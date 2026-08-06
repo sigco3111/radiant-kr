@@ -1,122 +1,93 @@
-<p align="center">
-  <img src="https://radiant-shaders.com/radiant-logo.svg" alt="Radiant" width="120">
-</p>
+# Radiant KR — 한국 전통 색채 셰이더 컬렉션
 
-<h1 align="center">Radiant</h1>
+**한국적 색감과 모티프가 추가된 Radiant 셰이더 갤러리.**
 
-<p align="center">
-  <strong>Open source shaders and visual effects for the web.</strong><br>
-  Drop-in canvas animations — zero dependencies, zero build step.
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/shaders-94-c8956c" alt="94 shaders">
-  <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT License">
-  <a href="https://radiant-shaders.com"><img src="https://img.shields.io/badge/live_gallery-radiant--shaders.com-c8956c" alt="Live Gallery"></a>
-</p>
-
-<p align="center">
-  <a href="https://radiant-shaders.com">
-    <img src="https://radiant-shaders.com/og-image.png" alt="Radiant Gallery" width="680">
-  </a>
-</p>
+원본 [pbakaus/radiant](https://github.com/pbakaus/radiant) (MIT)을 기반으로, 한국 전통 오방색(五方色)·한국적 모티프가 가미된 셰이더 1개(신년 폭죽)가 포함된 독립 포크입니다. **upstream PR은 보내지 않으며**, sigco3111 계정에서 단독 운영됩니다.
 
 ---
 
-## Quick Start
+## 🎆 무엇이 다른가?
 
-Every shader is a self-contained HTML file — `<style>` + `<canvas>` + `<script>`. No framework, no bundler, no runtime. Use them anywhere.
+원본 Radiant는 96개의 zero-dep 생성형 셰이더 컬렉션입니다 (SvelteKit 갤러리 + Canvas/WebGL 셰이더 standalone HTML). 모든 셰이더가 amber 톤 베이스이지만, 어떤 문화적 모티프도 직접 다루지 않습니다.
 
-### 1. Pick a shader
+이 저장소는:
 
-Browse the [gallery](https://radiant-shaders.com) or download the [shader pack](https://radiant-shaders.com/radiant-shaders.zip). You can also grab individual files from the `static/` directory in this repo.
+- 🎆 **한국 전통 오방색 (obangsaek) 폭죽 셰이더** 1개 추가 — 청/적/황/백/흑 + 금빛 팔레트
+- 🎨 한국 신년 분위기의 navy night sky 배경
+- ✨ 클릭으로 어디든 발사 가능한 인터랙티브 폭죽
+- 🌸 한국적 모티프 셰이더를 점진적으로 추가할 수 있는 구조
 
-### 2. Embed it
+---
 
-```html
-<iframe
-  src="event-horizon.html"
-  style="position: fixed; inset: 0; width: 100%; height: 100%; border: 0; z-index: -1;"
-></iframe>
-```
+## 🚀 빠른 시작
 
-That's it — a full-screen animated background in one tag.
-
-### 3. Control it at runtime
-
-Shaders accept live parameter updates through `postMessage`:
-
-```js
-const iframe = document.querySelector('iframe');
-
-// Adjust any parameter on the fly
-iframe.contentWindow.postMessage(
-  { type: 'param', name: 'ROTATION_SPEED', value: 0.6 },
-  '*'
-);
-```
-
-Each shader's parameters (name, range, default) are listed in [`src/lib/shaders.ts`](src/lib/shaders.ts).
-
-## Use Cases
-
-- **Website backgrounds** — full-viewport ambient animation behind your content
-- **Hero sections** — eye-catching landing page visuals
-- **Presentations** — animated slides and speaker backdrops
-- **Digital signage** — lobby screens, event displays
-- **Creative coding** — remix, fork, and learn from real Canvas 2D and WebGL techniques
-
-## What's Inside
-
-94 shaders across Canvas 2D and WebGL, organized by visual style:
-
-| Tag | Description |
-|-----|-------------|
-| `fill` | Full-canvas effects (backgrounds, textures) |
-| `object` | Standalone centered elements |
-| `particles` | Particle systems and swarms |
-| `physics` | Physics simulations (springs, waves, gravity) |
-| `noise` | Perlin/simplex noise-driven visuals |
-| `organic` | Fluid, biological, and natural forms |
-| `geometric` | Hard-edged patterns and tessellations |
-
-Every shader includes:
-- Mouse/touch interaction
-- Tunable parameters via `postMessage`
-- Visibility-based pause (saves battery)
-- DPR-aware rendering (capped at 2x)
-- 60fps targeting on standard hardware
-
-## Color Schemes
-
-The gallery supports 6 color schemes applied via CSS `filter` on the iframe — no shader modification needed:
-
-| Scheme | Filter |
-|--------|--------|
-| **Amber** (default) | `none` |
-| **Mono** | `grayscale(1)` |
-| **Blue** | `hue-rotate(175deg)` |
-| **Rose** | `hue-rotate(300deg) saturate(1.1)` |
-| **Emerald** | `hue-rotate(90deg) saturate(1.2)` |
-| **Arctic** | `hue-rotate(180deg) saturate(0.5) brightness(1.1)` |
-
-## Development
-
-```sh
+```bash
+# 의존성 설치
 npm install
-npm run dev       # Start dev server
-npm run build     # Production build
-npm run check     # TypeScript + Svelte checks
+
+# 개발 서버
+npm run dev
+# → http://localhost:5173/shader/new-year-fireworks
+
+# 프로덕션 빌드
+npm run build
+# → build/ 폴더에 정적 산출물 (Vercel 배포용)
 ```
 
-The gallery frontend is SvelteKit 2 + Svelte 5. Shaders themselves require no build step.
+---
 
-## Contributing
+## 🎆 추가된 셰이더
 
-See [CONTRIBUTORS.md](CONTRIBUTORS.md) for local development setup, conventions, and how to add new shaders.
+### `new-year-fireworks` — New Year Fireworks
+- **태그**: `fill`, `particles`, `organic`
+- **기술**: Canvas 2D
+- **파라미터**: Burst Rate (0.3~3.0), Particle Density (0.5~2.0)
+- **인터랙션**: 화면 어디든 클릭 → 폭죽 발사, 자동 폭죽도 0.8~1.5초 간격
+- **컬러 팔레트 (3종 랜덤)**:
+  - **오방색**: 청(2E86C1) / 적(E03946) / 황(F1C40F) / 백(F5F5F5) / 흑(2C3E50)
+  - **로열 골드**: FFD700 / FFAA33 / C95233 / FFE88A / 8B0000
+  - **봄꽃**: FFB7C5 / FF69B4 / FFE88A / B5E8FC / FFD9B3
 
-## License
+---
 
-[MIT](LICENSE) — Copyright (c) 2025 Paul Bakaus
+## 📜 원본 attribution
 
-Use these shaders in personal projects, commercial products, client work — whatever you want. Attribution is appreciated but not required.
+이 저장소는 다음 원본에서 파생되었습니다:
+
+- **원본**: [pbakaus/radiant](https://github.com/pbakaus/radiant)
+- **저자**: pbakaus 및 Radiant 기여자
+- **라이선스**: MIT
+- **원본 commit 기반**: 2026-08-06 시점 클론
+
+원본의 96개 셰이더는 모두 그대로 보존되어 있습니다. 이 저장소의 추가분은 `static/new-year-fireworks.html`과 `src/lib/shaders.ts`의 신규 엔트리 1개뿐이며, 모두 동일 MIT 라이선스를 따릅니다.
+
+---
+
+## 🌐 Vercel 배포
+
+이 저장소는 Vercel 정적 사이트로 즉시 배포 가능합니다:
+
+```bash
+vercel deploy --prod
+# 또는 GitHub 연동 후 자동 배포
+```
+
+`vercel.json`은 이미 원본에 포함되어 있어 별도 설정 불필요 (`outputDirectory: "build"`).
+
+---
+
+## 🗂️ 구조
+
+```
+static/
+├── *.html                            # 원본 96개 셰이더
+└── new-year-fireworks.html           # [신규] 한국적 폭죽 셰이더
+
+src/
+├── lib/shaders.ts                    # 원본 96개 + 신규 1개 카탈로그
+└── ...                               # SvelteKit 갤러리
+```
+
+---
+
+**유지보수**: sigco3111 · **라이선스**: MIT (원본 + 추가분 동일)

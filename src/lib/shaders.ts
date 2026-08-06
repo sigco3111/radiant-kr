@@ -1269,6 +1269,18 @@ export const shaders: Shader[] = [
 		},
 		hasArticle: true
 	},
+	{
+		id: 'new-year-fireworks',
+		file: 'new-year-fireworks.html',
+		title: 'New Year Fireworks',
+		desc: 'Korean traditional obangsaek fireworks over a navy night sky. Click anywhere to launch.',
+		tags: ['fill', 'particles', 'organic'],
+		technique: 'canvas-2d',
+		params: [
+			{ name: 'BURST_RATE', label: 'Burst Rate', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'PARTICLE_COUNT', label: 'Particle Density', min: 0.5, max: 2.0, step: 0.1, default: 1.0 }
+		]
+	},
 ];
 
 export function getShaderById(id: string): Shader | undefined {
