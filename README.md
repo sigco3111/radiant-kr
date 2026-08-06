@@ -2,7 +2,21 @@
 
 **한국적 색감과 모티프가 추가된 Radiant 셰이더 갤러리.**
 
+[![Live](https://img.shields.io/badge/Vercel-Live-success?logo=vercel)](https://radiant-kr.vercel.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![GitHub](https://img.shields.io/badge/sigco3111-radiant--kr-181717?logo=github)](https://github.com/sigco3111/radiant-kr)
+
 원본 [pbakaus/radiant](https://github.com/pbakaus/radiant) (MIT)을 기반으로, 한국 전통 오방색(五方色)·한국적 모티프가 가미된 셰이더 1개(신년 폭죽)가 포함된 독립 포크입니다. **upstream PR은 보내지 않으며**, sigco3111 계정에서 단독 운영됩니다.
+
+---
+
+## 🌐 라이브 데모
+
+| 페이지 | URL |
+|---|---|
+| 갤러리 홈 | https://radiant-kr.vercel.app |
+| 신년 폭죽 셰이더 직접 보기 | https://radiant-kr.vercel.app/new-year-fireworks.html |
+| 전체 셰이더 목록 | https://radiant-kr.vercel.app/all |
 
 ---
 
@@ -47,6 +61,7 @@ npm run build
   - **오방색**: 청(2E86C1) / 적(E03946) / 황(F1C40F) / 백(F5F5F5) / 흑(2C3E50)
   - **로열 골드**: FFD700 / FFAA33 / C95233 / FFE88A / 8B0000
   - **봄꽃**: FFB7C5 / FF69B4 / FFE88A / B5E8FC / FFD9B3
+- **Preview sprite**: `static/previews/new-year-fireworks.webp` (960×3600, 6 컬러 스킴 프레임)
 
 ---
 
@@ -59,20 +74,27 @@ npm run build
 - **라이선스**: MIT
 - **원본 commit 기반**: 2026-08-06 시점 클론
 
-원본의 96개 셰이더는 모두 그대로 보존되어 있습니다. 이 저장소의 추가분은 `static/new-year-fireworks.html`과 `src/lib/shaders.ts`의 신규 엔트리 1개뿐이며, 모두 동일 MIT 라이선스를 따릅니다.
+원본의 96개 셰이더는 모두 그대로 보존되어 있습니다. 이 저장소의 추가분은 다음과 같으며 모두 동일 MIT 라이선스를 따릅니다:
+
+- `static/new-year-fireworks.html` (셰이더 본체)
+- `static/previews/new-year-fireworks.webp` (갤러리 카드 썸네일)
+- `src/lib/shaders.ts`의 신규 엔트리 1개
 
 ---
 
 ## 🌐 Vercel 배포
 
-이 저장소는 Vercel 정적 사이트로 즉시 배포 가능합니다:
+이 저장소는 Vercel 정적 사이트로 배포되어 있습니다.
+
+**라이브 URL**: https://radiant-kr.vercel.app
+
+배포는 `vercel deploy --prod` 한 줄로 가능하며, `vercel.json`은 이미 원본에 포함되어 있어 별도 설정 불필요 (`outputDirectory: "build"`).
+
+GitHub 푸시 시 자동 재배포는 미설정 상태 — 수동 배포가 필요할 때 다음 명령을 사용하세요:
 
 ```bash
-vercel deploy --prod
-# 또는 GitHub 연동 후 자동 배포
+CI='' vercel deploy --prod --yes
 ```
-
-`vercel.json`은 이미 원본에 포함되어 있어 별도 설정 불필요 (`outputDirectory: "build"`).
 
 ---
 
@@ -80,13 +102,26 @@ vercel deploy --prod
 
 ```
 static/
-├── *.html                            # 원본 96개 셰이더
-└── new-year-fireworks.html           # [신규] 한국적 폭죽 셰이더
+├── *.html                                # 원본 96개 셰이더
+├── previews/*.webp                       # 원본 96개 preview sprite
+├── new-year-fireworks.html               # [신규] 한국적 폭죽 셰이더
+└── previews/new-year-fireworks.webp      # [신규] 폭죽 셰이더 preview sprite
 
 src/
-├── lib/shaders.ts                    # 원본 96개 + 신규 1개 카탈로그
-└── ...                               # SvelteKit 갤러리
+├── lib/shaders.ts                        # 원본 96개 + 신규 1개 카탈로그
+└── ...                                   # SvelteKit 갤러리
 ```
+
+---
+
+## 🛠️ 새 셰이더 추가 절차 (참고)
+
+원본 AGENTS.md의 가이드에 따라 새 셰이더를 추가합니다:
+
+1. `static/<name>.html` 셰이더 HTML 작성
+2. `src/lib/shaders.ts` 카탈로그에 엔트리 추가
+3. `node scripts/generate-previews.mjs --only=<name>`로 preview sprite 생성
+4. `npm run build` → Vercel 배포
 
 ---
 
