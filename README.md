@@ -15,8 +15,10 @@
 | 페이지 | URL |
 |---|---|
 | 갤러리 홈 | https://radiant-kr.vercel.app |
-| 신년 폭죽 셰이더 직접 보기 | https://radiant-kr.vercel.app/new-year-fireworks.html |
-| 전체 셰이더 목록 | https://radiant-kr.vercel.app/all |
+| 전체 셰이더 목록 | https://radiant-kr.vercel.app/gallery/all.html |
+| 신년 폭죽 셰이더 HTML (standalone) | https://radiant-kr.vercel.app/new-year-fireworks.html |
+
+> ℹ️ SvelteKit `adapter-static` prerender 특성상 URL 끝에 `.html`을 명시해야 접근 가능합니다 (예: `/gallery/all.html`). `.html`을 생략하면 404를 반환합니다.
 
 ---
 
