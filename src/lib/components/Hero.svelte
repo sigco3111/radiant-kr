@@ -149,7 +149,7 @@
 		<p class="changelog-link"><a href="/#changelog">v1.1 — 마우스 및 터치 인터랙션, 신규 셰이더 7개</a></p>
 		<div class="ctas">
 			<a href="/gallery" class="btn btn-solid">컬렉션 둘러보기</a>
-			<a href="https://github.com/pbakaus/radiant" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
+			<a href="https://github.com/sigco3111/batgrl-gallery" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
 		</div>
 	</div>
 	<div class="controls">

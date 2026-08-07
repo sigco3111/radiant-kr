@@ -3,7 +3,7 @@
 		<div class="wordmark">Radiant</div>
 		<nav class="footer-links">
 			<a href="/gallery">갤러리</a>
-			<a href="https://github.com/pbakaus/radiant" target="_blank" rel="noopener noreferrer">GitHub</a>
+			<a href="https://github.com/sigco3111/batgrl-gallery" target="_blank" rel="noopener noreferrer">GitHub</a>
 		</nav>
 		<div class="social">
 			<a href="https://x.com/pbakaus" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
