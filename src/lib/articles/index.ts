@@ -17,27 +17,27 @@ export interface ArticleMeta {
 
 export const articleMeta: Record<string, ArticleMeta> = {
 	'event-horizon': {
-		title: 'How to render a black hole',
+		title: '블랙홀을 렌더링하는 법',
 		subtitle:
-			'A real-time Schwarzschild ray tracer in under six hundred lines of WebGL. The geodesic equation, Doppler beaming, a photon ring you can actually see.',
+			'600줄 미만의 WebGL로 만든 실시간 슈바르츠실트 광선 추적기. 측지선 방정식, 도플러 비밍, 그리고 실제로 볼 수 있는 광자 고리까지.',
 		author: 'Paul Bakaus & Claude',
-		readingTime: '20 minute read · 5 interactive sandboxes',
+		readingTime: '20분 분량 · 인터랙티브 샌드박스 5개',
 		shareImage: '/share/learn-event-horizon.jpg'
 	},
 	'rain-on-glass': {
-		title: 'How to render rain on glass',
+		title: '유리 위의 빗방울을 렌더링하는 법',
 		subtitle:
-			'Two pipelines, one image. Canvas 2D builds a water map of refraction normals; a fragment shader bends a background through it. The drop physics is the whole article.',
+			'두 개의 파이프라인, 하나의 이미지. Canvas 2D가 굴절 노멀의 물 맵을 만들고, 프래그먼트 셰이더가 그 뒤에서 배경을 휘게 합니다. 빗방울 물리학이 이 글의 전부입니다.',
 		author: 'Paul Bakaus & Claude',
-		readingTime: '20 minute read · 6 interactive sandboxes',
+		readingTime: '20분 분량 · 인터랙티브 샌드박스 6개',
 		shareImage: '/share/learn-rain-on-glass.jpg'
 	},
 	'analog-drift': {
-		title: 'How to render a CRT oscilloscope',
+		title: 'CRT 오실로스코프를 렌더링하는 법',
 		subtitle:
-			'Two sines and a buffer you never clear. Lissajous figures, phosphor persistence, and the velocity-modulated thickness that sells the analog feeling.',
+			'두 개의 사인 곡선과 절대 지우지 않는 버퍼. 리사주 도형, 인광 잔상, 그리고 아날로그 감성을 살려내는 속도 변조 두께.',
 		author: 'Paul Bakaus & Claude',
-		readingTime: '15 minute read · 5 interactive sandboxes',
+		readingTime: '15분 분량 · 인터랙티브 샌드박스 5개',
 		shareImage: '/share/learn-analog-drift.jpg'
 	}
 };

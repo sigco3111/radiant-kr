@@ -10,19 +10,19 @@ export interface ShaderParam {
 export type ShaderTag = 'fill' | 'object' | 'particles' | 'physics' | 'noise' | 'organic' | 'geometric';
 
 export const tagLabels: Record<ShaderTag, string> = {
-	fill: 'Full canvas',
-	object: 'Standalone',
-	particles: 'Particles',
-	physics: 'Physics',
-	noise: 'Noise',
-	organic: 'Organic',
-	geometric: 'Geometric'
+	fill: '전체 화면',
+	object: '독립형',
+	particles: '파티클',
+	physics: '물리',
+	noise: '노이즈',
+	organic: '유기적',
+	geometric: '기하학적'
 };
 
 export type ShaderTechnique = 'canvas-2d' | 'webgl';
 
 export const techniqueLabels: Record<ShaderTechnique, string> = {
-	'canvas-2d': 'Canvas 2D',
+	'canvas-2d': '캔버스 2D',
 	'webgl': 'WebGL'
 };
 
@@ -51,427 +51,427 @@ export const shaders: Shader[] = [
 	{
 		id: 'flow-field',
 		file: 'flow-field.html',
-		title: 'Flow Field with Particle Trails',
-		desc: 'Particles following Perlin noise currents with warm amber trails.',
+		title: '플로우 필드 with 파티클 트레일',
+		desc: '따뜻한 앰버 톤 트레일을 남기는 Perlin 노이즈 흐름을 따르는 파티클.',
 		tags: ['fill', 'particles', 'noise'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'SPEED', label: 'Flow Speed', min: 0.3, max: 3.0, step: 0.1, default: 1.2 },
-			{ name: 'NOISE_SCALE', label: 'Pattern Scale', min: 0.001, max: 0.01, step: 0.0005, default: 0.0025 }
+			{ name: 'SPEED', label: '흐름 속도', min: 0.3, max: 3.0, step: 0.1, default: 1.2 },
+			{ name: 'NOISE_SCALE', label: '패턴 크기', min: 0.001, max: 0.01, step: 0.0005, default: 0.0025 }
 		]
 	},
 	{
 		id: 'topographic',
 		file: 'topographic.html',
-		title: 'Topographic Contour Map',
-		desc: 'Living terrain map with marching squares isolines and elevation labels.',
+		title: '지형 등고선 지도',
+		desc: '마칭 스퀘어 알고리즘의 등고선과 표고 라벨이 살아 움직이는 지형 지도.',
 		tags: ['fill', 'noise', 'geometric'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'NUM_CONTOURS', label: 'Contour Density', min: 4, max: 30, step: 1, default: 14 },
-			{ name: 'TIME_SPEED', label: 'Animation Speed', min: 0.0, max: 0.5, step: 0.01, default: 0.15 }
+			{ name: 'NUM_CONTOURS', label: '등고선 밀도', min: 4, max: 30, step: 1, default: 14 },
+			{ name: 'TIME_SPEED', label: '애니메이션 속도', min: 0.0, max: 0.5, step: 0.01, default: 0.15 }
 		]
 	},
 	{
 		id: 'generative-tree',
 		file: 'generative-tree.html',
-		title: 'Generative Branching Tree',
-		desc: 'L-system inspired tree with continuous growth and regrowth cycles.',
+		title: '생성형 가지 나무',
+		desc: 'L-system에서 영감을 받아 지속적으로 성장하고 다시 자라나는 나무.',
 		tags: ['object', 'organic'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'GROWTH_SPEED_BASE', label: 'Growth Speed', min: 0.003, max: 0.025, step: 0.001, default: 0.008 },
-			{ name: 'MAX_DEPTH', label: 'Branch Depth', min: 4, max: 14, step: 1, default: 9 }
+			{ name: 'GROWTH_SPEED_BASE', label: '성장 속도', min: 0.003, max: 0.025, step: 0.001, default: 0.008 },
+			{ name: 'MAX_DEPTH', label: '가지 깊이', min: 4, max: 14, step: 1, default: 9 }
 		]
 	},
 	{
 		id: 'strange-attractor',
 		file: 'strange-attractor.html',
-		title: 'Strange Attractor (Lorenz)',
-		desc: 'Lorenz system with 3D projection, rotation, and glowing particle trails.',
+		title: '이상 어트랙터 (로렌츠)',
+		desc: '3D 투영과 회전, 빛나는 파티클 트레일을 가진 로렌츠 시스템.',
 		tags: ['object', 'particles', 'physics'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'STEPS_PER_FRAME', label: 'Simulation Speed', min: 1, max: 12, step: 1, default: 4 },
-			{ name: 'TRAIL_LENGTH', label: 'Trail Length', min: 500, max: 4000, step: 100, default: 2000 },
-			{ name: 'RHO', label: 'Attractor Shape', min: 15, max: 50, step: 0.5, default: 28 }
+			{ name: 'STEPS_PER_FRAME', label: '시뮬레이션 속도', min: 1, max: 12, step: 1, default: 4 },
+			{ name: 'TRAIL_LENGTH', label: '트레일 길이', min: 500, max: 4000, step: 100, default: 2000 },
+			{ name: 'RHO', label: '어트랙터 형태', min: 15, max: 50, step: 0.5, default: 28 }
 		]
 	},
 	{
 		id: 'pendulum-wave',
 		file: 'pendulum-wave.html',
-		title: 'Pendulum Wave',
-		desc: 'Physics-based pendulum wave creating emergent interference patterns.',
+		title: '진자 파동',
+		desc: '물리 기반 진자 파동이 만들어내는 돌발적인 간섭 패턴.',
 		tags: ['object', 'physics'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'NUM_PENDULUMS', label: 'Pendulum Count', min: 6, max: 40, step: 1, default: 20 },
-			{ name: 'CYCLE_DURATION', label: 'Cycle Duration', min: 20, max: 120, step: 5, default: 60 }
+			{ name: 'NUM_PENDULUMS', label: '진자 개수', min: 6, max: 40, step: 1, default: 20 },
+			{ name: 'CYCLE_DURATION', label: '주기 길이', min: 20, max: 120, step: 5, default: 60 }
 		]
 	},
 	{
 		id: 'phyllotaxis',
 		file: 'phyllotaxis.html',
-		title: 'Phyllotaxis Spiral',
-		desc: "Golden angle spiral with Fibonacci lattice connections.",
+		title: '엽상체 나선',
+		desc: '황금각으로 배치한 나선과 피보나치 격자를 연결한 패턴.',
 		tags: ['object', 'geometric', 'organic'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'MAX_POINTS', label: 'Point Count', min: 500, max: 5000, step: 100, default: 2000 },
-			{ name: 'SPREAD', label: 'Spiral Tightness', min: 0.003, max: 0.015, step: 0.0005, default: 0.0065 }
+			{ name: 'MAX_POINTS', label: '점 개수', min: 500, max: 5000, step: 100, default: 2000 },
+			{ name: 'SPREAD', label: '나선 밀도', min: 0.003, max: 0.015, step: 0.0005, default: 0.0065 }
 		]
 	},
 	{
 		id: 'fluid-amber',
 		file: 'fluid-amber.html',
-		title: 'Fluid Amber',
-		desc: 'Domain-warped simplex noise with layered organic flow and warm palette.',
+		title: '앰버 플루이드',
+		desc: '도메인 왜곡을 적용한 심플렉스 노이즈가 따뜻한 색의 유기적 흐름을 겹쳐 만든다.',
 		tags: ['fill', 'noise', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'timeScale', label: 'Animation Speed', min: 0.0, max: 0.5, step: 0.01, default: 0.15 },
-			{ name: 'ampDecay', label: 'Detail Level', min: 0.3, max: 0.7, step: 0.01, default: 0.48 }
+			{ name: 'timeScale', label: '애니메이션 속도', min: 0.0, max: 0.5, step: 0.01, default: 0.15 },
+			{ name: 'ampDecay', label: '디테일 수준', min: 0.3, max: 0.7, step: 0.01, default: 0.48 }
 		]
 	},
 	{
 		id: 'champagne-fizz',
 		file: 'champagne-fizz.html',
-		title: 'Champagne Fizz',
-		desc: 'Effervescent bubbles rising with wobble physics, refractive highlights, and sparkle bursts.',
+		title: '샴페인 거품',
+		desc: '흔들림 물리와 굴절 하이라이트, 반짝임 폭발을 동반해 솟아오르는 샴페인 거품.',
 		inspiration: 'Sabrina Carpenter',
 		tags: ['fill', 'particles', 'physics'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'BUBBLE_RATE', label: 'Bubble Rate', min: 1, max: 10, step: 1, default: 3 },
-			{ name: 'RISE_SPEED', label: 'Rise Speed', min: 0.5, max: 4.0, step: 0.1, default: 1.5 }
+			{ name: 'BUBBLE_RATE', label: '기포 발생량', min: 1, max: 10, step: 1, default: 3 },
+			{ name: 'RISE_SPEED', label: '상승 속도', min: 0.5, max: 4.0, step: 0.1, default: 1.5 }
 		]
 	},
 	{
 		id: 'sugar-glass',
 		file: 'sugar-glass.html',
-		title: 'Sugar Glass',
-		desc: 'Caramelized sugar glass with Voronoi fracture patterns and golden light bleeding through cracks.',
+		title: '슈거 글라스',
+		desc: '보로노이 균열 사이로 황금빛이 스며드는 캐러멜 설탕 유리.',
 		inspiration: 'Sabrina Carpenter',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'CRACK_SPEED', label: 'Crack Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
-			{ name: 'LIGHT_BLEED', label: 'Light Bleed', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'CRACK_SPEED', label: '균열 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
+			{ name: 'LIGHT_BLEED', label: '빛 번짐', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'resonant-strings',
 		file: 'resonant-strings.html',
-		title: 'Resonant Strings',
-		desc: 'Vibrating cello strings with standing wave harmonics, overtone interference, and rosin dust particles.',
+		title: '공명하는 현',
+		desc: '정상파 고조파와 배음 간섭, 송진 가루가 함께 진동하는 첼로 현.',
 		inspiration: 'Laufey',
 		tags: ['object', 'physics'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'HARMONIC_COUNT', label: 'Harmonics', min: 1, max: 12, step: 1, default: 5 },
-			{ name: 'VIBRATION_SPEED', label: 'Vibration Speed', min: 0.2, max: 3.0, step: 0.1, default: 1.0 }
+			{ name: 'HARMONIC_COUNT', label: '고조파', min: 1, max: 12, step: 1, default: 5 },
+			{ name: 'VIBRATION_SPEED', label: '진동 속도', min: 0.2, max: 3.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'chladni-resonance',
 		file: 'chladni-resonance.html',
-		title: 'Chladni Resonance',
-		desc: 'Sand patterns forming on a vibrating plate, morphing between harmonic modes with golden glow.',
+		title: '클라드니 공명',
+		desc: '진동판 위 모래가 황금빛과 함께 조화 모드를 오가며 만드는 클라드니 무늬.',
 		inspiration: 'Laufey',
 		tags: ['object', 'geometric', 'physics'],
 		technique: 'webgl',
 		params: [
-			{ name: 'MODE_SPEED', label: 'Mode Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
-			{ name: 'COMPLEXITY', label: 'Complexity', min: 2, max: 8, step: 1, default: 5 }
+			{ name: 'MODE_SPEED', label: '모드 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
+			{ name: 'COMPLEXITY', label: '복잡도', min: 2, max: 8, step: 1, default: 5 }
 		]
 	},
 	{
 		id: 'kinetic-grid',
 		file: 'kinetic-grid.html',
-		title: 'Kinetic Grid',
-		desc: 'Spring-connected grid mesh with traveling force impulses, tension-colored connections in cyan and magenta.',
+		title: '키네틱 그리드',
+		desc: '스프링으로 연결된 격자에 힘의 충격이 퍼지고 장력에 따라 선의 색이 변한다.',
 		inspiration: 'Dua Lipa',
 		tags: ['fill', 'physics'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'IMPULSE_RATE', label: 'Impulse Rate', min: 0.3, max: 3.0, step: 0.1, default: 0.7 },
-			{ name: 'SPRING_TENSION', label: 'Spring Tension', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'IMPULSE_STRENGTH', label: 'Impulse Force', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'DAMPING', label: 'Damping', min: 0.95, max: 0.995, step: 0.001, default: 0.978 },
-			{ name: 'RETURN_FORCE', label: 'Return Force', min: 0.001, max: 0.01, step: 0.001, default: 0.003 }
+			{ name: 'IMPULSE_RATE', label: '충격 발생량', min: 0.3, max: 3.0, step: 0.1, default: 0.7 },
+			{ name: 'SPRING_TENSION', label: '스프링 장력', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'IMPULSE_STRENGTH', label: '충격력', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'DAMPING', label: '감쇠', min: 0.95, max: 0.995, step: 0.001, default: 0.978 },
+			{ name: 'RETURN_FORCE', label: '복원력', min: 0.001, max: 0.01, step: 0.001, default: 0.003 }
 		]
 	},
 	{
 		id: 'strobe-geometry',
 		file: 'strobe-geometry.html',
-		title: 'Strobe Geometry',
-		desc: 'Sharp neon geometric shapes flashing in choreographed sequence with cyan-to-magenta afterglow decay.',
+		title: '스트로브 기하',
+		desc: '청록에서 마젠타로 번지는 잔광을 남기며 안무처럼 번쩍이는 네온 기하 도형.',
 		inspiration: 'Dua Lipa',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'FLASH_RATE', label: 'Flash Rate', min: 0.3, max: 2.0, step: 0.1, default: 0.7 },
-			{ name: 'GLOW_INTENSITY', label: 'Glow', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'FLASH_RATE', label: '플래시 빈도', min: 0.3, max: 2.0, step: 0.1, default: 0.7 },
+			{ name: 'GLOW_INTENSITY', label: '빛', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'laser-labyrinth',
 		file: 'laser-labyrinth.html',
-		title: 'Laser Labyrinth',
-		desc: 'Volumetric laser beams crossing in a dark void with prismatic colors and intersection flares.',
+		title: '레이저 미로',
+		desc: '어두운 공간을 가로지르는 입체 레이저 빔과 교차점의 프리즘 플레어.',
 		inspiration: 'Dua Lipa',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'SWEEP_SPEED', label: 'Sweep Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
-			{ name: 'BEAM_INTENSITY', label: 'Beam Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'SWEEP_SPEED', label: '스윕 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
+			{ name: 'BEAM_INTENSITY', label: '빔 강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'bass-ripple',
 		file: 'bass-ripple.html',
-		title: 'Bass Ripple',
-		desc: 'Vibrating speaker mesh with beat-synced wave displacement and metallic specular sheen.',
+		title: '베이스 잔물결',
+		desc: '비트에 맞춰 물결치고 금속성 반사를 번뜩이는 진동 스피커 메시.',
 		inspiration: 'Dua Lipa',
 		tags: ['fill', 'physics'],
 		technique: 'webgl',
 		params: [
-			{ name: 'BASS_FREQ', label: 'Beat Speed', min: 0.1, max: 2.0, step: 0.1, default: 0.4 },
-			{ name: 'BASS_INTENSITY', label: 'Bass Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'BASS_FREQ', label: '비트 속도', min: 0.1, max: 2.0, step: 0.1, default: 0.4 },
+			{ name: 'BASS_INTENSITY', label: '저음 강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'ink-dissolve',
 		file: 'ink-dissolve.html',
-		title: 'Ink Dissolve',
-		desc: 'Dense ink tendrils spreading through amber liquid with reaction-diffusion branching patterns.',
+		title: '잉크 용해',
+		desc: '앰버 액체 속으로 퍼지는 짙은 잉크와 반응 확산식 가지 패턴.',
 		inspiration: 'Billie Eilish',
 		tags: ['fill', 'noise', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'SPREAD_SPEED', label: 'Spread Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.4 },
-			{ name: 'TENDRIL_DETAIL', label: 'Tendril Detail', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'SPREAD_SPEED', label: '확산 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.4 },
+			{ name: 'TENDRIL_DETAIL', label: '덩굴 디테일', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'sequin-wave',
 		file: 'sequin-wave.html',
-		title: 'Sequin Wave',
-		desc: 'Grid of metallic sequin discs catching sweeping light with specular reflections and warm shimmer.',
+		title: '스팽글 파동',
+		desc: '회전하는 빛을 받아 반짝이는 금속 스팽글 원반의 물결.',
 		inspiration: 'Taylor Swift',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'WAVE_SPEED', label: 'Wave Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.8 },
-			{ name: 'SPARKLE_INTENSITY', label: 'Sparkle', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'WAVE_SPEED', label: '파동 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.8 },
+			{ name: 'SPARKLE_INTENSITY', label: '반짝임', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'gilt-mosaic',
 		file: 'gilt-mosaic.html',
-		title: 'Gilt Mosaic',
-		desc: 'Byzantine golden mosaic wall with individually shimmering tiles catching candlelight.',
+		title: '금박 모자이크',
+		desc: '촛불을 받아 타일 하나씩 반짝이는 비잔틴풍 금빛 모자이크 벽.',
 		inspiration: 'Beyoncé',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'ANIM_MODE', label: 'Wave Flip', min: 0.0, max: 1.0, step: 1.0, default: 1.0 },
-			{ name: 'TILE_SCALE', label: 'Tile Scale', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'WAVE_SPEED', label: 'Wave Speed', min: 0.5, max: 6.0, step: 0.1, default: 4.0 },
-			{ name: 'WAVE_DELAY', label: 'Wave Delay', min: 0.5, max: 4.0, step: 0.1, default: 1.5 },
-			{ name: 'WAVE_DIR', label: 'Wave Direction', min: 0.0, max: 3.0, step: 1.0, default: 0.0 }
+			{ name: 'ANIM_MODE', label: '파동 반전', min: 0.0, max: 1.0, step: 1.0, default: 1.0 },
+			{ name: 'TILE_SCALE', label: '타일 크기', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'WAVE_SPEED', label: '파동 속도', min: 0.5, max: 6.0, step: 0.1, default: 4.0 },
+			{ name: 'WAVE_DELAY', label: '파동 지연', min: 0.5, max: 4.0, step: 0.1, default: 1.5 },
+			{ name: 'WAVE_DIR', label: '파동 방향', min: 0.0, max: 3.0, step: 1.0, default: 0.0 }
 		]
 	},
 	{
 		id: 'gilded-fracture',
 		file: 'gilded-fracture.html',
-		title: 'Gilded Fracture',
-		desc: 'Kintsugi-inspired golden cracks spreading across dark surface with molten gold light bleeding through.',
+		title: '금빛 균열',
+		desc: '어두운 표면을 가로지르는 긴츠기풍 균열 사이로 녹은 금빛이 번진다.',
 		inspiration: 'Beyoncé',
 		tags: ['fill', 'noise', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'CRACK_SPEED', label: 'Crack Speed', min: 0.05, max: 1.0, step: 0.05, default: 0.3 },
-			{ name: 'GLOW_INTENSITY', label: 'Glow Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'CRACK_SPEED', label: '균열 속도', min: 0.05, max: 1.0, step: 0.05, default: 0.3 },
+			{ name: 'GLOW_INTENSITY', label: '빛 강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'radiant-geometry',
 		file: 'radiant-geometry.html',
-		title: 'Radiant Geometry',
-		desc: 'Animated Islamic geometric art with layered golden star patterns and counter-rotating tracery.',
+		title: '빛나는 기하',
+		desc: '겹겹의 황금 별무늬와 서로 반대 방향으로 도는 선 장식이 빛나는 이슬람 기하 예술.',
 		inspiration: 'Beyoncé',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'ROTATION_SPEED', label: 'Rotation Speed', min: 0.05, max: 1.0, step: 0.05, default: 0.3 },
-			{ name: 'PATTERN_COMPLEXITY', label: 'Complexity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'ROTATION_SPEED', label: '회전 속도', min: 0.05, max: 1.0, step: 0.05, default: 0.3 },
+			{ name: 'PATTERN_COMPLEXITY', label: '복잡도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'golden-throne',
 		file: 'golden-throne.html',
-		title: 'Golden Throne',
-		desc: 'Sacred geometry mandala with golden ratio spirals and counter-rotating layers.',
+		title: '황금 왕좌',
+		desc: '황금비 나선과 반대 방향으로 회전하는 층을 품은 신성한 기하학 만다라.',
 		inspiration: 'Beyoncé',
 		tags: ['object', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'ROTATION_SPEED', label: 'Rotation Speed', min: 0.0, max: 1.0, step: 0.05, default: 0.3 },
-			{ name: 'COMPLEXITY', label: 'Complexity', min: 2, max: 8, step: 1, default: 5 }
+			{ name: 'ROTATION_SPEED', label: '회전 속도', min: 0.0, max: 1.0, step: 0.05, default: 0.3 },
+			{ name: 'COMPLEXITY', label: '복잡도', min: 2, max: 8, step: 1, default: 5 }
 		]
 	},
 	{
 		id: 'sacred-strange',
 		file: 'sacred-strange.html',
-		title: 'Sacred Strange',
-		desc: 'Fractal golden geometry with overlapping star motifs creating Doctor Strange-like dimensional patterns.',
+		title: '신성한 기이함',
+		desc: '겹쳐진 별무늬가 닥터 스트레인지풍 차원 패턴을 만드는 프랙털 황금 기하.',
 		inspiration: 'Benedict Cumberbatch',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'ROTATION_SPEED', label: 'Rotation Speed', min: 0.05, max: 1.0, step: 0.05, default: 0.3 },
-			{ name: 'PATTERN_COMPLEXITY', label: 'Complexity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'PATTERN', label: 'Dimensional Shift', min: 0.0, max: 0.15, step: 0.01, default: 0.05 }
+			{ name: 'ROTATION_SPEED', label: '회전 속도', min: 0.05, max: 1.0, step: 0.05, default: 0.3 },
+			{ name: 'PATTERN_COMPLEXITY', label: '복잡도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'PATTERN', label: '차원 이동', min: 0.0, max: 0.15, step: 0.01, default: 0.05 }
 		]
 	},
 	{
 		id: 'tropical-heat',
 		file: 'tropical-heat.html',
-		title: 'Tropical Heat',
-		desc: 'Heat shimmer distortion with chromatic aberration and tropical color blooms.',
+		title: '열대의 열기',
+		desc: '색수차와 열대 색상 블룸을 동반한 아지랑이 왜곡.',
 		inspiration: 'Bad Bunny',
 		tags: ['fill', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'HEAT_INTENSITY', label: 'Heat Intensity', min: 0.2, max: 2.5, step: 0.1, default: 1.0 },
-			{ name: 'COLOR_VIBRANCY', label: 'Color Vibrancy', min: 0.3, max: 1.5, step: 0.05, default: 0.8 }
+			{ name: 'HEAT_INTENSITY', label: '열 강도', min: 0.2, max: 2.5, step: 0.1, default: 1.0 },
+			{ name: 'COLOR_VIBRANCY', label: '색상 선명도', min: 0.3, max: 1.5, step: 0.05, default: 0.8 }
 		]
 	},
 	{
 		id: 'neon-drip',
 		file: 'neon-drip.html',
-		title: 'Neon Drip',
-		desc: 'Metaball blobs dripping upward with surface tension physics and trailing tendrils.',
+		title: '네온 방울',
+		desc: '표면 장력에 따라 위로 흐르며 촉수를 끌어가는 메타볼 덩어리.',
 		inspiration: 'Bad Bunny',
 		tags: ['fill', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'DRIP_SPEED', label: 'Drip Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
-			{ name: 'BLOB_COUNT', label: 'Blob Count', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'DRIP_SPEED', label: '방울 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
+			{ name: 'BLOB_COUNT', label: '블롭 개수', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'voltage-arc',
 		file: 'voltage-arc.html',
-		title: 'Voltage Arc',
-		desc: 'Electric plasma arcs crackling between floating conductor points with warm glow.',
+		title: '전압 아크',
+		desc: '떠 있는 도체점 사이에서 따뜻한 빛과 함께 튀는 전기 플라스마 아크.',
 		inspiration: 'Bad Bunny',
 		tags: ['object', 'physics'],
 		technique: 'webgl',
 		params: [
-			{ name: 'ARC_INTENSITY', label: 'Arc Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'CRACKLE_SPEED', label: 'Crackle Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 }
+			{ name: 'ARC_INTENSITY', label: '아크 강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'CRACKLE_SPEED', label: '방전 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 }
 		]
 	},
 	{
 		id: 'moonlit-ripple',
 		file: 'moonlit-ripple.html',
-		title: 'Moonlit Ripple',
-		desc: 'Moon reflection on dark water with multi-directional waves, Fresnel reflection, and 3D perspective.',
+		title: '달빛 잔물결',
+		desc: '다방향 파동과 프레넬 반사, 3D 원근으로 표현한 어두운 물 위 달빛.',
 		inspiration: 'SZA',
 		tags: ['fill', 'noise'],
 		technique: 'webgl',
 		defaultScheme: 'blue',
 		params: [
-			{ name: 'RIPPLE_SPEED', label: 'Ripple Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
-			{ name: 'MOON_GLOW', label: 'Moon Glow', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'CAMERA_TILT', label: 'Camera Tilt', min: -0.3, max: 1.0, step: 0.01, default: 0.15 },
-			{ name: 'WAVE_INTENSITY', label: 'Wave Intensity', min: 0.0, max: 3.0, step: 0.01, default: 1.0 }
+			{ name: 'RIPPLE_SPEED', label: '잔물결 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
+			{ name: 'MOON_GLOW', label: '달빛', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'CAMERA_TILT', label: '카메라 기울기', min: -0.3, max: 1.0, step: 0.01, default: 0.15 },
+			{ name: 'WAVE_INTENSITY', label: '파동 강도', min: 0.0, max: 3.0, step: 0.01, default: 1.0 }
 		]
 	},
 	{
 		id: 'eclipse-glow',
 		file: 'eclipse-glow.html',
-		title: 'Eclipse Glow',
-		desc: 'Solar eclipse corona with radial noise rays, diamond ring effect, and streaming solar wind.',
+		title: '일식의 빛',
+		desc: '방사형 노이즈 광선과 다이아몬드 링, 흘러가는 태양풍을 품은 일식 코로나.',
 		inspiration: 'SZA',
 		tags: ['object', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'CORONA_SIZE', label: 'Corona Size', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'RAY_INTENSITY', label: 'Ray Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'CORONA_SIZE', label: '코로나 크기', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'RAY_INTENSITY', label: '광선 강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'diamond-caustics',
 		file: 'diamond-caustics.html',
-		title: 'Diamond Caustics',
-		desc: 'Light refracting through rotating diamond facets casting prismatic caustic patterns.',
+		title: '다이아몬드 카우스틱',
+		desc: '회전하는 다이아몬드 면을 통과한 빛이 프리즘 카우스틱 무늬를 드리운다.',
 		inspiration: 'Rihanna',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'ROTATION_SPEED', label: 'Rotation Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
-			{ name: 'BRILLIANCE', label: 'Brilliance', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'ROTATION_SPEED', label: '회전 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
+			{ name: 'BRILLIANCE', label: '광휘', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'rain-on-glass',
 		file: 'rain-on-glass.html',
-		title: 'Rain on Glass',
-		desc: 'Ultra-realistic water droplets on a window, refracting a blurred city night with realistic trail physics.',
+		title: '유리창의 빗방울',
+		desc: '창에 맺힌 물방울이 흐릿한 도시의 밤을 굴절시키며 사실적인 자국을 남긴다.',
 		inspiration: 'Rihanna',
 		credit: 'Inspired by the excellent work of Lucas Bebber',
 		creditUrl: 'https://github.com/codrops/RainEffect',
 		tags: ['fill', 'physics', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'RAIN_AMOUNT', label: 'Rain Amount', min: 0.1, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'REFRACTION', label: 'Refraction Strength', min: 0.1, max: 3.0, step: 0.1, default: 1.0 }
+			{ name: 'RAIN_AMOUNT', label: '빗방울 양', min: 0.1, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'REFRACTION', label: '굴절 강도', min: 0.1, max: 3.0, step: 0.1, default: 1.0 }
 		],
 		hasArticle: true
 	},
 	{
 		id: 'rain-umbrella',
 		file: 'rain-umbrella.html',
-		title: 'Rain on Umbrella',
-		desc: 'Looking up through a translucent umbrella at city lights, with refractive drops sliding down the dome and a slow walking drift.',
+		title: '우산 위의 비',
+		desc: '투명한 우산 너머 도시 불빛을 올려다보며 돔을 타고 흐르는 빗방울과 느린 걸음을 담는다.',
 		inspiration: 'Rihanna',
 		credit: 'Inspired by the excellent work of Lucas Bebber',
 		creditUrl: 'https://github.com/codrops/RainEffect',
 		tags: ['fill', 'physics', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'RAIN_AMOUNT', label: 'Rain Amount', min: 0.1, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'REFRACTION', label: 'Refraction Strength', min: 0.1, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'WALK_SPEED', label: 'Walk Speed', min: 0.0, max: 3.0, step: 0.1, default: 1.0 }
+			{ name: 'RAIN_AMOUNT', label: '빗방울 양', min: 0.1, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'REFRACTION', label: '굴절 강도', min: 0.1, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'WALK_SPEED', label: '걷는 속도', min: 0.0, max: 3.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'metamorphosis',
 		file: 'metamorphosis.html',
-		title: 'Metamorphosis',
-		desc: 'Raymarched metaballs continuously merging and splitting with liquid-metal surface.',
+		title: '변태',
+		desc: '레이마칭 메타볼이 액체 금속 표면처럼 끊임없이 합쳐지고 갈라진다.',
 		inspiration: 'Lady Gaga',
 		tags: ['object', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'MORPH_SPEED', label: 'Morph Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
-			{ name: 'BLOB_COUNT', label: 'Blob Count', min: 2, max: 6, step: 1, default: 4 }
+			{ name: 'MORPH_SPEED', label: '변형 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
+			{ name: 'BLOB_COUNT', label: '블롭 개수', min: 2, max: 6, step: 1, default: 4 }
 		]
 	},
 	{
 		id: 'artpop-iridescence',
 		file: 'artpop-iridescence.html',
-		title: 'Artpop Iridescence',
-		desc: 'Holographic membrane with thin-film interference creating prismatic color shifts across an undulating surface.',
+		title: '아트팝 무지개빛',
+		desc: '얇은 막 간섭으로 물결치는 홀로그램 막에 프리즘 색 변화가 흐른다.',
 		inspiration: 'Lady Gaga',
 		tags: ['fill', 'organic', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'FILM_THICKNESS', label: 'Film Thickness', min: 0.5, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'FLOW_SPEED', label: 'Flow Speed', min: 0.1, max: 2.0, step: 0.1, default: 0.5 }
+			{ name: 'FILM_THICKNESS', label: '막 두께', min: 0.5, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'FLOW_SPEED', label: '흐름 속도', min: 0.1, max: 2.0, step: 0.1, default: 0.5 }
 		],
 		heroConfig: {
 			params: [
@@ -484,44 +484,44 @@ export const shaders: Shader[] = [
 	{
 		id: 'silk-groove',
 		file: 'silk-groove.html',
-		title: 'Silk Groove',
-		desc: 'Flowing silk ribbons with specular highlights and cloth-like wave animation.',
+		title: '실크 그루브',
+		desc: '금속성 하이라이트가 흐르는 실크 리본을 천처럼 물결치게 만든다.',
 		inspiration: 'Bruno Mars',
 		tags: ['fill', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'FLOW_SPEED', label: 'Flow Speed', min: 0.2, max: 2.0, step: 0.05, default: 0.8 },
-			{ name: 'WAVE_AMPLITUDE', label: 'Wave Amplitude', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'FLOW_SPEED', label: '흐름 속도', min: 0.2, max: 2.0, step: 0.05, default: 0.8 },
+			{ name: 'WAVE_AMPLITUDE', label: '파동 진폭', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'gilt-thread',
 		file: 'gilt-thread.html',
-		title: 'Gilt Thread',
-		desc: 'Golden threads tracing intricate parametric curves with metallic sheen and sparkle tips.',
+		title: '금빛 실',
+		desc: '금속 광택과 반짝이는 끝점을 지닌 황금 실이 정교한 매개변수 곡선을 그린다.',
 		inspiration: 'Bruno Mars',
 		tags: ['object', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'SHAPE', label: 'Shape', min: 1, max: 4, step: 1, default: 1 },
-			{ name: 'DRAW_SPEED', label: 'Draw Speed', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'THREAD_COUNT', label: 'Thread Count', min: 2, max: 8, step: 1, default: 5 }
+			{ name: 'SHAPE', label: '형태', min: 1, max: 4, step: 1, default: 1 },
+			{ name: 'DRAW_SPEED', label: '그리기 속도', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'THREAD_COUNT', label: '실 개수', min: 2, max: 8, step: 1, default: 5 }
 		]
 	},
 	{
 		id: 'event-horizon',
 		file: 'event-horizon.html',
-		title: 'Event Horizon',
-		desc: 'Physics-based black hole with raytraced gravitational lensing, volumetric accretion disk, and Doppler beaming.',
+		title: '사건의 지평선',
+		desc: '중력 렌즈와 입체 강착 원반, 도플러 빔을 ray tracing으로 그린 물리 기반 블랙홀.',
 		inspiration: 'The Weeknd',
 		tags: ['object', 'physics'],
 		technique: 'webgl',
 		params: [
-			{ name: 'ROTATION_SPEED', label: 'Rotation Speed', min: 0.05, max: 1.0, step: 0.05, default: 0.3 },
-			{ name: 'DISK_INTENSITY', label: 'Disk Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'TILT', label: 'Tilt', min: -1.5, max: 1.5, step: 0.05, default: 0.0 },
-			{ name: 'ROTATE', label: 'Rotate', min: -3.14, max: 3.14, step: 0.05, default: 0.0 },
-			{ name: 'CHROMATIC', label: 'Chromatic', min: 0.0, max: 1.0, step: 0.05, default: 0.0 }
+			{ name: 'ROTATION_SPEED', label: '회전 속도', min: 0.05, max: 1.0, step: 0.05, default: 0.3 },
+			{ name: 'DISK_INTENSITY', label: '원반 강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'TILT', label: '기울기', min: -1.5, max: 1.5, step: 0.05, default: 0.0 },
+			{ name: 'ROTATE', label: '회전', min: -3.14, max: 3.14, step: 0.05, default: 0.0 },
+			{ name: 'CHROMATIC', label: '색수차', min: 0.0, max: 1.0, step: 0.05, default: 0.0 }
 		],
 		heroConfig: {
 			params: [
@@ -535,66 +535,66 @@ export const shaders: Shader[] = [
 	{
 		id: 'burning-film',
 		file: 'burning-film.html',
-		title: 'Burning Film',
-		desc: 'Celluloid film stock catching fire with spreading amber burn holes, glowing edges, and ember field.',
+		title: '타오르는 필름',
+		desc: '셀룰로이드 필름에 앰버빛 구멍이 번지고 가장자리와 불씨가 빛나며 타오른다.',
 		inspiration: 'The Weeknd',
 		tags: ['fill', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'BURN_SPEED', label: 'Burn Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
-			{ name: 'EMBER_GLOW', label: 'Ember Glow', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'BURN_SPEED', label: '연소 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
+			{ name: 'EMBER_GLOW', label: '불씨 빛', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'vertigo',
 		file: 'vertigo.html',
-		title: 'Vertigo',
-		desc: 'Slow hypnotic tunnel with crimson ring segments, wave-based illumination, and dark void center.',
+		title: '현기증',
+		desc: '진홍색 고리와 파동 조명, 어두운 중심이 이어지는 느리고 최면적인 터널.',
 		inspiration: 'The Weeknd',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'TUNNEL_SPEED', label: 'Tunnel Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
-			{ name: 'SPIRAL_INTENSITY', label: 'Spiral', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'TUNNEL_SPEED', label: '터널 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
+			{ name: 'SPIRAL_INTENSITY', label: '나선', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'stardust-veil',
 		file: 'stardust-veil.html',
-		title: 'Stardust Veil',
-		desc: 'Dense cosmic stardust with parallax depth layers, aurora ribbons, constellation threads, and brightness waves.',
+		title: '별가루 장막',
+		desc: '시차 깊이의 별가루와 오로라 리본, 별자리 실, 밝기 파동이 겹친 우주 장막.',
 		inspiration: 'Ariana Grande',
 		tags: ['fill', 'particles', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'DRIFT_SPEED', label: 'Drift Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.4 },
-			{ name: 'STAR_DENSITY', label: 'Star Density', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'DRIFT_SPEED', label: '흐름 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.4 },
+			{ name: 'STAR_DENSITY', label: '별 밀도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'silk-cascade',
 		file: 'silk-cascade.html',
-		title: 'Silk Cascade',
-		desc: 'Flowing layered silk fabric with anisotropic specular highlights, parallax depth, and warm translucent overlap.',
+		title: '실크 폭포',
+		desc: '비등방성 하이라이트와 시차 깊이, 따뜻한 반투명 겹침을 지닌 흐르는 실크.',
 		inspiration: 'Ariana Grande',
 		tags: ['fill', 'organic', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'FLOW_SPEED', label: 'Flow Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.4 },
-			{ name: 'SHEEN_INTENSITY', label: 'Sheen Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'FLOW_SPEED', label: '흐름 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.4 },
+			{ name: 'SHEEN_INTENSITY', label: '광택 강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'smolder',
 		file: 'smolder.html',
-		title: 'Smolder',
-		desc: 'Radial warmth radiating through animated turbulence with heat shimmer, ember particles, and cool blue edges.',
+		title: '잔불',
+		desc: '열기 난류와 아지랑이, 불씨 파티클이 차가운 푸른 가장자리 사이로 번진다.',
 		inspiration: 'Pedro Pascal',
 		tags: ['fill', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'HEAT_INTENSITY', label: 'Heat Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'TURBULENCE', label: 'Turbulence', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'HEAT_INTENSITY', label: '열 강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'TURBULENCE', label: '난류', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		],
 		heroConfig: {
 			params: [
@@ -607,28 +607,28 @@ export const shaders: Shader[] = [
 	{
 		id: 'signal-decay',
 		file: 'signal-decay.html',
-		title: 'Signal Decay',
-		desc: 'Clean amber waveforms progressively degrading into gorgeous warm noise — order dissolving into beautiful chaos.',
+		title: '신호 감쇠',
+		desc: '정돈된 앰버 파형이 아름다운 따뜻한 노이즈로 무너져 질서가 혼돈으로 녹아든다.',
 		inspiration: 'Billie Eilish',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'SIGNAL_SPEED', label: 'Signal Speed', min: 0.2, max: 1.5, step: 0.05, default: 0.5 },
-			{ name: 'DECAY_INTENSITY', label: 'Decay', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'SIGNAL_SPEED', label: '신호 속도', min: 0.2, max: 1.5, step: 0.05, default: 0.5 },
+			{ name: 'DECAY_INTENSITY', label: '감쇠', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'neon-revival',
 		file: 'neon-revival.html',
-		title: 'Neon Revival',
-		desc: 'Flickering neon sign with electrical buzz, dripping light particles, and wall reflections.',
+		title: '네온 리바이벌',
+		desc: '전기 잡음으로 깜박이는 네온 간판과 떨어지는 빛 파티클, 벽면 반사.',
 		inspiration: 'Chappell Roan',
 		tags: ['object', 'particles'],
 		technique: 'webgl',
 		params: [
-			{ name: 'SHAPE', label: 'Shape', min: 1, max: 4, step: 1, default: 1 },
-			{ name: 'FLICKER_RATE', label: 'Flicker Rate', min: 0.1, max: 1.0, step: 0.05, default: 0.5 },
-			{ name: 'GLOW_SPREAD', label: 'Glow Spread', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'SHAPE', label: '형태', min: 1, max: 4, step: 1, default: 1 },
+			{ name: 'FLICKER_RATE', label: '깜박임 빈도', min: 0.1, max: 1.0, step: 0.05, default: 0.5 },
+			{ name: 'GLOW_SPREAD', label: '빛 확산', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		],
 		heroConfig: {
 			params: [
@@ -641,66 +641,66 @@ export const shaders: Shader[] = [
 	{
 		id: 'lipstick-smear',
 		file: 'lipstick-smear.html',
-		title: 'Lipstick Smear',
-		desc: 'Viscous fluid simulation in hot pink and crimson — bold pigment streaking and blending with metallic sheen.',
+		title: '번진 립스틱',
+		desc: '뜨거운 핑크와 진홍색 점성 유체가 금속 광택을 띠며 번지고 섞인다.',
 		inspiration: 'Chappell Roan',
 		tags: ['fill', 'physics', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'VISCOSITY', label: 'Viscosity', min: 0.1, max: 2.0, step: 0.05, default: 0.8 },
-			{ name: 'COLOR_INTENSITY', label: 'Color Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'VISCOSITY', label: '점도', min: 0.1, max: 2.0, step: 0.05, default: 0.8 },
+			{ name: 'COLOR_INTENSITY', label: '색상 강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'glitter-storm',
 		file: 'glitter-storm.html',
-		title: 'Glitter Storm',
-		desc: 'Dense field of tumbling metallic glitter flakes catching rotating spotlights with specular flash physics.',
+		title: '글리터 폭풍',
+		desc: '회전하는 스포트라이트를 받아 섬광을 터뜨리는 금속 글리터 조각의 폭풍.',
 		inspiration: 'Chappell Roan',
 		tags: ['fill', 'particles', 'physics'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'SPARKLE_RATE', label: 'Sparkle Rate', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'DENSITY', label: 'Density', min: 0.3, max: 4.0, step: 0.1, default: 1.0 }
+			{ name: 'SPARKLE_RATE', label: '반짝임 빈도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'DENSITY', label: '밀도', min: 0.3, max: 4.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'rubber-reality',
 		file: 'rubber-reality.html',
-		title: 'Rubber Reality',
-		desc: 'Elastic grid mesh deformed by traveling attractors with spring physics and snap-back.',
+		title: '고무 같은 현실',
+		desc: '움직이는 어트랙터에 휘어진 탄성 격자가 스프링처럼 튕겨 돌아온다.',
 		inspiration: 'Jim Carrey',
 		tags: ['fill', 'physics', 'geometric'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'ELASTICITY', label: 'Elasticity', min: 0.3, max: 2.5, step: 0.1, default: 1.0 },
-			{ name: 'DISTORTION_POINTS', label: 'Distortion Points', min: 1, max: 6, step: 1, default: 3 }
+			{ name: 'ELASTICITY', label: '탄성', min: 0.3, max: 2.5, step: 0.1, default: 1.0 },
+			{ name: 'DISTORTION_POINTS', label: '왜곡 지점', min: 1, max: 6, step: 1, default: 3 }
 		]
 	},
 	{
 		id: 'magma-core',
 		file: 'magma-core.html',
-		title: 'Magma Core',
-		desc: 'Volcanic eruption with thermal lava particles, cooling physics, and magma pool.',
+		title: '마그마 핵',
+		desc: '열을 품은 용암 파티클이 식어가는 물리와 마그마 웅덩이를 동반해 분출한다.',
 		inspiration: 'Jack Black',
 		tags: ['object', 'particles', 'physics'],
 		technique: 'webgl',
 		params: [
-			{ name: 'ERUPTION_FORCE', label: 'Eruption Force', min: 0.3, max: 2.5, step: 0.1, default: 1.0 },
-			{ name: 'ERUPTION_INTERVAL', label: 'Eruption Interval', min: 2, max: 15, step: 1, default: 6 }
+			{ name: 'ERUPTION_FORCE', label: '분출력', min: 0.3, max: 2.5, step: 0.1, default: 1.0 },
+			{ name: 'ERUPTION_INTERVAL', label: '분출 간격', min: 2, max: 15, step: 1, default: 6 }
 		]
 	},
 	{
 		id: 'clockwork-mind',
 		file: 'clockwork-mind.html',
-		title: 'Clockwork Mind',
-		desc: 'Interlocking precision gears with metallic rendering and mathematically correct meshing.',
+		title: '태엽장치의 정신',
+		desc: '정밀하게 맞물리는 톱니바퀴를 금속성으로 렌더링한 기계 장치.',
 		inspiration: 'Robert Downey Jr.',
 		tags: ['object', 'geometric'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'ROTATION_SPEED', label: 'Rotation Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
-			{ name: 'GEAR_DETAIL', label: 'Gear Detail', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'ROTATION_SPEED', label: '회전 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
+			{ name: 'GEAR_DETAIL', label: '톱니 디테일', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		],
 		heroConfig: {
 			params: [
@@ -713,55 +713,55 @@ export const shaders: Shader[] = [
 	{
 		id: 'edge-of-chaos',
 		file: 'edge-of-chaos.html',
-		title: 'Edge of Chaos',
-		desc: 'Reaction-diffusion maze with golden edge glow and organic pop-and-regrow cycle.',
+		title: '혼돈의 가장자리',
+		desc: '황금빛 가장자리를 두른 반응 확산 미로가 유기적으로 솟았다가 다시 자란다.',
 		inspiration: 'Robert Downey Jr.',
 		tags: ['fill', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'PATTERN_SPEED', label: 'Evolution Speed', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'POP_RATE', label: 'Pop Frequency', min: 0.2, max: 3.0, step: 0.1, default: 1.0 }
+			{ name: 'PATTERN_SPEED', label: '변화 속도', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'POP_RATE', label: '팝 빈도', min: 0.2, max: 3.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'spark-chamber',
 		file: 'spark-chamber.html',
-		title: 'Spark Chamber',
-		desc: 'Charged particles spiraling through a magnetic field, leaving curved trails like cloud chamber photography.',
+		title: '스파크 챔버',
+		desc: '자기장을 도는 하전 입자가 구름상자 사진 같은 곡선 트레일을 남긴다.',
 		inspiration: 'Robert Downey Jr.',
 		tags: ['fill', 'particles', 'physics'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'EMISSION_RATE', label: 'Emission Rate', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'FIELD_STRENGTH', label: 'Field Strength', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'EMISSION_RATE', label: '방출량', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'FIELD_STRENGTH', label: '장 세기', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'shifting-veils',
 		file: 'shifting-veils.html',
-		title: 'Shifting Veils',
-		desc: 'Layered translucent noise curtains that morph and reveal patterns underneath.',
+		title: '흔들리는 장막',
+		desc: '겹겹의 반투명 노이즈 장막이 형태를 바꾸며 아래 숨은 패턴을 드러낸다.',
 		inspiration: 'Meryl Streep',
 		tags: ['fill', 'noise', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'LAYER_SPEED', label: 'Layer Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
-			{ name: 'LAYER_COUNT', label: 'Layer Count', min: 3, max: 7, step: 1, default: 5 }
+			{ name: 'LAYER_SPEED', label: '레이어 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
+			{ name: 'LAYER_COUNT', label: '레이어 개수', min: 3, max: 7, step: 1, default: 5 }
 		]
 	},
 	{
 		id: 'crystal-lattice',
 		file: 'crystal-lattice.html',
-		title: 'Crystal Lattice',
-		desc: 'Procedural crystal formations growing with faceted 3D lighting and prismatic sparkle.',
+		title: '결정 격자',
+		desc: '면을 살리는 3D 조명과 프리즘 반짝임 속에서 절차적으로 자라나는 결정.',
 		inspiration: 'Anne Hathaway',
 		tags: ['object', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'GROWTH_SPEED', label: 'Crystal Count', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'REFRACTION', label: 'Prismatic', min: 0.0, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'TILT_X', label: 'Tilt X', min: -1.5, max: 1.5, step: 0.1, default: 0.0 },
-			{ name: 'TILT_Y', label: 'Tilt Y', min: -0.5, max: 0.5, step: 0.1, default: 0.0 }
+			{ name: 'GROWTH_SPEED', label: '결정 개수', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'REFRACTION', label: '프리즘 효과', min: 0.0, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'TILT_X', label: 'X축 기울기', min: -1.5, max: 1.5, step: 0.1, default: 0.0 },
+			{ name: 'TILT_Y', label: 'Y축 기울기', min: -0.5, max: 0.5, step: 0.1, default: 0.0 }
 		],
 		heroConfig: {
 			params: [
@@ -774,107 +774,107 @@ export const shaders: Shader[] = [
 	{
 		id: 'kaleidoscope-runway',
 		file: 'kaleidoscope-runway.html',
-		title: 'Kaleidoscope Runway',
-		desc: 'Fashion-inspired kaleidoscopic tessellations with symmetric mirror segments.',
+		title: '만화경 런웨이',
+		desc: '패션에서 영감을 받은 대칭 거울 조각의 만화경 테셀레이션.',
 		inspiration: 'Zendaya',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'SYMMETRY', label: 'Symmetry', min: 4, max: 16, step: 2, default: 8 },
-			{ name: 'PATTERN_SPEED', label: 'Pattern Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 }
+			{ name: 'SYMMETRY', label: '대칭 수', min: 4, max: 16, step: 2, default: 8 },
+			{ name: 'PATTERN_SPEED', label: '패턴 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 }
 		]
 	},
 	{
 		id: 'digital-rain',
 		file: 'digital-rain.html',
-		title: 'Digital Rain',
-		desc: 'Warm amber character columns dissolving into zen ripples at the water surface.',
+		title: '디지털 비',
+		desc: '따뜻한 앰버 문자 열이 수면에서 선의 잔물결로 녹아든다.',
 		inspiration: 'Keanu Reeves',
 		tags: ['fill', 'particles'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'FALL_SPEED', label: 'Fall Speed', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'COLUMN_DENSITY', label: 'Column Density', min: 0.3, max: 1.0, step: 0.05, default: 0.7 }
+			{ name: 'FALL_SPEED', label: '낙하 속도', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'COLUMN_DENSITY', label: '열 밀도', min: 0.3, max: 1.0, step: 0.05, default: 0.7 }
 		]
 	},
 	{
 		id: 'neon-drive',
 		file: 'neon-drive.html',
-		title: 'Neon Drive',
-		desc: 'Rain-slicked neon road stretching to a vanishing point with approaching headlights.',
+		title: '네온 드라이브',
+		desc: '젖은 네온 도로가 소실점으로 뻗고 다가오는 헤드라이트가 밤을 가른다.',
 		inspiration: 'Ryan Gosling',
 		tags: ['fill', 'particles'],
 		technique: 'webgl',
 		params: [
-			{ name: 'DRIVE_SPEED', label: 'Drive Speed', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'RAIN_INTENSITY', label: 'Rain Intensity', min: 0.1, max: 1.0, step: 0.05, default: 0.7 }
+			{ name: 'DRIVE_SPEED', label: '주행 속도', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'RAIN_INTENSITY', label: '빗줄기 강도', min: 0.1, max: 1.0, step: 0.05, default: 0.7 }
 		]
 	},
 	{
 		id: 'liquid-gold',
 		file: 'liquid-gold.html',
-		title: 'Liquid Gold',
-		desc: 'Molten metal flow with surface tension, metallic PBR shading, and golden reflections.',
+		title: '액체 금',
+		desc: '표면 장력과 금속성 PBR 셰이딩, 황금 반사를 지닌 녹은 금속의 흐름.',
 		inspiration: 'Margot Robbie',
 		tags: ['fill', 'noise', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'FLOW_SPEED', label: 'Flow Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.4 },
-			{ name: 'VISCOSITY', label: 'Viscosity', min: 0.2, max: 1.0, step: 0.05, default: 0.6 }
+			{ name: 'FLOW_SPEED', label: '흐름 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.4 },
+			{ name: 'VISCOSITY', label: '점도', min: 0.2, max: 1.0, step: 0.05, default: 0.6 }
 		]
 	},
 	{
 		id: 'aurora-veil',
 		file: 'aurora-veil.html',
-		title: 'Aurora Veil',
-		desc: 'Northern lights ribbons flowing above hexagonal ice crystal formations.',
+		title: '오로라 장막',
+		desc: '육각형 얼음 결정 위로 북극광 리본이 흐르는 풍경.',
 		inspiration: 'Cate Blanchett',
 		tags: ['fill', 'noise', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'AURORA_SPEED', label: 'Aurora Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
-			{ name: 'AURORA_INTENSITY', label: 'Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'AURORA_SPEED', label: '오로라 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
+			{ name: 'AURORA_INTENSITY', label: '강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'bioluminescence',
 		file: 'bioluminescence.html',
-		title: 'Bioluminescence',
-		desc: 'Deep sea jellyfish pulsing with bioluminescent glow and drifting plankton.',
+		title: '생물 발광',
+		desc: '생물 발광으로 맥동하는 심해 해파리와 천천히 떠다니는 플랑크톤.',
 		inspiration: 'Zendaya',
 		tags: ['fill', 'organic', 'particles'],
 		technique: 'webgl',
 		defaultScheme: 'blue',
 		params: [
-			{ name: 'GLOW_INTENSITY', label: 'Glow Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'WAVE_SPEED', label: 'Wave Speed', min: 0.2, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'GLOW_INTENSITY', label: '빛 강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'WAVE_SPEED', label: '파동 속도', min: 0.2, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'gothic-filigree',
 		file: 'gothic-filigree.html',
-		title: 'Gothic Filigree',
-		desc: 'Ornate fractal lace scrollwork growing from corners with dark metallic rendering.',
+		title: '고딕 세공',
+		desc: '어두운 금속 질감의 화려한 프랙털 레이스 장식이 모서리에서 자라난다.',
 		inspiration: 'Jenna Ortega',
 		tags: ['fill', 'organic', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'GROWTH_SPEED', label: 'Growth Speed', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'CURL_TIGHTNESS', label: 'Curl Tightness', min: 0.3, max: 1.0, step: 0.05, default: 0.7 }
+			{ name: 'GROWTH_SPEED', label: '성장 속도', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'CURL_TIGHTNESS', label: '컬 곡률', min: 0.3, max: 1.0, step: 0.05, default: 0.7 }
 		]
 	},
 	{
 		id: 'laser-precision',
 		file: 'laser-precision.html',
-		title: 'Laser Precision',
-		desc: 'Laser beams tracing geometric patterns with spark particles and intersection flares.',
+		title: '레이저 정밀도',
+		desc: '레이저 빔이 기하학적 패턴을 그리고 스파크와 교차점 플레어를 남긴다.',
 		inspiration: 'Ana de Armas',
 		tags: ['fill', 'geometric'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'DRAW_SPEED', label: 'Draw Speed', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'LINE_BRIGHTNESS', label: 'Brightness', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'SHAPE', label: 'Shape', min: 1, max: 7, step: 1, default: 1 }
+			{ name: 'DRAW_SPEED', label: '그리기 속도', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'LINE_BRIGHTNESS', label: '밝기', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'SHAPE', label: '형태', min: 1, max: 7, step: 1, default: 1 }
 		],
 		heroConfig: {
 			params: [
@@ -887,173 +887,173 @@ export const shaders: Shader[] = [
 	{
 		id: 'magnetic-sand',
 		file: 'magnetic-sand.html',
-		title: 'Magnetic Sand',
-		desc: 'Thousands of particles aligning along invisible magnetic field lines with warm golden glow.',
+		title: '자기 모래',
+		desc: '수천 개의 파티클이 보이지 않는 자기장 선을 따라 정렬되며 황금빛으로 빛난다.',
 		inspiration: 'Ana de Armas',
 		tags: ['fill', 'particles', 'physics'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'FIELD_STRENGTH', label: 'Field Strength', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'PARTICLE_COUNT', label: 'Particle Count', min: 1000, max: 5000, step: 500, default: 3000 }
+			{ name: 'FIELD_STRENGTH', label: '장 세기', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'PARTICLE_COUNT', label: '파티클 개수', min: 1000, max: 5000, step: 500, default: 3000 }
 		]
 	},
 	{
 		id: 'woven-radiance',
 		file: 'woven-radiance.html',
-		title: 'Woven Radiance',
-		desc: 'African textile-inspired weave patterns with vibrant kente cloth geometry.',
+		title: '직조된 광채',
+		desc: '아프리카 직물에서 영감을 받은 켄테 천의 선명한 기하학적 직조.',
 		inspiration: 'Lupita Nyong\'o',
 		tags: ['fill', 'geometric'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'WEAVE_SPEED', label: 'Weave Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
-			{ name: 'COLOR_RICHNESS', label: 'Color Richness', min: 0.3, max: 1.0, step: 0.05, default: 0.8 }
+			{ name: 'WEAVE_SPEED', label: '직조 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
+			{ name: 'COLOR_RICHNESS', label: '색상 풍부도', min: 0.3, max: 1.0, step: 0.05, default: 0.8 }
 		]
 	},
 	{
 		id: 'jazz-chaos',
 		file: 'jazz-chaos.html',
-		title: 'Jazz Chaos',
-		desc: 'Syncopated particle groups moving in rhythm with swing timing and solos.',
+		title: '재즈 카오스',
+		desc: '스윙 타이밍과 즉흥 솔로에 맞춰 리듬감 있게 움직이는 파티클 무리.',
 		inspiration: 'Jeff Goldblum',
 		tags: ['fill', 'particles'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'TEMPO', label: 'Tempo', min: 60, max: 200, step: 5, default: 120 },
-			{ name: 'SWING', label: 'Swing', min: 0.0, max: 1.0, step: 0.05, default: 0.6 }
+			{ name: 'TEMPO', label: '템포', min: 60, max: 200, step: 5, default: 120 },
+			{ name: 'SWING', label: '스윙', min: 0.0, max: 1.0, step: 0.05, default: 0.6 }
 		]
 	},
 	{
 		id: 'thunder-sermon',
 		file: 'thunder-sermon.html',
-		title: 'Thunder Sermon',
-		desc: 'Fractal lightning bolts with Lichtenberg branching and thunder shockwaves.',
+		title: '천둥의 설교',
+		desc: '리히텐베르크식 가지를 뻗는 프랙털 번개와 천둥 충격파.',
 		inspiration: 'The Weeknd',
 		tags: ['fill', 'physics'],
 		technique: 'webgl',
 		params: [
-			{ name: 'STRIKE_INTERVAL', label: 'Strike Interval', min: 1, max: 8, step: 0.5, default: 3 },
-			{ name: 'BRANCH_COMPLEXITY', label: 'Branching', min: 0.2, max: 0.9, step: 0.05, default: 0.6 }
+			{ name: 'STRIKE_INTERVAL', label: '낙뢰 간격', min: 1, max: 8, step: 0.5, default: 3 },
+			{ name: 'BRANCH_COMPLEXITY', label: '가지 분화', min: 0.2, max: 0.9, step: 0.05, default: 0.6 }
 		]
 	},
 	{
 		id: 'vinyl-grooves',
 		file: 'vinyl-grooves.html',
-		title: 'Vinyl Grooves',
-		desc: 'Spinning vinyl record with visible grooves, tonearm, and needle spark.',
+		title: '바이닐 홈',
+		desc: '홈과 톤암, 바늘 스파크가 선명하게 보이는 회전 바이닐 레코드.',
 		inspiration: 'Laufey',
 		tags: ['object', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'RPM', label: 'RPM', min: 16, max: 78, step: 1, default: 33 },
-			{ name: 'GROOVE_DETAIL', label: 'Groove Detail', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'RPM', label: '분당 회전수', min: 16, max: 78, step: 1, default: 33 },
+			{ name: 'GROOVE_DETAIL', label: '홈 디테일', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'vintage-static',
 		file: 'vintage-static.html',
-		title: 'Vintage Static',
-		desc: 'Retro TV color bars melting with VHS glitches and CRT scan lines.',
+		title: '빈티지 노이즈',
+		desc: 'VHS 글리치와 CRT 스캔 라인 속에서 녹아내리는 레트로 TV 컬러 바.',
 		inspiration: 'Harry Styles',
 		tags: ['fill', 'geometric'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'GLITCH_INTENSITY', label: 'Glitch Intensity', min: 0.1, max: 1.0, step: 0.05, default: 0.5 },
-			{ name: 'MELT_SPEED', label: 'Melt Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 }
+			{ name: 'GLITCH_INTENSITY', label: '글리치 강도', min: 0.1, max: 1.0, step: 0.05, default: 0.5 },
+			{ name: 'MELT_SPEED', label: '녹는 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 }
 		]
 	},
 	{
 		id: 'torn-paper',
 		file: 'torn-paper.html',
-		title: 'Torn Paper',
-		desc: 'Paper surface tearing apart with fibrous edges revealing warm volumetric light underneath, then reforming.',
+		title: '찢긴 종이',
+		desc: '섬유질 가장자리로 종이가 찢어져 따뜻한 입체 빛을 드러낸 뒤 다시 붙는다.',
 		inspiration: 'Olivia Rodrigo',
 		tags: ['fill', 'noise', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'TEAR_SPEED', label: 'Tear Speed', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'GLOW_INTENSITY', label: 'Glow Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'TEAR_SPEED', label: '찢김 속도', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'GLOW_INTENSITY', label: '빛 강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'polaroid-burn',
 		file: 'polaroid-burn.html',
-		title: 'Polaroid Burn',
-		desc: 'Scattered polaroid photos developing warm abstract memories, overexposing, and burning out with ember edges.',
+		title: '폴라로이드 번인',
+		desc: '흩어진 폴라로이드 사진이 따뜻한 추상을 현상하고 과다 노출과 불씨 가장자리로 사라진다.',
 		inspiration: 'Olivia Rodrigo',
 		tags: ['fill', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'BURN_SPEED', label: 'Burn Speed', min: 0.2, max: 2.0, step: 0.05, default: 0.6 },
-			{ name: 'PHOTO_COUNT', label: 'Photo Count', min: 3, max: 8, step: 1, default: 5 }
+			{ name: 'BURN_SPEED', label: '연소 속도', min: 0.2, max: 2.0, step: 0.05, default: 0.6 },
+			{ name: 'PHOTO_COUNT', label: '사진 개수', min: 3, max: 8, step: 1, default: 5 }
 		]
 	},
 	{
 		id: 'scream-wave',
 		file: 'scream-wave.html',
-		title: 'Scream Wave',
-		desc: 'Glowing waveform building from gentle sine to distorted scream with chromatic aberration and collapse.',
+		title: '비명의 파동',
+		desc: '잔잔한 사인파가 색수차를 품은 왜곡된 비명으로 커졌다가 무너지는 빛나는 파형.',
 		inspiration: 'Olivia Rodrigo',
 		tags: ['object', 'physics'],
 		technique: 'webgl',
 		params: [
-			{ name: 'INTENSITY', label: 'Intensity', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'WAVE_SPEED', label: 'Wave Speed', min: 0.3, max: 2.0, step: 0.1, default: 0.8 }
+			{ name: 'INTENSITY', label: '강도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'WAVE_SPEED', label: '파동 속도', min: 0.3, max: 2.0, step: 0.1, default: 0.8 }
 		]
 	},
 	{
 		id: 'ink-calligraphy',
 		file: 'ink-calligraphy.html',
-		title: 'Ink Calligraphy',
-		desc: 'Abstract gestural ink strokes with organic diffusion on textured paper and luminous gold leaf highlights.',
+		title: '잉크 캘리그래피',
+		desc: '질감 있는 종이 위 유기적으로 번지는 몸짓 잉크와 빛나는 금박 하이라이트.',
 		inspiration: 'Anne Hathaway',
 		tags: ['fill', 'organic'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'STROKE_SPEED', label: 'Stroke Speed', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'INK_DENSITY', label: 'Ink Density', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'GOLD_AMOUNT', label: 'Gold Leaf', min: 0.0, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'PALETTE', label: 'Dark Mode', min: 0.0, max: 1.0, step: 1.0, default: 0.0 }
+			{ name: 'STROKE_SPEED', label: '스트로크 속도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'INK_DENSITY', label: '잉크 밀도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'GOLD_AMOUNT', label: '금박', min: 0.0, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'PALETTE', label: '어두운 모드', min: 0.0, max: 1.0, step: 1.0, default: 0.0 }
 		]
 	},
 	{
 		id: 'velvet-spotlight',
 		file: 'velvet-spotlight.html',
-		title: 'Velvet Spotlight',
-		desc: 'Theatrical dust particles caught in sweeping spotlight cones with volumetric rays and warm scattering haze.',
+		title: '벨벳 스포트라이트',
+		desc: '입체 광선과 따뜻한 산란 안개 속에서 스포트라이트에 포착된 무대 먼지.',
 		inspiration: 'Anne Hathaway',
 		tags: ['fill', 'particles'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'DUST_DENSITY', label: 'Dust Density', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'SWEEP_SPEED', label: 'Sweep Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 }
+			{ name: 'DUST_DENSITY', label: '먼지 밀도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'SWEEP_SPEED', label: '스윕 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 }
 		]
 	},
 	{
 		id: 'murmuration',
 		file: 'murmuration.html',
-		title: 'Murmuration',
-		desc: 'Thousands of flocking particles forming flowing ribbons with emergent density waves against a warm twilight sky.',
+		title: '새 떼의 군무',
+		desc: '따뜻한 황혼 하늘 아래 수천 마리의 새 파티클이 흐르는 리본과 밀도 파동을 이룬다.',
 		inspiration: 'Anne Hathaway',
 		tags: ['fill', 'particles', 'physics'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'FLOCK_SIZE', label: 'Flock Size', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'COHESION', label: 'Cohesion', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'PALETTE', label: 'Twilight', min: 0.0, max: 1.0, step: 1.0, default: 1.0 }
+			{ name: 'FLOCK_SIZE', label: '무리 크기', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'COHESION', label: '응집력', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'PALETTE', label: '황혼', min: 0.0, max: 1.0, step: 1.0, default: 1.0 }
 		]
 	},
 	{
 		id: 'tesseract-shadow',
 		file: 'tesseract-shadow.html',
-		title: 'Tesseract Shadow',
-		desc: '4D hypercube projected into 2D with depth-faded wireframe, axis-mapped colors, and rotation trails.',
+		title: '테서랙트의 그림자',
+		desc: '4차원 초입방체를 2D로 투영해 깊이에 따라 흐려지는 와이어프레임과 회전 트레일을 만든다.',
 		inspiration: 'Benedict Cumberbatch',
 		tags: ['object', 'geometric'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'ROTATION_SPEED', label: 'Rotation Speed', min: 0.05, max: 1.0, step: 0.05, default: 0.3 },
-			{ name: 'PROJECTION_DEPTH', label: 'Projection Depth', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'ROTATION_SPEED', label: '회전 속도', min: 0.05, max: 1.0, step: 0.05, default: 0.3 },
+			{ name: 'PROJECTION_DEPTH', label: '투영 깊이', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		],
 		heroConfig: {
 			params: [
@@ -1066,199 +1066,199 @@ export const shaders: Shader[] = [
 	{
 		id: 'moire-interference',
 		file: 'moire-interference.html',
-		title: 'Moiré Interference',
-		desc: 'Overlapping concentric ring patterns creating hypnotic emergent moiré interference in blue-violet and teal.',
+		title: '모아레 간섭',
+		desc: '겹쳐진 동심원이 청보라와 청록의 최면적인 모아레 간섭을 만들어낸다.',
 		inspiration: 'Benedict Cumberbatch',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'RING_DENSITY', label: 'Ring Density', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'DRIFT_SPEED', label: 'Drift Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 }
+			{ name: 'RING_DENSITY', label: '링 밀도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'DRIFT_SPEED', label: '흐름 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 }
 		]
 	},
 	{
 		id: 'phase-transition',
 		file: 'phase-transition.html',
-		title: 'Phase Transition',
-		desc: 'Particles oscillating between crystalline lattice order and chaotic turbulence with a traveling phase wavefront.',
+		title: '상전이',
+		desc: '결정 격자의 질서와 혼돈의 난류 사이를 오가는 파티클을 위상 파면이 가로지른다.',
 		inspiration: 'Benedict Cumberbatch',
 		tags: ['fill', 'particles', 'physics'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'WAVE_SPEED', label: 'Wave Speed', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
-			{ name: 'PARTICLE_DENSITY', label: 'Particle Density', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'WAVE_SPEED', label: '파동 속도', min: 0.1, max: 1.5, step: 0.05, default: 0.5 },
+			{ name: 'PARTICLE_DENSITY', label: '파티클 밀도', min: 0.3, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'magnetic-field',
 		file: 'magnetic-field.html',
-		title: 'Magnetic Field',
-		desc: 'Dipole field lines curving between slowly rotating poles with silk-thread glow rendering.',
+		title: '자기장',
+		desc: '천천히 회전하는 양극 사이로 휘어지는 쌍극자 자기장 선을 실크 실처럼 빛낸다.',
 		inspiration: 'Cate Blanchett',
 		tags: ['fill', 'geometric', 'physics'],
 		technique: 'webgl',
 		params: [
-			{ name: 'WAVE_SPEED', label: 'Animation Speed', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'LINE_COUNT', label: 'Field Lines', min: 3, max: 12, step: 1, default: 8 }
+			{ name: 'WAVE_SPEED', label: '애니메이션 속도', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'LINE_COUNT', label: '장력선', min: 3, max: 12, step: 1, default: 8 }
 		]
 	},
 	{
 		id: 'aurora-curtain',
 		file: 'aurora-curtain.html',
-		title: 'Aurora Curtain',
-		desc: 'Vertical luminous threads swaying like aurora borealis curtains with warm-to-cool color gradient.',
+		title: '오로라 커튼',
+		desc: '따뜻한 색에서 차가운 색으로 이어지는 수직 빛실이 오로라 커튼처럼 흔들린다.',
 		inspiration: 'Meryl Streep',
 		tags: ['fill', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'WAVE_SPEED', label: 'Wave Speed', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'LINE_COUNT', label: 'Curtains', min: 3, max: 12, step: 1, default: 6 },
-			{ name: 'AMPLITUDE', label: 'Amplitude', min: 0.2, max: 2.0, step: 0.05, default: 1.0 },
-			{ name: 'ROTATION', label: 'Rotation', min: -1.57, max: 1.57, step: 0.05, default: 0.0 }
+			{ name: 'WAVE_SPEED', label: '파동 속도', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'LINE_COUNT', label: '커튼 수', min: 3, max: 12, step: 1, default: 6 },
+			{ name: 'AMPLITUDE', label: '진폭', min: 0.2, max: 2.0, step: 0.05, default: 1.0 },
+			{ name: 'ROTATION', label: '회전', min: -1.57, max: 1.57, step: 0.05, default: 0.0 }
 		]
 	},
 	{
 		id: 'vortex',
 		file: 'vortex.html',
-		title: 'Vortex',
-		desc: 'Logarithmic spiral arms converging on a drifting center with silk-thread glow and undulating perturbation.',
+		title: '소용돌이',
+		desc: '흐르는 중심을 향해 모이는 로그 나선 팔이 실크 실 같은 빛과 물결치는 변형을 만든다.',
 		inspiration: 'Lupita Nyong\'o',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'WAVE_SPEED', label: 'Animation Speed', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'LINE_COUNT', label: 'Spiral Arms', min: 3, max: 10, step: 1, default: 6 }
+			{ name: 'WAVE_SPEED', label: '애니메이션 속도', min: 0.2, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'LINE_COUNT', label: '나선 팔', min: 3, max: 10, step: 1, default: 6 }
 		]
 	},
 	{
 		id: 'chromatic-bloom',
 		file: 'chromatic-bloom.html',
-		title: 'Chromatic Bloom',
-		desc: 'Luminous color orbs drifting on pure black with Gaussian glow, additive blending, film grain, and cinematic vignette.',
+		title: '색채의 개화',
+		desc: '순수한 검정 위를 떠도는 빛나는 색 구슬에 가우시안 글로와 필름 그레인이 더해진다.',
 		inspiration: 'Lady Gaga',
 		tags: ['fill', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'DRIFT_SPEED', label: 'Drift Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
-			{ name: 'GRAIN_AMOUNT', label: 'Film Grain', min: 0.0, max: 1.0, step: 0.05, default: 0.5 }
+			{ name: 'DRIFT_SPEED', label: '흐름 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
+			{ name: 'GRAIN_AMOUNT', label: '필름 그레인', min: 0.0, max: 1.0, step: 0.05, default: 0.5 }
 		]
 	},
 	{
 		id: 'lens-whisper',
 		file: 'lens-whisper.html',
-		title: 'Lens Whisper',
-		desc: 'Anamorphic lens flares with chromatic color separation, horizontal streaks, bokeh halos, and cinematic film grain on pure black.',
+		title: '렌즈의 속삭임',
+		desc: '색 분리 아나모픽 플레어와 가로 줄무늬, 보케 후광이 시네마틱 그레인 위에 번진다.',
 		inspiration: 'Ryan Gosling',
 		tags: ['fill', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'FLARE_SPREAD', label: 'Flare Spread', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'DRIFT_SPEED', label: 'Drift Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 }
+			{ name: 'FLARE_SPREAD', label: '플레어 확산', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'DRIFT_SPEED', label: '흐름 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 }
 		]
 	},
 	{
 		id: 'luminous-silt',
 		file: 'luminous-silt.html',
-		title: 'Luminous Silt',
-		desc: 'Dense field of 18K particles creating soft color clouds through alpha accumulation over a noise-driven flow field.',
+		title: '빛나는 실트',
+		desc: '노이즈 기반 플로우 필드에서 1만 8천 개 파티클이 알파 누적으로 부드러운 색 구름을 만든다.',
 		inspiration: 'Lupita Nyong\'o',
 		tags: ['fill', 'particles', 'noise'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'DRIFT_SPEED', label: 'Drift Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.6 },
-			{ name: 'DENSITY', label: 'Density', min: 0.3, max: 2.0, step: 0.05, default: 1.0 }
+			{ name: 'DRIFT_SPEED', label: '흐름 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.6 },
+			{ name: 'DENSITY', label: '밀도', min: 0.3, max: 2.0, step: 0.05, default: 1.0 }
 		]
 	},
 	{
 		id: 'synth-ribbon',
 		file: 'synth-ribbon.html',
-		title: 'Synth Ribbon',
-		desc: 'Flowing metallic ribbons twisting through 3D space with chrome reflections in hot pink and cyan.',
+		title: '신스 리본',
+		desc: '핫 핑크와 시안 크롬 반사를 품은 금속 리본이 3D 공간에서 비틀려 흐른다.',
 		inspiration: 'Chappell Roan',
 		tags: ['fill', 'geometric'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'RIBBON_COUNT', label: 'Ribbon Count', min: 0.5, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'TWIST_SPEED', label: 'Twist Speed', min: 0.1, max: 2.0, step: 0.05, default: 1.0 }
+			{ name: 'RIBBON_COUNT', label: '리본 개수', min: 0.5, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'TWIST_SPEED', label: '비틀림 속도', min: 0.1, max: 2.0, step: 0.05, default: 1.0 }
 		]
 	},
 	{
 		id: 'hologram-glitch',
 		file: 'hologram-glitch.html',
-		title: 'Hologram Glitch',
-		desc: 'Abstract holographic texture with chromatic aberration, scanlines, and controlled glitch bursts.',
+		title: '홀로그램 글리치',
+		desc: '색수차와 스캔 라인, 제어된 글리치 폭발이 추상 홀로그램 질감을 흔든다.',
 		inspiration: 'Daft Punk',
 		tags: ['fill', 'noise'],
 		technique: 'webgl',
 		params: [
-			{ name: 'GLITCH_INTENSITY', label: 'Glitch Intensity', min: 0.0, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'SCAN_SPEED', label: 'Scan Speed', min: 0.1, max: 2.0, step: 0.05, default: 1.0 }
+			{ name: 'GLITCH_INTENSITY', label: '글리치 강도', min: 0.0, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'SCAN_SPEED', label: '스캔 속도', min: 0.1, max: 2.0, step: 0.05, default: 1.0 }
 		]
 	},
 	{
 		id: 'shattered-plains',
 		file: 'shattered-plains.html',
-		title: 'Shattered Plains',
-		desc: 'Storm-carved chasms branching through ancient sandstone plateaus with depth-revealed strata.',
+		title: '부서진 평원',
+		desc: '폭풍이 깎은 협곡이 고대 사암 고원을 가르고 깊이 드러난 지층을 보여준다.',
 		inspiration: 'Brandon Sanderson',
 		tags: ['fill', 'noise', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'CHANNEL_SPEED', label: 'Channel Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
-			{ name: 'CHANNEL_DEPTH', label: 'Channel Depth', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
-			{ name: 'GRAIN', label: 'Grain Texture', min: 0.0, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'CHANNEL_SPEED', label: '수로 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
+			{ name: 'CHANNEL_DEPTH', label: '수로 깊이', min: 0.3, max: 2.0, step: 0.1, default: 1.0 },
+			{ name: 'GRAIN', label: '그레인 질감', min: 0.0, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 	{
 		id: 'painted-strata',
 		file: 'painted-strata.html',
-		title: 'Painted Strata',
-		desc: 'Flowing layered bands with washi paper textures, slow tectonic folding, and fibrous grain — like a handcrafted landscape scroll.',
+		title: '채색된 지층',
+		desc: '와시 종이 질감의 층이 천천히 지각처럼 접히는 수공예 풍경 두루마리.',
 		inspiration: 'Laufey',
 		tags: ['fill', 'noise', 'organic'],
 		technique: 'webgl',
 		params: [
-			{ name: 'FOLD_SPEED', label: 'Fold Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
-			{ name: 'LAYER_COUNT', label: 'Layer Count', min: 8, max: 24, step: 1, default: 16 }
+			{ name: 'FOLD_SPEED', label: '접힘 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
+			{ name: 'LAYER_COUNT', label: '레이어 개수', min: 8, max: 24, step: 1, default: 16 }
 		]
 	},
 	{
 		id: 'feedback-loop',
 		file: 'feedback-loop.html',
-		title: 'Feedback Loop',
-		desc: 'Recursive video feedback tunnel with holographic color cycling, geometric seed shapes, and infinite fractal depth.',
+		title: '피드백 루프',
+		desc: '홀로그램 색 순환과 기하학적 씨앗, 끝없는 프랙털 깊이를 품은 재귀 영상 터널.',
 		inspiration: 'Daft Punk',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'ZOOM_SPEED', label: 'Zoom Speed', min: 0.5, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'ROTATION_SPEED', label: 'Rotation Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 }
+			{ name: 'ZOOM_SPEED', label: '줌 속도', min: 0.5, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'ROTATION_SPEED', label: '회전 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 }
 		]
 	},
 	{
 		id: 'dither-gradient',
 		file: 'dither-gradient.html',
-		title: 'Dither Gradient',
-		desc: 'Smooth gradients decomposed into shifting ordered dithering patterns with chromatic separation and bit-depth waves.',
+		title: '디더 그라디언트',
+		desc: '부드러운 그라디언트가 색 분리와 비트 깊이 파동을 지닌 정렬 디더 패턴으로 분해된다.',
 		inspiration: 'Daft Punk',
 		tags: ['fill', 'geometric'],
 		technique: 'webgl',
 		params: [
-			{ name: 'DITHER_SCALE', label: 'Dither Scale', min: 0.5, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'BIT_DEPTH', label: 'Bit Depth', min: 0.3, max: 2.0, step: 0.05, default: 1.0 }
+			{ name: 'DITHER_SCALE', label: '디더 크기', min: 0.5, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'BIT_DEPTH', label: '비트 깊이', min: 0.3, max: 2.0, step: 0.05, default: 1.0 }
 		]
 	},
 	{
 		id: 'analog-drift',
 		file: 'analog-drift.html',
-		title: 'Analog Drift',
-		desc: 'Morphing Lissajous figures with phosphor persistence trails, harmonic overtones, and oscilloscope grid.',
+		title: '아날로그 드리프트',
+		desc: '인광 잔상 트레일과 배음, 오실로스코프 격자 위에서 변형되는 리사주 도형.',
 		inspiration: 'Daft Punk',
 		tags: ['object', 'geometric'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'DRIFT_SPEED', label: 'Drift Speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
-			{ name: 'TRAIL_LENGTH', label: 'Trail Length', min: 0.3, max: 2.0, step: 0.05, default: 1.0 }
+			{ name: 'DRIFT_SPEED', label: '흐름 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
+			{ name: 'TRAIL_LENGTH', label: '트레일 길이', min: 0.3, max: 2.0, step: 0.05, default: 1.0 }
 		],
 		heroConfig: {
 			params: [
@@ -1272,13 +1272,13 @@ export const shaders: Shader[] = [
 	{
 		id: 'new-year-fireworks',
 		file: 'new-year-fireworks.html',
-		title: 'New Year Fireworks',
-		desc: 'Korean traditional obangsaek fireworks over a navy night sky. Click anywhere to launch.',
+		title: '새해 폭죽',
+		desc: '남색 밤하늘 위로 한국 전통 오방색 폭죽이 터진다. 화면을 클릭해 어디든 발사할 수 있다.',
 		tags: ['fill', 'particles', 'organic'],
 		technique: 'canvas-2d',
 		params: [
-			{ name: 'BURST_RATE', label: 'Burst Rate', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
-			{ name: 'PARTICLE_COUNT', label: 'Particle Density', min: 0.5, max: 2.0, step: 0.1, default: 1.0 }
+			{ name: 'BURST_RATE', label: '폭발 빈도', min: 0.3, max: 3.0, step: 0.1, default: 1.0 },
+			{ name: 'PARTICLE_COUNT', label: '파티클 밀도', min: 0.5, max: 2.0, step: 0.1, default: 1.0 }
 		]
 	},
 ];

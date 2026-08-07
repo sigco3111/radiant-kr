@@ -74,7 +74,7 @@ export function filterShaders(dimension: FilterDimension, slug: string): Shader[
 }
 
 export function getFilterTitle(dimension: FilterDimension, slug: string): string {
-	if (dimension === 'all') return 'All Shaders';
+	if (dimension === 'all') return '전체 셰이더';
 	if (dimension === 'tag') return tagLabels[slug as ShaderTag] ?? slug;
 	if (dimension === 'technique') return techniqueLabels[slug as ShaderTechnique] ?? slug;
 	if (dimension === 'inspiration') {
@@ -85,12 +85,12 @@ export function getFilterTitle(dimension: FilterDimension, slug: string): string
 }
 
 export function getFilterDescription(dimension: FilterDimension, slug: string, count: number): string {
-	if (dimension === 'all') return `${count} production-ready shaders & effects. Click to explore, configure, and download.`;
-	if (dimension === 'tag') return `${count} shaders tagged "${tagLabels[slug as ShaderTag]}"`;
-	if (dimension === 'technique') return `${count} shaders built with ${techniqueLabels[slug as ShaderTechnique]}`;
+	if (dimension === 'all') return `${count}개의 프로덕션 셰이더와 효과. 클릭하여 탐색하고 설정 후 다운로드하세요.`;
+	if (dimension === 'tag') return `${tagLabels[slug as ShaderTag]} 태그가 붙은 셰이더 ${count}개`;
+	if (dimension === 'technique') return `${techniqueLabels[slug as ShaderTechnique]}로 제작된 셰이더 ${count}개`;
 	if (dimension === 'inspiration') {
 		const name = getFilterTitle('inspiration', slug);
-		return `${count} shader${count !== 1 ? 's' : ''} inspired by ${name}`;
+		return `${name}에게 영감을 받은 셰이더 ${count}개`;
 	}
 	return '';
 }
@@ -100,12 +100,12 @@ export function getSidebarSections(): FilterSection[] {
 
 	// Browse
 	sections.push({
-		title: 'Browse',
+		title: '둘러보기',
 		categories: [
 			{
 				dimension: 'all',
 				slug: 'all',
-				label: 'All Shaders',
+				label: '전체 셰이더',
 				count: shaders.length,
 				href: '/gallery/all'
 			}
@@ -120,7 +120,7 @@ export function getSidebarSections(): FilterSection[] {
 		}
 	}
 	sections.push({
-		title: 'Style',
+		title: '스타일',
 		categories: (Object.keys(tagLabels) as ShaderTag[]).map((tag) => ({
 			dimension: 'tag' as FilterDimension,
 			slug: tag,
@@ -136,7 +136,7 @@ export function getSidebarSections(): FilterSection[] {
 		techCounts.set(s.technique, (techCounts.get(s.technique) ?? 0) + 1);
 	}
 	sections.push({
-		title: 'Technique',
+		title: '기법',
 		categories: (['webgl', 'canvas-2d'] as ShaderTechnique[]).map((tech) => ({
 			dimension: 'technique' as FilterDimension,
 			slug: tech,
@@ -149,7 +149,7 @@ export function getSidebarSections(): FilterSection[] {
 	// Inspiration
 	const inspirations = getInspirations();
 	sections.push({
-		title: 'Inspiration',
+		title: '영감',
 		categories: inspirations.map((i) => ({
 			dimension: 'inspiration' as FilterDimension,
 			slug: i.slug,

@@ -8,37 +8,37 @@ export interface ColorScheme {
 export const colorSchemes: ColorScheme[] = [
 	{
 		id: 'amber',
-		name: 'Amber',
+		name: '앰버',
 		swatch: '#c8956c',
 		filter: 'none'
 	},
 	{
 		id: 'monochrome',
-		name: 'Mono',
+		name: '모노',
 		swatch: '#999',
 		filter: 'grayscale(1)'
 	},
 	{
 		id: 'blue',
-		name: 'Blue',
+		name: '블루',
 		swatch: '#6c8ec8',
 		filter: 'hue-rotate(175deg)'
 	},
 	{
 		id: 'rose',
-		name: 'Rose',
+		name: '로즈',
 		swatch: '#c86c8e',
 		filter: 'hue-rotate(300deg) saturate(1.1)'
 	},
 	{
 		id: 'emerald',
-		name: 'Emerald',
+		name: '에메랄드',
 		swatch: '#6cc889',
 		filter: 'hue-rotate(90deg) saturate(1.2)'
 	},
 	{
 		id: 'arctic',
-		name: 'Arctic',
+		name: '아틱',
 		swatch: '#b8ccd8',
 		filter: 'hue-rotate(180deg) saturate(0.5) brightness(1.1)'
 	}
