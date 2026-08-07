@@ -116,33 +116,25 @@ drawCurve(a, b, delta, 0.38, 'rgba(220, 180, 130, 1)', 0.85, 1.5);`;
 	readingTime={meta.readingTime}
 >
 	<p>
-		Two sines, plotted against each other on a 2D canvas. Don't clear the canvas between frames.
-		That's the whole effect. Everything else is decoration on top of those two facts.
+		두 사인파를 2D 캔버스에서 서로 다른 축에 그린다. 프레임 사이에 캔버스를 지우지 않는 것이 이 효과의 핵심이다.
 	</p>
 
 	<p>
-		The shape comes from <strong>Lissajous figures</strong>, the curve you get when you feed one
-		oscillating waveform into the X deflection of a cathode-ray tube and another into the Y. The
-		glow comes from <strong>phosphor persistence</strong>, the property that made CRT screens look
-		analog: the screen keeps emitting light for a moment after the beam moves on. We fake both.
+		모양은 리사주 도형에서, 빛은 CRT의 인광 잔상에서 온다. 전자빔이 지나간 뒤에도 화면이 잠시 빛나는 성질을 흉내 낸다.
 	</p>
 
-	<Aside type="note" title="Why bother?">
+<Aside type="note" title="왜 해야 할까?">
 		{#snippet children()}
 			<p>
-				The Radiant <a href="/shader/analog-drift">Analog Drift</a> shader looks like an
-				oscilloscope readout from a piece of audio gear. The technique generalizes to any
-				phosphor-trail effect: route planners, time-series scrubbers, audio visualizers, the
-				HUD of a fictional spaceship. Two functions, one buffer.
-			</p>
+		Analog Drift는 오실로스코프처럼 보이지만 이 기법은 경로 표시기, 시계열 탐색기, 오디오 시각화에도 적용할 수 있다.
+	</p>
 		{/snippet}
 	</Aside>
 
-	<h2 id="lissajous">A.k.a. Lissajous</h2>
+	<h2 id="lissajous">리사주 도형</h2>
 
 	<p>
-		Named for Jules Antoine Lissajous, who studied them in the 1850s by reflecting light off
-		mirrors attached to tuning forks. The parametric form is two sines:
+		리사주 도형은 1850년대 줄스 앙투안 리사주가 소리굽쇠에 붙인 거울로 빛을 반사하며 연구했다. 매개변수식은 두 사인파로 이루어진다.
 	</p>
 
 	<p class="equation">
@@ -152,85 +144,57 @@ drawCurve(a, b, delta, 0.38, 'rgba(220, 180, 130, 1)', 0.85, 1.5);`;
 	</p>
 
 	<p>
-		Three parameters. <code>a</code> is how often the X coordinate cycles per unit of <code>t</code>;
-		<code>b</code> is the same for Y; <code>δ</code> is the phase offset between them. Plug those
-		into a 2D plot and step <code>t</code> from 0 to 2π·max(a, b) to draw a full loop. Drag the
-		knobs below to feel it.
+		a는 X 좌표의 주기, b는 Y 좌표의 주기이며 δ는 두 파형 사이의 위상 차이다. t를 충분히 움직이면 한 바퀴를 그린다. <code>a</code> <code>t</code> <code>b</code> <code>δ</code> <code>t</code>
 	</p>
 
-	<LissajousMath caption="Three sliders, one equation. Integer ratios (1:1, 2:3, 3:5) produce closed curves; non-integer ratios produce dense fills that never close." />
+<LissajousMath caption="세 개의 슬라이더와 하나의 방정식입니다. 정수비(1:1, 2:3, 3:5)는 닫힌 곡선을 만들고, 정수가 아닌 비는 절대 닫히지 않는 조밀한 면을 만듭니다." />
 
 	<p>
-		The ratio <code>a:b</code> determines the figure's shape. 1:1 with δ = π/2 is a circle; 1:1
-		with δ = 0 is a diagonal line. 1:2 is a figure-8. 2:3 is a trefoil. The numerator counts X
-		loops per period, the denominator counts Y loops. As the integers grow, the figure gets
-		denser. Irrational ratios fill the box uniformly and never quite close, which is its own
-		visual signature.
+		a와 b의 비율이 도형의 모양을 정한다. 정수 비율은 닫힌 곡선을 만들고 무리수 비율은 상자를 조밀하게 채운다. <code>a:b</code>
 	</p>
 
 	<p>
-		The phase δ controls how the two oscillations line up. Slide it from 0 to π/2 on a 1:2 figure
-		and you see the figure-8 dissolve into a parabola, then into a tilted figure-8 on the other
-		side. The shape is alive in three dimensions of parameter space.
+		위상 δ는 두 진동이 만나는 방식을 조절한다. 값을 움직이면 숫자 8 모양이 포물선과 기울어진 도형으로 변한다.
 	</p>
 
-	<Code code={lissajousCode} lang="js" caption="One frame's drawing. 3000 points along the parameter range, one beginPath, one stroke. Canvas 2D handles the rest." />
+<Code code={lissajousCode} lang="js" caption="한 프레임을 그리는 과정입니다. 매개변수 범위의 3000개 점을 하나의 beginPath와 한 번의 stroke로 그립니다. 나머지는 Canvas 2D가 처리합니다." />
 
-	<h2 id="phosphor">Phosphor persistence</h2>
+	<h2 id="phosphor">인광 잔상</h2>
 
 	<p>
-		A static Lissajous is a math plot. The CRT look is what you get when you stop clearing the
-		canvas between frames. Instead of <code>ctx.clearRect</code> or <code>fillRect(black)</code>
-		at full opacity, draw black at <em>low</em> alpha. Each old pixel decays toward black a
-		little per frame; new pixels arrive at full brightness. Older parts of the trace fade away
-		while the leading edge stays bright.
+		정적인 리사주 도형은 수학 그래프다. 캔버스를 지우지 않고 낮은 알파의 검정을 덧칠하면 CRT 같은 잔상이 생긴다. <code>ctx.clearRect</code> <code>fillRect(black)</code>
 	</p>
 
 	<p>
-		The math is straight exponential decay. If you blend a frame against a black overlay with
-		alpha <code>α</code>, the pixel value after <code>n</code> frames is
-		<code>v · (1 − α)^n</code>. At α = 0.025, after 60 frames a pixel is at
-		<code>(0.975)^60 ≈ 0.22</code> of its initial brightness, so the trail is visible for about a
-		second before fading below perceptible. Crank α to 1 and you get a hard clear (no trail at
-		all). Crank it to 0 and pixels never fade (the screen burns in).
+		이 감쇠는 지수 함수로 설명된다. 오래된 픽셀은 검정으로 향하고 새 픽셀은 최대 밝기로 나타나므로 선두가 가장 밝게 남는다. <code>α</code> <code>n</code> <code>v · (1 − α)^n</code> <code>(0.975)^60 ≈ 0.22</code>
 	</p>
 
-	<Code code={phosphorCode} lang="js" caption="The whole phosphor-persistence trick. Three lines of meaningful code." />
+<Code code={phosphorCode} lang="js" caption="인광 잔상의 핵심 전체입니다. 의미 있는 코드는 세 줄뿐입니다." />
 
 	<Sandbox
 		src="/learn/analog-drift/01-phosphor-trail.html"
-		title="Step 01 — phosphor trail"
-		caption="The toggle switches between hard clear (no memory) and phosphor fade (exponential decay). Watch what happens to the same animating curve when you flip it."
+		title="1단계 — 인광 궤적"
+		caption="토글은 완전 지우기(기억 없음)와 인광 페이드(지수 감쇠) 사이를 전환합니다. 같은 애니메이션 곡선이 어떻게 달라지는지 확인해 보세요."
 		aspect="16/9"
 		params={[
-			{ name: 'FADE', label: 'Fade alpha', min: 0.005, max: 0.1, step: 0.005, default: 0.025 },
-			{ name: 'SPEED', label: 'Phase speed', min: 0.1, max: 3.0, step: 0.05, default: 1.0 }
+			{ name: 'FADE', label: '페이드 알파', min: 0.005, max: 0.1, step: 0.005, default: 0.025 },
+			{ name: 'SPEED', label: '위상 속도', min: 0.1, max: 3.0, step: 0.05, default: 1.0 }
 		]}
-		toggle={{ name: 'PHOSPHOR', label: 'Phosphor persistence', onValue: 1, offValue: 0, default: true }}
+		toggle={{ name: 'PHOSPHOR', label: '인광 잔상', onValue: 1, offValue: 0, default: true }}
 	/>
 
 	<p>
-		There's no real physics here: a real CRT phosphor has a non-exponential decay curve with a
-		fast initial component and a long tail. The exponential we use is close enough that nobody
-		notices. The visual signature lives in two things: that the trail fades smoothly to black, and
-		that the leading edge of the trace is always the brightest pixel on screen. Both come free
-		with one <code>fillRect</code>.
+		실제 CRT 인광체의 감쇠는 더 복잡하지만, 지수 감쇠만으로도 시각적 인상은 충분히 재현된다. <code>fillRect</code>
 	</p>
 
-	<h2 id="thickness">Velocity tells brightness</h2>
+	<h2 id="thickness">속도가 밝기를 결정한다</h2>
 
 	<p>
-		Watch a real oscilloscope. The trace is brighter where the curve loops back on itself and
-		dimmer where it sweeps across long distances quickly. The reason is physical: the electron
-		beam moves at constant angular speed but the trace it draws goes faster through some regions
-		than others, and pixel brightness depends on how long the beam dwells per pixel. Slow regions
-		accumulate more photons.
+		실제 오실로스코프에서는 곡선이 천천히 지나는 곳이 더 밝다. 전자빔이 그 픽셀에 오래 머물러 광자가 더 많이 쌓이기 때문이다.
 	</p>
 
 	<p>
-		The shortcut: sample the segment speed periodically and scale the line width inversely. Where
-		the curve moves slowly between consecutive points, the stroke is fat. Where it sprints, thin.
-		One formula:
+		간단한 방법은 구간 속도를 샘플링하고 선 너비를 반대로 조절하는 것이다. 느린 곳은 굵고 빠른 곳은 가늘어진다.
 	</p>
 
 	<p class="equation">
@@ -238,178 +202,128 @@ drawCurve(a, b, delta, 0.38, 'rgba(220, 180, 130, 1)', 0.85, 1.5);`;
 	</p>
 
 	<p>
-		Tuning is empirical. The 0.6 floor keeps fast regions from disappearing entirely. The 1.2
-		multiplier sets how much variation you get. The 0.25 scale on speed sets the speed at which
-		the falloff kicks in. None of these are derivable; you find them by sliding numbers until the
-		trace looks right.
+		조절값은 경험적으로 정한다. 빠른 구간이 사라지지 않게 바닥값을 두고, 숫자를 움직여 보기 좋은 흔적을 찾는다.
 	</p>
 
-	<Code code={thicknessCode} lang="js" caption="Compute all points into typed arrays first, then stroke them in batches of 20 with one thickness per batch. Batching keeps Canvas 2D's draw count manageable; without it, calling lineWidth per segment would be ~150× more expensive." />
+	<Code code={thicknessCode} lang="js" caption="먼저 모든 점을 타입 배열에 계산한 뒤, 배치마다 하나의 두께를 적용해 20개씩 선을 그립니다. 배칭 덕분에 Canvas 2D의 그리기 횟수를 관리할 수 있습니다. 그렇지 않으면 구간마다 lineWidth를 호출하는 비용이 약 150배 더 커집니다." />
 
 	<Sandbox
 		src="/learn/analog-drift/02-velocity-thickness.html"
-		title="Step 02 — velocity thickness"
-		caption="Same 3:2 figure either way. Toggle modulation on and watch the slow lobes get fat while the fast sweeps stay thin. The strength slider exaggerates or softens the effect."
+		title="2단계 — 속도에 따른 굵기"
+		caption="어느 쪽이든 같은 3:2 도형입니다. 변조를 켜면 느린 고리는 굵어지고 빠른 스윕은 가늘게 유지됩니다. 강도 슬라이더로 효과를 과장하거나 부드럽게 만들 수 있습니다."
 		aspect="16/9"
 		params={[
-			{ name: 'STRENGTH', label: 'Modulation strength', min: 0.0, max: 1.0, step: 0.02, default: 0.5 }
+			{ name: 'STRENGTH', label: '변조 강도', min: 0.0, max: 1.0, step: 0.02, default: 0.5 }
 		]}
-		toggle={{ name: 'MODULATE', label: 'Velocity-modulated thickness', onValue: 1, offValue: 0, default: true }}
+		toggle={{ name: 'MODULATE', label: '속도 변조 굵기', onValue: 1, offValue: 0, default: true }}
 	/>
 
 	<p>
-		With modulation off, the trace looks like a CSS border drawn around an SVG shape: technically
-		correct, visually flat. With modulation on, the figure suddenly has weight. The same 3000
-		points, the same colors, the same phosphor fade. The only difference is that the renderer now
-		respects how long the beam spent at each location.
+		변조를 끄면 도형은 평평한 테두리처럼 보인다. 켜면 같은 점과 색을 사용해도 전자빔이 머문 시간이 느껴져 무게가 생긴다.
 	</p>
 
-	<h2 id="drift">Drifting through parameter space</h2>
+	<h2 id="drift">매개변수 공간을 떠돌기</h2>
 
 	<p>
-		A frozen Lissajous figure is a math demo. The full Analog Drift effect comes from slowly
-		animating <code>(a, b, δ)</code> through a sequence of curated waypoints, so the trace
-		morphs between known-nice figures over a span of tens of seconds. The phosphor persistence
-		makes the transitions visible: old waypoints are still glowing while the new one draws itself
-		on top.
+		완성된 효과는 매개변수 a, b, δ를 미리 고른 지점 사이에서 천천히 움직이는 데서 나온다. 잔상이 이전 도형과 새 도형을 이어 준다. <code>(a, b, δ)</code>
 	</p>
 
 	<p>
-		Picking waypoints is curation, not math. Ten figures, hand-chosen: a circle, a figure-8, a
-		trefoil, a few rose-like ones, then back to a diagonal line that almost dissolves to nothing
-		before the loop restarts. Random parameter sweeps look chaotic; a curated tour reads as
-		intentional.
+		웨이포인트 선택은 수학보다 큐레이션에 가깝다. 원, 숫자 8, 세잎 모양과 장미 모양을 의도적으로 배열하면 움직임이 설계된 여행처럼 읽힌다.
 	</p>
 
 	<p>
-		The interpolation matters too. Linear interpolation between waypoints feels mechanical: it
-		moves at the same speed through the whole transition, arriving at the new waypoint at the
-		same velocity it left the old one. <strong>Ease-in-out cubic</strong> is what sells the analog
-		feeling: slow at both ends of the transition, fastest in the middle. The same curve a
-		mechanical control knob would make if you turned it smoothly without overshooting.
+		보간 방식도 중요하다. 선형 보간은 기계적이지만 ease-in-out cubic은 양끝에서 느리고 가운데서 빨라 손으로 돌리는 노브 같은 느낌을 준다.
 	</p>
 
-	<Code code={driftCode} lang="js" caption="Waypoint storage, easing curve, and interpolation. The ease-in-out cubic is the one place where the choice of math directly affects how 'analog' the result feels." />
+	<Code code={driftCode} lang="js" caption="웨이포인트 저장, 이징 곡선, 보간입니다. 인아웃 3차 이징은 수학적 선택이 결과의 아날로그 느낌에 직접 영향을 주는 부분입니다." />
 
 	<Sandbox
 		src="/learn/analog-drift/03-drift.html"
-		title="Step 03 — waypoint drift"
-		caption="The figure drifts through ten waypoints on a loop. Toggle easing off and the transitions feel like a software animation; turn it back on and it feels like a knob being turned by hand. The readout in the top-right shows live (a, b, δ)."
+		title="3단계 — 웨이포인트 드리프트"
+		caption="도형은 열 개의 웨이포인트를 순환하며 이동합니다. 이징을 끄면 소프트웨어 애니메이션처럼 느껴지고, 다시 켜면 손으로 노브를 돌리는 듯한 느낌이 납니다. 오른쪽 위 표시에서 (a, b, δ)를 실시간으로 확인할 수 있습니다."
 		aspect="16/9"
 		params={[
-			{ name: 'SPEED', label: 'Drift speed', min: 0.1, max: 3.0, step: 0.05, default: 1.0 }
+			{ name: 'SPEED', label: '드리프트 속도', min: 0.1, max: 3.0, step: 0.05, default: 1.0 }
 		]}
-		toggle={{ name: 'EASING', label: 'Ease-in-out cubic', onValue: 1, offValue: 0, default: true }}
+		toggle={{ name: 'EASING', label: '인아웃 3차 이징', onValue: 1, offValue: 0, default: true }}
 	/>
 
-	<h2 id="harmonics">Harmonic overtones</h2>
+	<h2 id="harmonics">고조파 배음</h2>
 
 	<p>
-		One more layer. Stack three additional Lissajous curves behind the main one, each at a
-		multiple of the base frequencies. The 2× harmonic <code>(2a, 2b)</code> is denser and tighter,
-		drawn at about 30% alpha. The 3× harmonic <code>(3a, 2b)</code> is denser still, dimmer. A
-		sub-harmonic <code>(a/2, b/2)</code> goes the other way: larger, slower, even dimmer, drifting
-		behind everything.
+		세 개의 추가 리사주 곡선을 기본 곡선 뒤에 겹치면 더 조밀한 고조파와 느린 저조파가 생긴다. <code>(2a, 2b)</code> <code>(3a, 2b)</code> <code>(a/2, b/2)</code>
 	</p>
 
 	<p>
-		All four curves share the same drift waypoints, so they morph together. The harmonics
-		multiply or halve the frequencies, but they're locked to the same δ progression. The visual
-		effect is that the figure looks <em>fuller</em> without looking busy, the same way an audio
-		signal with harmonic overtones sounds richer than a pure sine wave at the same fundamental.
+		네 곡선은 같은 웨이포인트를 공유하므로 함께 변형된다. 결과는 복잡하지 않으면서 순수한 사인파보다 풍부하게 보인다.
 	</p>
 
-	<Code code={harmonicsCode} lang="js" caption="Layer order matters: draw back-to-front, so the brightest layer ends up on top. Each harmonic gets its own alpha, thickness, and time-shift, so they don't all phase-lock into one congealed shape." />
+	<Code code={harmonicsCode} lang="js" caption="레이어 순서가 중요합니다. 뒤에서 앞으로 그려 가장 밝은 레이어가 위에 오도록 합니다. 각 고조파에 고유한 알파, 두께, 시간 이동을 적용해 모두 한 덩어리 모양으로 위상 고정되지 않게 합니다." />
 
 	<Sandbox
 		src="/learn/analog-drift/04-harmonics.html"
-		title="Step 04 — harmonics"
-		caption="A held 2:3 figure with the three harmonic layers toggleable. Turn them off one at a time. The 2nd is the most visually impactful; the sub-harmonic is the most felt-but-not-seen."
+		title="4단계 — 고조파"
+		caption="2:3 도형을 고정하고 세 고조파 레이어를 켜고 끌 수 있습니다. 하나씩 꺼 보세요. 2차 고조파가 시각적 영향은 가장 크고, 저조파는 보이지 않지만 가장 강하게 느껴집니다."
 		aspect="16/9"
 		toggle={{ name: 'H2', label: '2× harmonic', onValue: 1, offValue: 0, default: true }}
 	/>
 
 	<p>
-		The harmonics aren't a single toggle in the production shader; each is configurable
-		independently. Together they account for maybe 5% of the visible image but 30% of the
-		impression that the signal is rich, not synthetic.
+		고조파는 화면의 작은 부분만 차지하지만 신호가 인공적이지 않고 풍성하다는 인상을 크게 강화한다.
 	</p>
 
-	<h2 id="final">Everything together</h2>
+	<h2 id="final">모든 요소 합치기</h2>
 
 	<p>
-		Add a faint oscilloscope grid behind the trace (subtle, breathing). Add a Gaussian-bloom layer
-		under the main curve using <code>shadowBlur</code> for CRT phosphor glow. Add an offset cyan
-		shimmer trace at <code>δ + 0.01</code> over the amber base for a hint of chromatic
-		aberration. Add 40 brightly-cored phosphor dots distributed along the curve, pulsing
-		independently of the trace. None of those is essential. All of them are easy.
+		최종 단계에서는 희미한 격자, CRT 광택, 청록색 보조 흔적과 밝은 인광 점을 더한다. 필수는 아니지만 각각의 효과는 쉽게 추가할 수 있다. <code>shadowBlur</code> <code>δ + 0.01</code>
 	</p>
 
 	<Sandbox
 		src="/learn/analog-drift/05-final.html"
-		title="Step 05 — all together"
-		caption="The full effect: waypoint drift, phosphor fade, velocity thickness, harmonics, bloom, cyan accent, dot phosphors, grid. Drift speed and trail length are exposed; everything else is hard-coded to taste."
+		title="5단계 — 모두 합치기"
+		caption="전체 효과입니다. 웨이포인트 드리프트, 인광 페이드, 속도 굵기, 고조파, 블룸, 청록색 강조, 인광 점, 그리드를 포함합니다. 드리프트 속도와 궤적 길이만 조절할 수 있고 나머지는 보기 좋게 고정했습니다."
 		aspect="16/9"
 		params={[
-			{ name: 'DRIFT_SPEED', label: 'Drift speed', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
-			{ name: 'TRAIL_LENGTH', label: 'Trail length', min: 0.3, max: 2.0, step: 0.05, default: 1.0 }
+			{ name: 'DRIFT_SPEED', label: '드리프트 속도', min: 0.1, max: 2.0, step: 0.05, default: 0.5 },
+			{ name: 'TRAIL_LENGTH', label: '궤적 길이', min: 0.3, max: 2.0, step: 0.05, default: 1.0 }
 		]}
 	/>
 
-	<h2 id="performance">Why this is fast</h2>
+	<h2 id="performance">왜 빠르게 실행되는가</h2>
 
 	<p>
-		Four curves of 3000 points each, redrawn 60 times per second, is 720K points per second
-		through Canvas 2D. None of it is intuitively cheap.
+		세 곡선을 3000점씩 초당 60회 다시 그리면 Canvas 2D가 초당 수십만 점을 처리해야 한다.
 	</p>
 
 	<p>
-		<strong>Pre-allocated typed arrays.</strong> Point coordinates go into two <code>Float64Array(4001)</code>
-		buffers allocated once at startup. No per-frame garbage. The browser's GC never sees this
-		hot loop.
+		좌표는 시작할 때 미리 할당한 Float64Array 버퍼에 저장한다. 프레임마다 쓰레기가 생기지 않으므로 가비지 컬렉터가 뜨거운 루프를 방해하지 않는다. <code>Float64Array(4001)</code>
 	</p>
 
 	<p>
-		<strong>Batched strokes per thickness.</strong> Naive line-width-per-segment would call
-		<code>beginPath</code>, <code>stroke</code>, and a state-change 3000 times per curve. Sampling
-		one thickness per 20-point batch is 150 strokes per curve, with the path itself still drawn
-		as one continuous <code>moveTo</code>/<code>lineTo</code> sequence per batch.
+		선 너비별로 스트로크를 묶으면 곡선 하나당 드로잉 호출을 크게 줄일 수 있다. 경로는 각 묶음 안에서 연속으로 그린다. <code>beginPath</code> <code>stroke</code> <code>moveTo</code> <code>lineTo</code>
 	</p>
 
 	<p>
-		<strong>Bloom only where it pays.</strong> <code>shadowBlur</code> is one of Canvas 2D's most
-		expensive operations: it forces a software pass for the entire stroke. We apply it only to
-		the main trace and the cyan accent (the two layers the eye lingers on), and skip it entirely
-		on the three harmonics.
+		shadowBlur는 비용이 크므로 주된 흔적과 청록색 강조층에만 적용하고 고조파에는 사용하지 않는다. <code>shadowBlur</code>
 	</p>
 
 	<p>
-		The whole shader holds 60fps on a 2019 laptop with the dev tools open. The bottleneck isn't
-		math or memory; it's how many times we ask Canvas 2D to flush its state.
+		이 셰이더는 개발 도구를 연 2019년형 노트북에서도 60fps를 유지한다. 병목은 수학이나 메모리가 아니라 Canvas 2D 상태를 플러시하는 횟수다.
 	</p>
 
-	<h2 id="where-to-go">Where to go from here</h2>
+	<h2 id="where-to-go">다음으로 읽을 자료</h2>
 
 	<p>
-		Lissajous on
-		<a href="https://en.wikipedia.org/wiki/Lissajous_curve" target="_blank" rel="noopener noreferrer">Wikipedia</a>
-		covers the math thoroughly, including the closed-curve conditions and the rational/irrational
-		distinction. <a href="https://mathworld.wolfram.com/LissajousCurve.html" target="_blank" rel="noopener noreferrer">MathWorld</a>
-		has a more compact treatment with the parametric forms.
+		리사주 곡선 자료는 닫힌 곡선 조건과 유리수, 무리수 비율을 자세히 설명한다. 매개변수식만 빠르게 보려면 MathWorld도 유용하다.
 	</p>
 
 	<p>
-		If you want a deeper rabbit hole, the underlying technique generalizes to any 2D parametric
-		curve. Replace the sines with rose curves <code>r = cos(k·θ)</code>, with epicycloids, with
-		audio waveforms sampled in real time. The phosphor-fade-plus-velocity-thickness rendering
-		layer is independent of what's being plotted. Feed it any function; it'll look like that
-		function as seen through an oscilloscope.
+		같은 기법은 모든 2D 매개변수 곡선으로 확장할 수 있다. 사인파 대신 장미 곡선이나 실시간 오디오 파형을 넣어도 잔상 렌더링은 그대로 작동한다. <code>r = cos(k·θ)</code>
 	</p>
 
 	<p>
-		The whole analog-drift shader is 434 lines of HTML. Roughly half is the curve math and
-		harmonics. A third is the rendering setup. The rest is parameter wiring and the bit of
-		oscilloscope chrome that sells the illusion. Drop it on any page; it has no dependencies.
+		analog-drift 셰이더는 434줄의 HTML이다. 곡선 수학과 렌더링 설정, 매개변수 연결이 들어 있으며 의존성 없이 어느 페이지에도 넣을 수 있다.
 	</p>
 </ArticleShell>
 

@@ -130,143 +130,102 @@ for (var i = 0; i < drops.length; i++) {
 	readingTime={meta.readingTime}
 >
 	<p>
-		What looks like a single water effect is actually two pipelines, glued together. Canvas 2D
-		builds a "water map" of where drops are and what shape each one bends light by. A WebGL
-		fragment shader reads that water map and uses it to refract a background image. Take away
-		either side and you don't have rain.
+		겉보기와 달리 이 효과는 두 파이프라인이 이어진 결과다. Canvas 2D가 물 맵을 만들고 WebGL 프래그먼트 셰이더가 배경을 굴절시킨다.
 	</p>
 
 	<p>
-		The trick that makes this fast is that <strong>refraction is a texture lookup, not a
-		computation</strong>. The shader does almost no per-pixel math. The drop's refraction profile
-		is pre-baked into an RGBA bitmap once, at startup, and then stamped wherever a drop should
-		appear. That's the article.
+		빠른 비결은 굴절이 계산이 아니라 텍스처 조회라는 점이다. 물방울의 굴절 모양은 시작할 때 한 번 비트맵으로 구워 둔다.
 	</p>
 
-	<Aside type="note" title="Prior art">
+	<Aside type="note" title="선행 사례">
 		{#snippet children()}
 			<p>
-				The technique is from
-				<a href="https://github.com/codrops/RainEffect" target="_blank" rel="noopener noreferrer">Lucas
-				Bebber's RainEffect</a>, published on Codrops in 2015 and still one of the most-cited
-				examples of clever Canvas-2D-as-texture-source compositing. The Radiant version is a
-				rewrite for the shader catalog. The shape of the algorithm (the bitmap encoding, the
-				physics model, the wet-glass two-background trick) is his.
-			</p>
+		이 기법은 Lucas Bebber의 RainEffect에서 비롯되었다. Radiant 버전은 셰이더 카탈로그에 맞게 다시 작성한 것이다.
+	</p>
 		{/snippet}
 	</Aside>
 
-	<h2 id="a-drop-is-a-lens">A drop is a lens</h2>
+	<h2 id="a-drop-is-a-lens">물방울은 렌즈다</h2>
 
 	<p>
-		Hold a water drop on a window in front of a city light. The light through the drop is
-		flipped, distorted, and concentrated. Different parts of the drop pull different parts of the
-		background into your eye. That's what we have to fake.
+		창문 앞 도시의 불빛을 물방울 너머로 보면 빛이 뒤집히고 왜곡되며 집중된다. 우리가 흉내 내려는 현상이 바로 이것이다.
 	</p>
 
 	<p>
-		For real refraction we'd compute Snell's law per pixel: the angle of incidence, the index of
-		refraction, the path the light takes through curved glass. Doable in a fragment shader. Slow,
-		and overkill. Real raindrops on a real window aren't perfect spheres. They're squished blobs
-		with surface tension. The "lens" math gets dirty fast.
+		실제 굴절이라면 픽셀마다 스넬의 법칙을 계산해야 한다. 가능하지만 느리고 과하다. 실제 물방울도 완벽한 구가 아니라 표면 장력으로 눌린 덩어리다.
 	</p>
 
 	<p>
-		The shortcut: for each pixel of a drop, just remember where it should sample from. That's a
-		2D offset. Store it. The shader reads the offset and samples. No Snell, no per-pixel math.
+		간단한 방법은 물방울의 각 픽셀에 어디에서 샘플링할지만 2D 오프셋으로 저장하는 것이다.
 	</p>
 
-	<h2 id="encoding-refraction">Encoding refraction as a texture</h2>
+	<h2 id="encoding-refraction">굴절을 텍스처로 인코딩하기</h2>
 
 	<p>
-		Here's the drop, drawn once into a 256×256 Canvas 2D bitmap. The RGB channels each carry a
-		different piece of the refraction recipe. Drag the marker on the left to see what gets
-		encoded at each point.
+		물방울을 256×256 Canvas 2D 비트맵에 한 번 그린다. RGB 채널에는 굴절에 필요한 서로 다른 정보가 들어간다.
 	</p>
 
 	<RefractionDecoder
-		caption="Click and drag inside the drop. R encodes the vertical offset, G the horizontal, B the depth into the drop. The arrow on the right shows where that pixel will end up sampling from on the background."
+		caption="물방울 안을 클릭하고 드래그해 보세요. R은 세로 오프셋, G는 가로 오프셋, B는 물방울 안쪽 깊이를 인코딩합니다. 오른쪽 화살표는 해당 픽셀이 배경에서 샘플링할 위치를 보여 줍니다."
 	/>
 
 	<p>
-		The encoding is intentionally simple: a point at distance <code>d</code> from the drop's
-		center stores an offset that points <em>outward</em> from the center, with magnitude
-		proportional to <code>d</code>. That's the shape a real lens makes: the rim bends light most,
-		the center barely. The B channel stores depth (a half-sphere falloff), used later as a
-		multiplier so the shader can dial refraction strength up where the drop is thickest.
+		중심에서 멀수록 <em>바깥쪽</em>을 향하는 오프셋을 저장한다. 가장자리가 빛을 크게 휘게 하고 중심은 거의 휘지 않는 렌즈의 형태다. <code>d</code> <code>d</code>
 	</p>
 
-	<Code code={bitmapCode} lang="js" caption="The drop bitmap, built once at init. This is plain Canvas 2D, no shader, no GPU. We're filling an ImageData buffer by hand because we need full control over individual channels." />
+	<Code code={bitmapCode} lang="js" caption="초기화 때 한 번 만드는 물방울 비트맵입니다. 셰이더나 GPU 없이 순수한 Canvas 2D로 동작합니다. 각 채널을 완전히 제어해야 하므로 ImageData 버퍼를 직접 채웁니다." />
 
 	<p>
-		The visible portion of the bitmap is much smaller than the drawn radius. The
-		<code>pow(dist / 0.45, 6)</code> alpha falloff means only the inner ~45% of the bitmap is
-		opaque. That's deliberate: the bitmap gets drawn at many different scales, and the rest of the
-		256×256 frame is unused padding for safe blending at the edges.
+		비트맵에서 실제로 보이는 영역은 그려진 반지름보다 작다. 가장자리에서 안전하게 합성하기 위한 여백이 남아 있다. <code>pow(dist / 0.45, 6)</code>
 	</p>
 
 	<p>
-		Line 7's <code>dy *= 1 + dy * 0.15</code> bias gives the drop a slight teardrop shape, taller
-		than wide. Surface tension does that on real glass.
+		세로 방향의 작은 편향은 물방울을 폭보다 약간 높은 눈물방울 모양으로 만든다. 실제 유리의 표면 장력도 같은 형태를 만든다. <code>dy *= 1 + dy * 0.15</code>
 	</p>
 
 	<Sandbox
 		src="/learn/rain-on-glass/02-normal-map.html"
-		title="Step 02 — the drop normal map"
-		caption="Pure Canvas 2D, no shader. Left: the drop's alpha channel (the visible-area mask). Right: the RGB channels (refraction offsets and depth, all in one image)."
+		 title="2단계 — 물방울 노멀 맵"
+		 caption="순수한 Canvas 2D이며 셰이더는 없습니다. 왼쪽은 물방울의 알파 채널(가시 영역 마스크), 오른쪽은 RGB 채널(굴절 오프셋과 깊이를 한 이미지에 저장)입니다."
 		aspect="16/9"
 	/>
 
-	<h2 id="the-shader">The shader: one lookup, two textures</h2>
+	<h2 id="the-shader">셰이더: 하나의 조회, 두 텍스처</h2>
 
 	<p>
-		Now we use the bitmap. The fragment shader needs two textures: the
-		<strong>water map</strong> (where drops are, drawn by Canvas 2D each frame), and the
-		<strong>background</strong> (whatever we're refracting: a photograph, a procedural city
-		scene). Each pixel reads the water map, decodes RG as a 2D offset, scales it by the depth
-		channel, and samples the background at offset position.
+		이제 셰이더가 비트맵을 사용한다. 필요한 텍스처는 물방울 위치를 담은 <strong>물 맵</strong>과 굴절시킬 배경이다.
 	</p>
 
-	<Code code={shaderCode} lang="glsl" caption="The whole refraction shader. Six lines of actual work between the uniforms and the final blend." />
+	<Code code={shaderCode} lang="glsl" caption="굴절 셰이더 전체입니다. 유니폼 선언부터 최종 블렌드까지 실제로 작업하는 코드는 여섯 줄입니다." />
 
 	<p>
-		Line 12 is the decode: <code>(g, r) − 0.5</code> shifts the 0..1 stored offset back into a
-		signed −1..1 range, the <code>* 2.0</code> recovers the original scale. The pixel-to-UV
-		conversion on line 14 uses <code>256 / u_res.x</code> as the base offset and adds another
-		<code>256 · depth</code> on top, so a pixel at the drop's deepest point can pull from up to
-		512 pixels away. On a 1400-pixel-wide canvas that's roughly a third of the screen, which
-		looks like a real drop's lensing.
+		저장된 오프셋을 부호 있는 범위로 되돌린 뒤 깊이 채널로 크기를 조절해 배경을 샘플링한다. <code>(g, r) − 0.5</code> <code>* 2.0</code> <code>256 / u_res.x</code> <code>256 · depth</code>
 	</p>
 
 	<p>
-		Below: a single drop, mouse-positioned, refracting a procedural background. Move your cursor
-		anywhere. The toggle flips between the rendered drop and the raw normal map texture, so you
-		can see the encoded image directly.
+		아래에서는 마우스로 움직이는 물방울 하나가 절차적 배경을 굴절시킨다. 토글을 켜면 원시 노멀 맵도 직접 볼 수 있다.
 	</p>
 
 	<Sandbox
 		src="/learn/rain-on-glass/01-single-drop.html"
-		title="Step 01 — one drop"
-		caption="Move your cursor to position the drop. The 'show normal map' toggle reveals the raw RGB bitmap the shader is decoding."
+		 title="1단계 — 물방울 하나"
+		 caption="커서를 움직여 물방울의 위치를 정하세요. '노멀 맵 표시' 토글을 켜면 셰이더가 디코딩하는 원본 RGB 비트맵이 나타납니다."
 		aspect="16/9"
 		params={[
-			{ name: 'REFRACTION', label: 'Refraction strength', min: 0.1, max: 3.0, step: 0.05, default: 1.0 },
-			{ name: 'DROP_SIZE', label: 'Drop size', min: 200, max: 600, step: 10, default: 380 }
+			{ name: 'REFRACTION', label: '굴절 강도', min: 0.1, max: 3.0, step: 0.05, default: 1.0 },
+			{ name: 'DROP_SIZE', label: '물방울 크기', min: 200, max: 600, step: 10, default: 380 }
 		]}
-		toggle={{ name: 'SHOW_NORMAL_MAP', label: 'Show normal map texture', onValue: 1, offValue: 0, default: false }}
+		toggle={{ name: 'SHOW_NORMAL_MAP', label: '노멀 맵 텍스처 표시', onValue: 1, offValue: 0, default: false }}
 	/>
 
-	<h2 id="many-drops">A water map of many drops</h2>
+	<h2 id="many-drops">수많은 물방울의 워터 맵</h2>
 
 	<p>
-		One drop is a curiosity. A windowful is the point. Each frame we clear a Canvas 2D buffer
-		(the water map), draw every drop's bitmap into it at the drop's current position and size,
-		and upload the result as a WebGL texture. The shader does the same lookup for every pixel; it
-		doesn't know or care that there are now two hundred drops instead of one.
+		물방울 하나는 호기심을 자극하지만, 창 전체가 되어야 효과의 핵심이 드러난다. 매 프레임 모든 물방울을 물 맵에 찍어 WebGL 텍스처로 올린다.
 	</p>
 
 	<p>
-		The drawing loop is literally this:
+		물방울마다 drawImage를 한 번 호출한다. 이미 올바르게 합성된 비트맵 덕분에 Canvas 2D는 셰이더에서 굴절을 계산하는 것보다 훨씬 빠르다.
 	</p>
 
 	<Code code={`waterCtx.clearRect(0, 0, w, h);
@@ -280,278 +239,197 @@ for (const drop of drops) {
 }`} lang="js" />
 
 	<p>
-		One <code>drawImage</code> call per drop. Canvas 2D is extremely good at this, orders of
-		magnitude faster than computing refraction in a shader, because the drop bitmap is already
-		correctly composited (the alpha channel masks the shape, the RGB channels carry the
-		refraction). Stamping a 60×60 pixel sprite is something the browser's 2D pipeline has been
-		optimized to death for.
+		실제 물방울은 대부분 가만히 있다. 표면 장력이 중력보다 강하지만, 진동이나 새 물방울이 균형을 깨면 갑자기 미끄러지기 시작한다. <code>drawImage</code>
 	</p>
 
 	<Sandbox
 		src="/learn/rain-on-glass/03-static-field.html"
-		title="Step 03 — a static field"
+		title="3단계 — 정적인 물방울 장"
 		caption="200 drops, no motion, just stamping. Adjust the count, size range, and refraction. Reshuffle to see different random placements."
 		aspect="16/9"
 		params={[
-			{ name: 'DROP_COUNT', label: 'Drop count', min: 20, max: 600, step: 10, default: 200 },
-			{ name: 'DROP_SIZE_MIN', label: 'Min size', min: 10, max: 60, step: 1, default: 30 },
-			{ name: 'DROP_SIZE_MAX', label: 'Max size', min: 40, max: 150, step: 5, default: 90 },
-			{ name: 'REFRACTION', label: 'Refraction', min: 0.1, max: 3.0, step: 0.05, default: 1.0 },
-			{ name: 'RESHUFFLE', label: 'Shuffle seed', min: 1, max: 99, step: 1, default: 1 }
+			{ name: 'DROP_COUNT', label: '물방울 개수', min: 20, max: 600, step: 10, default: 200 },
+			{ name: 'DROP_SIZE_MIN', label: '최소 크기', min: 10, max: 60, step: 1, default: 30 },
+			{ name: 'DROP_SIZE_MAX', label: '최대 크기', min: 40, max: 150, step: 5, default: 90 },
+			{ name: 'REFRACTION', label: '굴절', min: 0.1, max: 3.0, step: 0.05, default: 1.0 },
+			{ name: 'RESHUFFLE', label: '시드 섞기', min: 1, max: 99, step: 1, default: 1 }
 		]}
 	/>
 
-	<h2 id="drops-that-move">Drops that move</h2>
+	<h2 id="drops-that-move">움직이는 물방울</h2>
 
 	<p>
-		Real drops on glass mostly sit still. Surface tension is stronger than gravity at the scales
-		we care about. Then something (a vibration, an arriving drop, a temperature gradient) tips
-		the balance and the drop suddenly starts sliding. Once it's moving, it gains momentum, sheds
-		smaller drops in its wake, and either makes it to the bottom or fuses with another drop and
-		passes its mass along.
+		이 모든 과정을 물리적으로 모델링하는 대신 확률로 표현한다. 매 프레임 물방울은 운동량을 얻을 확률을 갖고, 움직인 뒤에는 다시 정지 쪽으로 감쇠한다.
 	</p>
 
 	<p>
-		Modeling all that physically would be a research project. We model it as <em>probability</em>.
-		Each frame, every drop has some chance of getting a momentum kick. Bigger drops get kicked
-		more often (their weight wins against tension sooner). Once moving, drops decay back toward
-		stillness unless they get kicked again or run into another drop.
+		표면 장력이 낮으면 물방울이 계속 움직여 유리가 줄무늬로 가득 찬다. 높이면 짧게 미끄러진 뒤 제자리에서 멈춘다.
 	</p>
 
-	<Code code={physicsCode} lang="js" caption="The whole physics loop for one drop. Surface tension is not a force here; it's the inverse of a probability." />
+	<Code code={physicsCode} lang="js" caption="물방울 하나의 전체 물리 반복문입니다. 여기서 표면 장력은 힘이 아니라 확률의 역수입니다." />
 
 	<Sandbox
 		src="/learn/rain-on-glass/04-rolling-drop.html"
-		title="Step 04 — a rolling drop"
-		caption="A single drop with physics. Notice the teardrop shape; drops aren't round. Crank surface tension down to see drops slide more easily; crank trail rate up to see them shed mass faster."
+		 title="4단계 — 굴러가는 물방울"
+		 caption="물리가 적용된 물방울 하나입니다. 물방울은 둥글지 않고 눈물방울 모양이라는 점을 확인해 보세요. 표면 장력을 낮추면 더 쉽게 미끄러지고, 트레일 비율을 높이면 더 빠르게 질량을 흘립니다."
 		aspect="16/9"
 		params={[
-			{ name: 'GRAVITY', label: 'Gravity', min: 0.3, max: 3.0, step: 0.05, default: 1.0 },
-			{ name: 'SURFACE_TENSION', label: 'Surface tension', min: 0.1, max: 4.0, step: 0.05, default: 1.0 },
-			{ name: 'TRAIL_RATE', label: 'Trail rate', min: 0.0, max: 3.0, step: 0.05, default: 1.0 },
-			{ name: 'REFRACTION', label: 'Refraction', min: 0.1, max: 2.0, step: 0.05, default: 1.0 }
+			{ name: 'GRAVITY', label: '중력', min: 0.3, max: 3.0, step: 0.05, default: 1.0 },
+			{ name: 'SURFACE_TENSION', label: '표면 장력', min: 0.1, max: 4.0, step: 0.05, default: 1.0 },
+			{ name: 'TRAIL_RATE', label: '트레일 비율', min: 0.0, max: 3.0, step: 0.05, default: 1.0 },
+			{ name: 'REFRACTION', label: '굴절', min: 0.1, max: 2.0, step: 0.05, default: 1.0 }
 		]}
 	/>
 
 	<p>
-		Watch what happens when surface tension drops to 0.2: the kicks happen constantly, drops never
-		really sit still, and the glass becomes a wash of streaks. Crank it up to 3 and drops freeze
-		in place after a brief slide. Real plausibility is somewhere around 0.7–1.5.
+		굴러가는 물방울은 원이 아니다. 실제 물방울은 폭보다 높고 아래가 납작한 눈물방울이며, 셰이더도 같은 방식으로 형태를 속인다.
 	</p>
 
-	<h2 id="shape">Drops aren't round</h2>
+	<h2 id="shape">물방울은 둥글지 않다</h2>
 
 	<p>
-		Look closely at the rolling drop above. It's not a circle. A real water drop on glass is taller
-		than it is wide, with a flattened bottom. Gravity pulls down, surface tension pulls the top
-		back up, and the steady-state shape is a teardrop. The drops in our shader cheat the same way
-		real drops do.
+		형태는 일정한 세로 비율과 순간적인 튀김 인자를 겹쳐 만든다. 두 인자는 매 프레임 감쇠하며 원래 형태로 돌아온다.
 	</p>
 
 	<p>
-		The shape is two factors stacked together. <code>scaleY</code> is constant. Every drop is
-		drawn ~1.5x taller than wide; that's the teardrop baseline. On top of that, <code>spreadX</code>
-		and <code>spreadY</code> are transient "splat" factors. A freshly-spawned drop hits the glass
-		spread out; a freshly-merged drop bulges from the impact. Both spreads decay every frame, which
-		is what surface tension does in real life.
+		감쇠 속도가 중요하다. 가로 퍼짐은 먼저 빠르게 줄고 세로 방향은 더 천천히 안정되어 실제 물방울 같은 비대칭이 생긴다. <code>scaleY</code> <code>spreadX</code> <code>spreadY</code>
 	</p>
 
-	<Code code={shapeCode} lang="js" caption="Drop shape in three lines: a constant teardrop multiplier, transient spreads, and per-frame decay back to the baseline." />
+	<Code code={shapeCode} lang="js" caption="세 줄로 표현한 물방울 형태입니다. 일정한 눈물방울 배율, 순간적인 퍼짐, 프레임마다 기준 형태로 돌아가는 감쇠를 사용합니다." />
 
 	<p>
-		The decay rates matter. <code>pow(0.4, dt)</code> on X means horizontal spread collapses in
-		~3 frames. <code>pow(0.7, dt)</code> on Y means vertical settling takes ~6 frames. Drops snap
-		back narrow first, then settle vertically. That's the asymmetry you see in a real droplet
-		flattening on glass.
+		이 효과가 없으면 합쳐진 물방울은 두 원이 큰 원으로 바뀌는 것처럼 보인다. 퍼짐을 넣으면 잠시 부풀었다가 다시 모인다. <code>pow(0.4, dt)</code> <code>pow(0.7, dt)</code>
 	</p>
 
 	<p>
-		Without this, a merge looks like two circles snapping into one bigger circle. With it, the
-		bigger circle <em>bulges</em> for a moment and then pulls itself back together. That bulge is
-		the difference between "fake" and "real" in this shader.
+		두 물방울이 만나면 작은 물방울이 큰 물방울에 흡수된다. 반지름은 늘지만 일부 물은 잔류물로 남아 부피는 대략 보존된다.
 	</p>
 
-	<h2 id="merging">Drops that merge</h2>
+	<h2 id="merging">합쳐지는 물방울</h2>
 
 	<p>
-		Two drops meet. Surface tension at the contact point collapses; the smaller drop folds into
-		the bigger. The bigger one's radius grows, but not by the full sum of the two: a little
-		water gets left behind as residue. Volume is roughly conserved.
+		면적 보존 공식은 셰이더 전체에서 유일하게 실제 기하를 사용하는 부분이다. 합쳐진 반지름은 손실 계수를 반영해 계산한다.
 	</p>
-
-	<p>In code:</p>
-
-	<Code code={collisionCode} lang="js" caption="Collision detection and merging. The y-sort plus a window of 30 neighbors keeps the inner loop bounded, close enough to O(n) in practice." />
 
 	<p>
-		The area-conservation formula on line 13 is the only piece of real geometry in the whole
-		shader. Two drops with radii <code>r₁</code> and <code>r₂</code> have combined area
-		<code>π·r₁² + π·r₂²</code>. The merged drop has the same area minus a fudge factor (we use
-		0.8) for water lost in the merge, so its radius is the square root of all that divided by π.
-		The slider below has it live:
+		운동량 증가가 장면을 자연스럽게 만든다. 흡수할 때마다 작은 힘을 더해 물방울이 점점 빨라진다.
 	</p>
 
-	<DropMerger caption="Two drops with adjustable radii and the merged result. The 0.8 factor on r₂² is the 'some water doesn't make it' loss." />
+	<Code code={collisionCode} lang="js" caption="충돌 감지와 병합입니다. y 정렬과 30개 이웃으로 제한한 검색 창 덕분에 내부 반복문의 범위가 제한되어 실제로는 O(n)에 가깝게 동작합니다." />
+
+	<p>
+		최종 셰이더의 핵심적인 시각적 속임수는 서로 다른 두 배경 텍스처다. 물방울 바깥은 흐린 장면을, 안쪽은 덜 흐린 장면을 샘플링한다. <code>r₁</code> <code>r₂</code> <code>π·r₁² + π·r₂²</code>
+	</p>
+
+	<DropMerger caption="반지름을 조절할 수 있는 두 물방울과 병합 결과입니다. r₂²에 곱하는 0.8은 '일부 물이 남는다'는 손실을 나타냅니다." />
 
 	<Sandbox
 		src="/learn/rain-on-glass/05-merging-field.html"
-		title="Step 05 — drops that merge"
-		caption="Drops spawn over time, slide when surface tension lets go, and absorb the smaller drops they touch. Watch the moment of impact: the merged drop spreads briefly before pulling itself back into a teardrop. That's what makes the merge read as physical instead of as one circle eating another."
+		 title="5단계 — 합쳐지는 물방울"
+		 caption="시간이 지나면 물방울이 생성되고, 표면 장력이 풀리면 미끄러지며, 닿은 작은 물방울을 흡수합니다. 충돌 순간을 보세요. 합쳐진 물방울은 잠시 퍼졌다가 다시 눈물방울 모양으로 돌아옵니다. 그래서 한 원이 다른 원을 먹는 대신 실제 물리 현상처럼 보입니다."
 		aspect="16/9"
 		params={[
-			{ name: 'SPAWN_RATE', label: 'Spawn rate', min: 0.1, max: 3.0, step: 0.05, default: 1.0 },
-			{ name: 'COLLISION_RADIUS', label: 'Collision radius', min: 0.1, max: 0.9, step: 0.05, default: 0.45 },
-			{ name: 'REFRACTION', label: 'Refraction', min: 0.1, max: 2.0, step: 0.05, default: 1.0 }
+			{ name: 'SPAWN_RATE', label: '생성 비율', min: 0.1, max: 3.0, step: 0.05, default: 1.0 },
+			{ name: 'COLLISION_RADIUS', label: '충돌 반지름', min: 0.1, max: 0.9, step: 0.05, default: 0.45 },
+			{ name: 'REFRACTION', label: '굴절', min: 0.1, max: 2.0, step: 0.05, default: 1.0 }
 		]}
 	/>
 
 	<p>
-		The momentum boost on line 16 is what makes this look right. Without it, a drop that absorbs
-		five smaller drops on its way down would arrive at the bottom at the same speed it started.
-		With it, every merger adds a small kick and the drop accelerates, exactly the
-		snowballing-bowling-ball trajectory real raindrops make.
+		젖은 유리가 흐릿한 이유는 표면의 물이 수많은 미세 렌즈처럼 작용하기 때문이다. 실제 물방울은 그 시야를 다시 초점에 모은다.
 	</p>
 
-	<h2 id="wet-glass">The wet-glass trick</h2>
+	<h2 id="wet-glass">젖은 유리의 비결</h2>
 
 	<p>
-		There's one more piece of visual sleight of hand that does most of the heavy lifting in the
-		final shader: <strong>two different background textures</strong>. The "no drop here" pixels
-		sample a heavily-blurred version of the scene; the "you're looking through a drop" pixels
-		sample a less-blurred version. The drop's alpha mask switches between them.
+		속임수를 끄면 물방울은 맑은 이미지의 굴절로만 보여 돌기처럼 보인다. 켜면 주변 유리는 흐려지고 물방울은 선명한 창이 된다.
 	</p>
 
 	<p>
-		The effect is psychological. Wet glass is hazy because the water on the surface is itself
-		acting as a million tiny micro-lenses, each one slightly blurring what's behind. But the
-		moment a real drop forms, it concentrates that view back into focus, like a magnifying glass.
-		Our drops become portals; they reveal sharper detail than the surrounding glass.
+		Radiant 셰이더는 두 절차적 도시 배경을 사용한다. 추가 텍스처 업로드와 픽셀별 텍스처 샘플링 하나의 비용으로 전체 분위기를 얻는다.
 	</p>
 
 	<p>
-		Toggle the trick on and off below. Off, the scene is sharp everywhere and drops are
-		just refractions of a clear image; they read as bumps, not lenses. On, the surrounding glass
-		fogs out and the drops become clear windows into a more detailed view.
+		실제 셰이더에는 큰 물방울과 별도로 움직이지 않는 작은 분무 물방울 층도 있다.
 	</p>
 
 	<Sandbox
 		src="/learn/rain-on-glass/06-wet-glass.html"
-		title="Step 06 — the wet-glass trick"
-		caption="Same drops, same physics. The toggle controls whether the area outside the drops is the heavily-blurred or the sharp version of the city. The drops themselves always sample the sharp one."
+		 title="6단계 — 젖은 유리 트릭"
+		 caption="같은 물방울과 같은 물리입니다. 토글은 물방울 바깥 영역에 도시의 강한 흐림 버전과 선명한 버전 중 어느 쪽을 표시할지 제어합니다. 물방울 자체는 항상 선명한 버전을 샘플링합니다."
 		aspect="16/9"
 		params={[
-			{ name: 'REFRACTION', label: 'Refraction', min: 0.1, max: 2.5, step: 0.05, default: 1.0 },
-			{ name: 'SPAWN_RATE', label: 'Spawn rate', min: 0.1, max: 2.0, step: 0.05, default: 0.5 }
+			{ name: 'REFRACTION', label: '굴절', min: 0.1, max: 2.5, step: 0.05, default: 1.0 },
+			{ name: 'SPAWN_RATE', label: '생성 비율', min: 0.1, max: 2.0, step: 0.05, default: 0.5 }
 		]}
-		toggle={{ name: 'WET_GLASS', label: 'Wet glass (two-background trick)', onValue: 1, offValue: 0, default: true }}
+		toggle={{ name: 'WET_GLASS', label: '젖은 유리 (두 배경 트릭)', onValue: 1, offValue: 0, default: true }}
 	/>
 
 	<p>
-		The Radiant production shader does this with a 384×256 heavy-blur background and a 96×64
-		lighter-blur foreground, both procedurally generated cityscapes. The cost is one extra texture
-		upload and one extra <code>texture2D</code> call per pixel. The payoff is the entire
-		atmosphere of the effect.
+		분무 물방울은 충돌하지 않고 운동량도 없다. 큰 물방울이 지나가면 캔버스의 지우기 합성으로 아래의 분무를 지워 깨끗한 흔적을 남긴다.
 	</p>
 
-	<h2 id="two-layers">Two layers of drops</h2>
+	<h2 id="two-layers">두 겹의 물방울</h2>
 
 	<p>
-		One last thing the production shader does that the teaching variants don't. There are
-		actually two separate "drops" systems running in parallel: the <code>drops[]</code> array of
-		big, physics-having drops we've been talking about, plus a second Canvas 2D layer of tiny
-		static "spray" droplets, the kind that mist up the glass between real drops without
-		individually moving.
+		우산 위의 비 셰이더도 같은 비트맵과 굴절 셰이더, 거의 같은 물리 루프를 사용한다. 달라지는 것은 생성 표면과 궤적뿐이다. <code>drops[]</code>
 	</p>
 
 	<p>
-		Spray drops never collide and never have momentum. They just exist as a fine speckle on the
-		water map. Big drops, as they slide, <em>erase</em> spray drops underneath them via Canvas
-		2D's <code>destination-out</code> composite operation: clean tracks of glass appear behind
-		moving drops, while the rest of the window stays misty. It's the visual signature of the
-		whole effect.
+		두 셰이더를 나란히 보면 외형은 크게 다르지만 내부 파이프라인은 동일하다. <code>destination-out</code>
 	</p>
 
-	<h2 id="umbrella">Same trick, different surface</h2>
+	<h2 id="umbrella">같은 비결, 다른 표면</h2>
 
 	<p>
-		The rain-on-umbrella shader in the Radiant catalog uses the exact same drop bitmap, the
-		exact same refraction shader, and a barely-modified physics loop. The differences are all in
-		the spawn surface and the trajectories: drops spawn on a curved dome, slide radially outward
-		from the center of the umbrella, and inherit a small "walking" jitter that makes the whole
-		image bob as if you're walking under it.
+		비가 가득 찬 창은 수백 개의 물방울과 수천 개의 정적 분무, 픽셀별 굴절 조회를 동시에 처리한다.
 	</p>
 
 	<p>
-		Open it side by side with this one and switch between them. The look is wildly different.
-		The pipeline is identical.
+		물방울 노멀 맵은 초기화 때 한 번 계산하고, 여러 깊이 변형을 미리 렌더링한다. 이후에는 drawImage 한 번이면 된다.
 	</p>
 
 	<Sandbox
 		src="/rain-umbrella.html"
-		title="Rain on umbrella"
-		caption="Same drop bitmap, same shader, different surface. The dome curvature determines initial drop momentum and direction; the walk-speed parameter adds the umbrella-shake jitter."
+		title="우산 위의 비"
+		caption="같은 물방울 비트맵과 같은 셰이더를 다른 표면에 적용합니다. 돔의 곡률이 초기 물방울 운동량과 방향을 정하고, 걷는 속도 매개변수가 우산 흔들림을 더합니다."
 		aspect="16/9"
 		params={[
-			{ name: 'RAIN_AMOUNT', label: 'Rain amount', min: 0.1, max: 2.0, step: 0.05, default: 1.0 },
-			{ name: 'REFRACTION', label: 'Refraction', min: 0.1, max: 3.0, step: 0.05, default: 1.0 },
-			{ name: 'WALK_SPEED', label: 'Walk speed', min: 0.0, max: 3.0, step: 0.05, default: 1.0 }
+			{ name: 'RAIN_AMOUNT', label: '비의 양', min: 0.1, max: 2.0, step: 0.05, default: 1.0 },
+			{ name: 'REFRACTION', label: '굴절', min: 0.1, max: 3.0, step: 0.05, default: 1.0 },
+			{ name: 'WALK_SPEED', label: '걷는 속도', min: 0.0, max: 3.0, step: 0.05, default: 1.0 }
 		]}
 	/>
 
-	<h2 id="performance">Why this is fast</h2>
+	<h2 id="performance">왜 빠르게 실행되는가</h2>
 
 	<p>
-		A windowful of rain is two hundred drops, each with its own physics update, plus a few
-		thousand static spray droplets, plus a per-pixel refraction lookup. None of that is
-		intuitively cheap.
+		물 맵에는 Canvas 2D가 알맞다. 한 프레임에 하나의 텍스처만 GPU로 올리면 되므로 별도의 복잡한 배칭 관리가 필요 없다.
 	</p>
 
 	<p>
-		<strong>The bitmap is pre-baked.</strong> The drop's normal map is computed once, at init.
-		255 depth variants pre-rendered as separate sprites so the shader can pick the right one
-		for any drop size without extra math. After init, drawing a drop is one
-		<code>drawImage</code>. There's no per-frame texture generation.
+		충돌 검사는 y 좌표로 정렬한 뒤 가까운 이웃만 확인한다. 따라서 물방울 수가 늘어도 실제 비용은 거의 선형으로 유지된다. <code>drawImage</code>
 	</p>
 
 	<p>
-		<strong>Canvas 2D is the right tool for the water map.</strong> A WebGL implementation of
-		"stamp two hundred sprites onto a canvas" would need batched draw calls, instanced
-		quads, and texture atlases. Canvas 2D does it natively, on the CPU, at speed, with no
-		bookkeeping. The water map gets uploaded to the GPU as one texture per frame. That's the
-		only cross-domain transfer.
+		원문 자료는 깊이 변형, 시차 처리와 빛과 그림자까지 자세히 다룬다. Radiant 버전은 <strong>배경</strong>과 상호작용을 주로 바꾸었다.
 	</p>
 
 	<p>
-		<strong>The physics loop is O(n)-ish.</strong> Collision detection sorts drops by y and only
-		checks each one against its 30 nearest neighbors. With drops sorted, the y-sort is nearly
-		stable across frames (a near-sorted insertion sort is O(n)), and each drop's collision check
-		is bounded. No spatial hash, no quadtree. Two hundred drops, six thousand cheap distance
-		checks per frame.
+		노멀 맵은 각 픽셀의 표면 방향을 RGB로 저장하는 일반적인 2D 기법이다. 물방울뿐 아니라 바닥, 물, 벽돌에도 적용할 수 있다.
 	</p>
 
-	<h2 id="where-to-go">Where to go from here</h2>
+	<h2 id="where-to-go">다음으로 읽을 자료</h2>
 
 	<p>
-		<a href="https://tympanus.net/codrops/2015/11/04/rain-water-effect-experiments/" target="_blank" rel="noopener noreferrer">Lucas
-		Bebber's original article</a> at Codrops covers the technique with more depth on the production
-		setup, including the depth-variant pre-baking, the parallax handling, and the shine/shadow
-		that make the drops look 3D rather than purely flat. The source for Radiant's version is the
-		same algorithm; it differs mostly in the procedural background and the interaction details
-		(click to splash, drag to wipe).
+		전체 rain-on-glass 파일은 약 1000줄의 HTML이다. 물리와 배경, 프래그먼트 셰이더가 나뉘어 있으며 어떤 페이지에도 바로 넣을 수 있다.
 	</p>
 
 	<p>
-		If you want a deeper rabbit hole, look up
-		<a href="https://en.wikipedia.org/wiki/Normal_mapping" target="_blank" rel="noopener noreferrer">normal
-		mapping</a> in general 3D rendering. The drop bitmap is exactly a 2D normal map: each pixel
-		stores a surface normal direction encoded in the RGB channels, and the shader uses it to
-		offset something else. Drops on glass are one application; bumpy floors in video games, water
-		surfaces, and bricks on walls are others. The encoding trick generalizes.
+		전체 rain-on-glass 파일은 약 1000줄의 HTML이다. 물리와 배경, 프래그먼트 셰이더가 나뉘어 있으며 어떤 페이지에도 바로 넣을 수 있다.
 	</p>
 
 	<p>
-		The whole rain-on-glass file is about 1000 lines of HTML. Half is the physics. A quarter is
-		the procedural background. A tenth is the fragment shader. Drop it on any page; it has no
-		dependencies.
+		전체 rain-on-glass 파일은 약 1000줄의 HTML이다. 물리와 배경, 프래그먼트 셰이더가 나뉘어 있으며 어떤 페이지에도 바로 넣을 수 있다.
 	</p>
 </ArticleShell>
