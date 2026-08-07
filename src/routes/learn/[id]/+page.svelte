@@ -26,7 +26,7 @@
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
-	<meta property="og:image:alt" content="{data.meta.title} — a Radiant deep dive on the {data.shader.title} shader." />
+	<meta property="og:image:alt" content="{data.meta.title} — Radiant의 {data.shader.title} 셰이더 심층 분석." />
 	<meta property="og:type" content="article" />
 	<meta property="article:author" content={data.meta.author} />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -36,7 +36,7 @@
 	<meta name="twitter:title" content={pageTitle} />
 	<meta name="twitter:description" content={data.meta.subtitle} />
 	<meta name="twitter:image" content={shareImageUrl} />
-	<meta name="twitter:image:alt" content="{data.meta.title} — a Radiant deep dive on the {data.shader.title} shader." />
+	<meta name="twitter:image:alt" content="{data.meta.title} — Radiant의 {data.shader.title} 셰이더 심층 분석." />
 </svelte:head>
 
 {#if ArticleComponent}

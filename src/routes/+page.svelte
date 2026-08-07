@@ -36,25 +36,25 @@
 </script>
 
 <svelte:head>
-	<title>Radiant — Open Source Shaders & Effects</title>
-	<meta name="description" content="130+ production-ready shaders and visual effects for the web. No dependencies. Just drop in." />
+	<title>Radiant — 오픈 소스 셰이더 & 효과</title>
+	<meta name="description" content="웹을 위한 130개 이상의 프로덕션 준비 셰이더와 시각 효과. 의존성 없음. 바로 사용하세요." />
 	<link rel="canonical" href={pageUrl} />
 	<meta property="og:url" content={pageUrl} />
 	<meta property="og:site_name" content="Radiant" />
-	<meta property="og:title" content="Radiant — Open Source Shaders & Effects" />
-	<meta property="og:description" content="130+ production-ready shaders and visual effects for the web. No dependencies. Just drop in." />
+	<meta property="og:title" content="Radiant — 오픈 소스 셰이더 & 효과" />
+	<meta property="og:description" content="웹을 위한 130개 이상의 프로덕션 준비 셰이더와 시각 효과. 의존성 없음. 바로 사용하세요." />
 	<meta property="og:image" content={shareImageUrl} />
 	<meta property="og:image:type" content="image/jpeg" />
-	<meta property="og:image:alt" content="Radiant gallery preview showing multiple generative shaders and effects." />
+	<meta property="og:image:alt" content="다양한 생성형 셰이더와 효과가 보이는 Radiant 갤러리 미리보기." />
 	<meta property="og:type" content="website" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:url" content={pageUrl} />
 	<meta name="twitter:site" content={xHandle} />
 	<meta name="twitter:creator" content={xHandle} />
-	<meta name="twitter:title" content="Radiant — Open Source Shaders & Effects" />
-	<meta name="twitter:description" content="130+ production-ready shaders and visual effects for the web. No dependencies. Just drop in." />
+	<meta name="twitter:title" content="Radiant — 오픈 소스 셰이더 & 효과" />
+	<meta name="twitter:description" content="웹을 위한 130개 이상의 프로덕션 준비 셰이더와 시각 효과. 의존성 없음. 바로 사용하세요." />
 	<meta name="twitter:image" content={shareImageUrl} />
-	<meta name="twitter:image:alt" content="Radiant gallery preview showing multiple generative shaders and effects." />
+	<meta name="twitter:image:alt" content="다양한 생성형 셰이더와 효과가 보이는 Radiant 갤러리 미리보기." />
 </svelte:head>
 
 <div bind:this={heroEl}>
@@ -63,8 +63,8 @@
 
 <section class="featured" id="gallery">
 	<header>
-		<h2>Featured</h2>
-		<p>A curated selection from the collection.</p>
+		<h2>추천</h2>
+		<p>컬렉션에서 엄선한 항목.</p>
 	</header>
 	<div class="featured-grid">
 		{#each featuredShaders as shader (shader.id)}
@@ -72,7 +72,7 @@
 		{/each}
 	</div>
 	<div class="browse-cta">
-		<a href="/gallery" class="btn btn-solid">Browse Full Collection &rarr;</a>
+		<a href="/gallery" class="btn btn-solid">전체 컬렉션 둘러보기 &rarr;</a>
 	</div>
 </section>
 

@@ -10,7 +10,7 @@ export const load: PageLoad = ({ params }) => {
 	const slug = params.slug;
 	const inspirations = getInspirations();
 	const match = inspirations.find((i) => i.slug === slug);
-	if (!match) throw error(404, 'Unknown inspiration');
+	if (!match) throw error(404, '알 수 없는 영감입니다');
 	const filtered = filterShaders('inspiration', slug);
 	return {
 		shaders: filtered,

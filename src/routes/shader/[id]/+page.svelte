@@ -56,10 +56,10 @@
 	);
 
 	const layouts: { id: Layout; label: string; icon: string }[] = [
-		{ id: 'full', label: 'Full screen', icon: 'full' },
-		{ id: 'background', label: 'Background', icon: 'bg' },
-		{ id: 'hero', label: 'Hero section', icon: 'hero' },
-		{ id: 'accent', label: 'Accent', icon: 'accent' }
+		{ id: 'full', label: '전체 화면', icon: 'full' },
+		{ id: 'background', label: '배경', icon: 'bg' },
+		{ id: 'hero', label: '히어로 섹션', icon: 'hero' },
+		{ id: 'accent', label: '액센트', icon: 'accent' }
 	];
 
 	function sendParam(name: string, value: number) {
@@ -96,7 +96,7 @@
 
 	<div class="main">
 		<header>
-			<a href="/gallery" class="back">&larr; Gallery</a>
+			<a href="/gallery" class="back">&larr; 갤러리</a>
 			<div class="shader-id">{number} — {shader.title}</div>
 		</header>
 		<div class="preview-area">
@@ -108,7 +108,7 @@
 		<div class="sidebar-inner">
 			{#if shader.inspiration}
 			<div class="sidebar-section inspiration-section">
-				<span class="sidebar-label">Inspired by</span>
+				<span class="sidebar-label">영감</span>
 				<div class="inspiration-name">{shader.inspiration}</div>
 			</div>
 			{/if}
@@ -124,7 +124,7 @@
 			{/if}
 
 			<div class="sidebar-section">
-				<span class="sidebar-label">Layout</span>
+				<span class="sidebar-label">레이아웃</span>
 				<div class="sidebar-buttons">
 					{#each layouts as layout}
 						{@const desktopOnly = layout.id === 'hero' || layout.id === 'accent'}
@@ -133,7 +133,7 @@
 							class:active={activeLayout === layout.id}
 							class:disabled={isMobile && desktopOnly}
 							onclick={() => { if (!(isMobile && desktopOnly)) activeLayout = layout.id; }}
-							title={isMobile && desktopOnly ? 'Desktop only' : layout.label}
+							title={isMobile && desktopOnly ? '데스크톱 전용' : layout.label}
 							aria-label={layout.label}
 							aria-pressed={activeLayout === layout.id}
 						>
@@ -158,7 +158,7 @@
 			</div>
 
 			<div class="sidebar-section">
-				<span class="sidebar-label">Color scheme</span>
+				<span class="sidebar-label">컬러 스킴</span>
 				<div class="sidebar-buttons">
 					{#each colorSchemes as scheme}
 						<button
@@ -176,7 +176,7 @@
 
 			{#if shader.params?.length}
 			<div class="sidebar-section">
-				<span class="sidebar-label">Parameters</span>
+				<span class="sidebar-label">매개변수</span>
 				<div class="param-controls">
 					{#each shader.params as param}
 						<label class="param-row">
@@ -199,20 +199,20 @@
 
 			{#if shader.hasArticle}
 				<a class="deep-dive-cta" href="/learn/{shader.id}">
-					<span class="deep-dive-label">Deep dive</span>
-					<span class="deep-dive-title">How to render a black hole &rarr;</span>
+					<span class="deep-dive-label">심층 분석</span>
+					<span class="deep-dive-title">{shader.title} 셰이더 심층 분석 &rarr;</span>
 				</a>
 			{/if}
 
 			<div class="sidebar-section actions-section">
 				<button class="action-btn" class:active={showSource} onclick={toggleSource}>
-					{showSource ? 'Hide' : 'View'} Source
+					{showSource ? '소스 숨기기' : '소스 보기'}
 				</button>
 				<a class="action-btn" href="/{shader.file}" download={shader.file}>
-					Download
+					다운로드
 				</a>
 				<a class="action-btn" href="/{shader.file}" target="_blank">
-					Fullscreen &rarr;
+					전체 화면 &rarr;
 				</a>
 			</div>
 		</div>

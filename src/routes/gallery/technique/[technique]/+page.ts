@@ -7,7 +7,7 @@ export const prerender = true;
 
 export const load: PageLoad = ({ params }) => {
 	const technique = params.technique as ShaderTechnique;
-	if (!(technique in techniqueLabels)) throw error(404, 'Unknown technique');
+	if (!(technique in techniqueLabels)) throw error(404, '알 수 없는 기법입니다');
 	const filtered = filterShaders('technique', technique);
 	return {
 		shaders: filtered,

@@ -8,8 +8,8 @@
 </script>
 
 <svelte:head>
-	<title>All Shaders — Radiant</title>
+	<title>전체 셰이더 — Radiant</title>
 </svelte:head>
 
-<GalleryHeader title="All Shaders" description="{shaders.length} production-ready shaders & effects. Click to explore, configure, and download." count={shaders.length} />
+<GalleryHeader title="전체 셰이더" description="{shaders.length}개의 프로덕션 준비 셰이더와 효과. 클릭하여 둘러보고, 설정하고, 다운로드하세요." count={shaders.length} />
 <GalleryGrid shaders={shaders} scheme={getScheme()} />

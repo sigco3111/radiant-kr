@@ -12,21 +12,21 @@
 </script>
 
 <svelte:head>
-	<title>Saved Shaders — Radiant</title>
+	<title>저장된 셰이더 — Radiant</title>
 </svelte:head>
 
 <GalleryHeader
-	title="Saved"
+	title="저장됨"
 	description={savedShaders.length === 0
-		? 'No saved shaders yet. Bookmark shaders from the gallery to collect them here.'
-		: `${savedShaders.length} saved shader${savedShaders.length !== 1 ? 's' : ''}.`}
+		? '아직 저장된 셰이더가 없습니다. 갤러리에서 셰이더를 북마크하여 여기에 모아보세요.'
+		: `저장된 셰이더 ${savedShaders.length}개.`}
 	count={savedShaders.length}
 />
 <GalleryGrid shaders={savedShaders} scheme={getScheme()} />
 
 {#if savedShaders.length === 0}
 	<div class="empty-cta">
-		<a href="/gallery/all">Browse all shaders &rarr;</a>
+		<a href="/gallery/all">전체 셰이더 둘러보기 &rarr;</a>
 	</div>
 {/if}
 

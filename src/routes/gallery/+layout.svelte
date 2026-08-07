@@ -29,7 +29,7 @@
 
 <div class="gallery-layout">
 	<!-- Mobile sidebar toggle -->
-	<button class="sidebar-toggle" class:open={sidebarOpen} onclick={() => sidebarOpen = !sidebarOpen} aria-label="Toggle sidebar">
+	<button class="sidebar-toggle" class:open={sidebarOpen} onclick={() => sidebarOpen = !sidebarOpen} aria-label="사이드바 토글">
 		<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 			{#if sidebarOpen}
 				<line x1="18" y1="6" x2="6" y2="18" />
@@ -44,7 +44,7 @@
 
 	<!-- Mobile sidebar overlay -->
 	{#if sidebarOpen}
-		<button class="sidebar-overlay" onclick={() => sidebarOpen = false} aria-label="Close sidebar"></button>
+		<button class="sidebar-overlay" onclick={() => sidebarOpen = false} aria-label="사이드바 닫기"></button>
 	{/if}
 
 	<div class="sidebar-wrapper" class:open={sidebarOpen}>

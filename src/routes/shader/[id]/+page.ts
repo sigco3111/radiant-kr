@@ -7,7 +7,7 @@ export const prerender = true;
 export const load: PageLoad = ({ params }) => {
 	const shader = getShaderById(params.id);
 	if (!shader) {
-		throw error(404, 'Shader not found');
+		throw error(404, '셰이더를 찾을 수 없습니다');
 	}
 	return { shader };
 };

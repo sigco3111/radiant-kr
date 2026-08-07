@@ -8,37 +8,35 @@
 	const pageUrl = `${siteUrl}/learn`;
 	const xHandle = '@pbakaus';
 	const description =
-		'Interactive long-form articles on the shaders behind Radiant. Each one walks through the techniques, the math, and the trade-offs, with live sandboxes you can poke at every step.';
+		'Radiant 셰이더의 인터랙티브 장문 아티클. 각 글은 기법, 수학, 트레이드오프를 단계별로 다루며, 모든 단계에서 직접 만져볼 수 있는 라이브 샌드박스를 제공합니다.';
 </script>
 
 <svelte:head>
-	<title>Deep Dives — Radiant</title>
+	<title>심층 분석 — Radiant</title>
 	<meta name="description" content={description} />
 	<link rel="canonical" href={pageUrl} />
 	<meta property="og:url" content={pageUrl} />
 	<meta property="og:site_name" content="Radiant" />
-	<meta property="og:title" content="Deep Dives — Radiant" />
+	<meta property="og:title" content="심층 분석 — Radiant" />
 	<meta property="og:description" content={description} />
 	<meta property="og:type" content="website" />
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:site" content={xHandle} />
-	<meta name="twitter:title" content="Deep Dives — Radiant" />
+	<meta name="twitter:title" content="심층 분석 — Radiant" />
 	<meta name="twitter:description" content={description} />
 </svelte:head>
 
 <main class="page">
 	<header class="head">
-		<div class="eyebrow">Radiant · Deep dives</div>
-		<h1>Interactive walkthroughs of the shaders behind Radiant</h1>
+		<div class="eyebrow">Radiant · 심층 분석</div>
+		<h1>Radiant 셰이더의 인터랙티브 워크스루</h1>
 		<p class="lede">
-			Each article rebuilds one shader from scratch, one mechanism at a time. The math is on the
-			page, the code is on the page, and every step is a live sandbox you can drag, scrub, and
-			break.
+			각 아티클은 한 가지 셰이더를 한 번에 한 메커니즘씩 처음부터 다시 만듭니다. 수학은 페이지에, 코드는 페이지에, 모든 단계는 드래그하고 조작하고 부수고 싶은 라이브 샌드박스입니다.
 		</p>
 	</header>
 
 	{#if data.entries.length === 0}
-		<div class="empty">No deep dives written yet.</div>
+		<div class="empty">아직 작성된 심층 분석이 없습니다.</div>
 	{:else}
 		<div class="grid">
 			{#each data.entries as entry (entry.id)}
@@ -48,7 +46,7 @@
 	{/if}
 
 	<footer class="more">
-		<p>More on the way. In the meantime, browse the <a href="/gallery">full shader gallery</a>.</p>
+		<p>더 많은 글이 준비 중입니다. 그 동안 <a href="/gallery">전체 셰이더 갤러리</a>를 둘러보세요.</p>
 	</footer>
 </main>
 
