@@ -20,6 +20,7 @@
 			<a href="https://buy.stripe.com/aFa3cwfsEe3G25R6i48Ra03" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">
 				팁 남기기 &rarr;
 			</a>
+			<a href="https://github.com/pbakaus/radiant" target="_blank" rel="noopener noreferrer" class="upstream-link" title="원본 Radiant 저장소">원본 보기 →</a>
 		</div>
 	</div>
 </section>
@@ -93,6 +94,20 @@
 	.btn-ghost:hover {
 		border-color: rgba(200, 149, 108, 0.5);
 		color: #e8e0d8;
+	}
+
+	.upstream-link {
+		display: inline-block;
+		margin-top: 0.25rem;
+		font-size: 0.75rem;
+		color: rgba(200, 149, 108, 0.5);
+		text-decoration: none;
+		letter-spacing: 0.04em;
+		text-align: center;
+		transition: color 0.2s;
+	}
+	.upstream-link:hover {
+		color: rgba(200, 149, 108, 0.85);
 	}
 
 	@media (max-width: 640px) {

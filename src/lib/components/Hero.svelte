@@ -151,6 +151,7 @@
 			<a href="/gallery" class="btn btn-solid">컬렉션 둘러보기</a>
 			<a href="https://github.com/sigco3111/batgrl-gallery" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
 		</div>
+		<a href="https://github.com/pbakaus/radiant" target="_blank" rel="noopener noreferrer" class="upstream-link" title="원본 Radiant 저장소">원본 보기 →</a>
 	</div>
 	<div class="controls">
 		<div class="schemes">
@@ -282,6 +283,20 @@
 	}
 	.btn-ghost:hover {
 		border-color: rgba(200, 149, 108, 0.7);
+	}
+
+	.upstream-link {
+		display: inline-block;
+		margin-top: 1rem;
+		margin-left: 1.5rem;
+		font-size: 0.75rem;
+		color: rgba(200, 149, 108, 0.5);
+		text-decoration: none;
+		letter-spacing: 0.04em;
+		transition: color 0.2s;
+	}
+	.upstream-link:hover {
+		color: rgba(200, 149, 108, 0.85);
 	}
 
 	/* Controls bar */

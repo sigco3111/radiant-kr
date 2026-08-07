@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![GitHub](https://img.shields.io/badge/sigco3111-radiant--kr-181717?logo=github)](https://github.com/sigco3111/radiant-kr)
 
-원본 [pbakaus/radiant](https://github.com/sigco3111/batgrl-gallery) (MIT)을 기반으로, 한국 전통 오방색(五方色)·한국적 모티프가 가미된 셰이더 1개(신년 폭죽)가 포함된 독립 포크입니다. **upstream PR은 보내지 않으며**, sigco3111 계정에서 단독 운영됩니다.
+원본 [pbakaus/radiant](https://github.com/pbakaus/radiant) (MIT)을 기반으로, 한국 전통 오방색(五方色)·한국적 모티프가 가미된 셰이더 1개(신년 폭죽)가 포함된 독립 포크입니다. **upstream PR은 보내지 않으며**, sigco3111 계정에서 단독 운영됩니다.
 
 ---
 
@@ -70,7 +70,7 @@ npm run build
 
 이 저장소는 다음 원본에서 파생되었습니다:
 
-- **원본**: [pbakaus/radiant](https://github.com/sigco3111/batgrl-gallery)
+- **원본**: [pbakaus/radiant](https://github.com/pbakaus/radiant)
 - **저자**: pbakaus 및 Radiant 기여자
 - **라이선스**: MIT
 - **원본 commit 기반**: 2026-08-06 시점 클론

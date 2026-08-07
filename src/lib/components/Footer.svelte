@@ -4,6 +4,7 @@
 		<nav class="footer-links">
 			<a href="/gallery">갤러리</a>
 			<a href="https://github.com/sigco3111/batgrl-gallery" target="_blank" rel="noopener noreferrer">GitHub</a>
+			<a href="https://github.com/pbakaus/radiant" target="_blank" rel="noopener noreferrer" title="원본 Radiant 저장소">원본 저장소</a>
 		</nav>
 		<div class="social">
 			<a href="https://x.com/pbakaus" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">

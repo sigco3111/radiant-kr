@@ -10,6 +10,7 @@
 		<a href="/learn">심층 분석</a>
 		<a href="/#how-to-use">사용법</a>
 		<a href="https://github.com/sigco3111/batgrl-gallery" target="_blank" rel="noopener noreferrer">GitHub</a>
+		<a href="https://github.com/pbakaus/radiant" target="_blank" rel="noopener noreferrer" class="upstream-link" title="원본 Radiant 저장소">원본</a>
 		{#if savedCount > 0}
 			<a href="/gallery/saved" class="saved-link">
 				<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -56,6 +57,14 @@
 	}
 	.links a:hover {
 		color: #c8956c;
+	}
+	.links a.upstream-link {
+		font-size: 0.7rem;
+		color: rgba(200, 149, 108, 0.4);
+		letter-spacing: 0.05em;
+	}
+	.links a.upstream-link:hover {
+		color: rgba(200, 149, 108, 0.75);
 	}
 	.saved-link {
 		display: flex;
