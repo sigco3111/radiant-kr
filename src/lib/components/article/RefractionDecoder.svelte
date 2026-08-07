@@ -205,10 +205,10 @@
 <figure class="decoder">
 	<div class="panes">
 		<div class="pane">
-			<div class="pane-label">Drop normal map (encoded RGB)</div>
+			<div class="pane-label">방울 노멀 맵 (인코딩된 RGB)</div>
 			<canvas
 				bind:this={dropCanvas}
-				aria-label="Drop's refraction normal map. Drag to move the sample point."
+				aria-label="방울의 굴절 노멀 맵. 드래그하여 샘플 포인트를 이동하세요."
 				onpointerdown={(e) => {
 					isDragging = true;
 					(e.currentTarget as HTMLCanvasElement).setPointerCapture(e.pointerId);
@@ -222,17 +222,17 @@
 			></canvas>
 		</div>
 		<div class="pane">
-			<div class="pane-label">Background, with sampling arrow</div>
+			<div class="pane-label">배경, 샘플링 화살표 포함</div>
 			<canvas bind:this={bgCanvas} aria-hidden="true"></canvas>
 		</div>
 	</div>
 	<div class="readout">
 		<div class="row">
-			<span class="key">R (y-offset)</span>
+			<span class="key">R (y 오프셋)</span>
 			<span class="val">{rgba.r}</span>
-			<span class="key">G (x-offset)</span>
+			<span class="key">G (x 오프셋)</span>
 			<span class="val">{rgba.g}</span>
-			<span class="key">B (depth)</span>
+			<span class="key">B (깊이)</span>
 			<span class="val">{rgba.b}</span>
 		</div>
 		<div class="row formula">

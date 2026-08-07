@@ -13,7 +13,7 @@ export function generateLayoutSource(
 		if (scheme.filter === 'none') return rawSource;
 		return rawSource.replace(
 			'</style>',
-			`  /* Color scheme: ${scheme.name} */\n  canvas { filter: ${scheme.filter}; }\n</style>`
+			`  /* 컬러 스킴: ${scheme.name} */\n  canvas { filter: ${scheme.filter}; }\n</style>`
 		);
 	}
 
@@ -70,11 +70,11 @@ function heroTemplate(shader: Shader, shaderEmbed: string, filterStyle: string):
 	// generating source as a string, not rendering it. So </script> is fine
 	// for the outer block — it will be correct when saved as a file.
 	return `<!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hero — ${shader.title}</title>
+<title>히어로 — ${shader.title}</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -149,16 +149,16 @@ function heroTemplate(shader: Shader, shaderEmbed: string, filterStyle: string):
   <nav>
     <div class="logo">acme</div>
     <div class="links">
-      <a href="#">Features</a>
-      <a href="#">Pricing</a>
-      <a href="#">About</a>
+      <a href="#">기능</a>
+      <a href="#">가격</a>
+      <a href="#">소개</a>
     </div>
   </nav>
   <section class="hero">
     <div class="hero-content">
-      <h1>Your next big idea starts here</h1>
-      <p>A beautiful landing page with a generative shader that makes your product stand out.</p>
-      <a href="#" class="btn">Get Started</a>
+      <h1>여기서 다음 위대한 아이디어가 시작됩니다</h1>
+      <p>생성형 셰이더로 제품을 돋보이게 하는 아름다운 랜딩 페이지.</p>
+      <a href="#" class="btn">시작하기</a>
     </div>
     <div class="hero-shader">
       <iframe id="shader"${filterStyle}></iframe>
@@ -178,11 +178,11 @@ function heroCustomTemplate(shader: Shader, shaderEmbed: string, filterStyle: st
 		.map((p) => `      frame.contentWindow.postMessage({ type: 'param', name: '${p.name}', value: ${p.value} }, '*');`)
 		.join('\n');
 	return `<!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hero — ${shader.title}</title>
+<title>히어로 — ${shader.title}</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -265,16 +265,16 @@ function heroCustomTemplate(shader: Shader, shaderEmbed: string, filterStyle: st
     <nav>
       <div class="logo">acme</div>
       <div class="links">
-        <a href="#">Features</a>
-        <a href="#">Pricing</a>
-        <a href="#">About</a>
+        <a href="#">기능</a>
+        <a href="#">가격</a>
+        <a href="#">소개</a>
       </div>
     </nav>
     <section class="hero">
       <div class="hero-content">
-        <h1>Your next big idea starts here</h1>
-        <p>A beautiful landing page with a generative shader that makes your product stand out.</p>
-        <a href="#" class="btn">Get Started</a>
+        <h1>여기서 다음 위대한 아이디어가 시작됩니다</h1>
+        <p>생성형 셰이더로 제품을 돋보이게 하는 아름다운 랜딩 페이지.</p>
+        <a href="#" class="btn">시작하기</a>
       </div>
     </section>
   </div>
@@ -292,11 +292,11 @@ ${paramMessages}
 
 function backgroundTemplate(shader: Shader, shaderEmbed: string, filterStyle: string): string {
 	return `<!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Background — ${shader.title}</title>
+<title>배경 — ${shader.title}</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -364,9 +364,9 @@ function backgroundTemplate(shader: Shader, shaderEmbed: string, filterStyle: st
     <iframe id="shader"${filterStyle}></iframe>
     <div class="overlay">
       <div class="overlay-content">
-        <h1>Welcome</h1>
-        <p>Content overlaid on a full-viewport shader background with a darkening layer.</p>
-        <a href="#" class="btn">Call to Action</a>
+        <h1>환영합니다</h1>
+        <p>전체 뷰포트 셰이더 배경 위에 어둡게 처리된 콘텐츠가 오버레이됩니다.</p>
+        <a href="#" class="btn">액션 유도</a>
       </div>
     </div>
   </section>
@@ -380,11 +380,11 @@ function backgroundTemplate(shader: Shader, shaderEmbed: string, filterStyle: st
 
 function accentTemplate(shader: Shader, shaderEmbed: string, filterStyle: string): string {
 	return `<!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accent — ${shader.title}</title>
+<title>액센트 — ${shader.title}</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -444,9 +444,9 @@ function accentTemplate(shader: Shader, shaderEmbed: string, filterStyle: string
   <section class="viewport">
     <iframe id="shader"${filterStyle}></iframe>
     <div class="content">
-      <h1>Creative Studio</h1>
-      <p>The shader fades in from the right as a dramatic accent, creating depth alongside your content.</p>
-      <a href="#" class="btn">Learn More</a>
+      <h1>크리에이티브 스튜디오</h1>
+      <p>셰이더가 오른쪽에서 극적인 액센트로 페이드 인되어 콘텐츠와 함께 깊이를 만들어냅니다.</p>
+      <a href="#" class="btn">자세히 보기</a>
     </div>
   </section>
 

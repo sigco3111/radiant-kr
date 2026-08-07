@@ -1,23 +1,23 @@
 <section class="how-to-use" id="how-to-use">
 	<header>
-		<h2>How to Use</h2>
-		<p>No npm. No build step. No dependencies.</p>
+		<h2>사용법</h2>
+		<p>npm 없음. 빌드 단계 없음. 의존성 없음.</p>
 	</header>
 	<div class="steps">
 		<div class="step">
 			<span class="step-number">1</span>
-			<h3>Pick</h3>
-			<p>Browse the collection and find a shader you love. Each one is a single, self-contained HTML file.</p>
+			<h3>선택</h3>
+			<p>컬렉션을 둘러보고 마음에 드는 셰이더를 찾아보세요. 각 셰이더는 단일 HTML 파일로 자체 완결되어 있습니다.</p>
 		</div>
 		<div class="step">
 			<span class="step-number">2</span>
-			<h3>Copy</h3>
-			<p>View the source and copy it. That's the whole thing. No packages, no imports, no bundler config.</p>
+			<h3>복사</h3>
+			<p>소스를 보고 복사하세요. 그것이 전부입니다. 패키지, import, 번들러 설정 없습니다.</p>
 		</div>
 		<div class="step">
 			<span class="step-number">3</span>
-			<h3>Remix with AI</h3>
-			<p>Paste the source into Claude Code, Cursor, Codex, or any AI coding tool. Ask it to change colors, adjust timing, or adapt the effect for your project.</p>
+			<h3>AI로 리믹스</h3>
+			<p>소스를 Claude Code, Cursor, Codex 또는 다른 AI 코딩 도구에 붙여넣으세요. 색상 변경, 타이밍 조정, 프로젝트에 맞는 효과 적용을 요청하세요.</p>
 		</div>
 	</div>
 </section>

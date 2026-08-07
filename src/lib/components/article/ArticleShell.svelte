@@ -102,7 +102,7 @@
 			<div class="hero-eyebrow">
 				<a href="/" class="eyebrow-link">Radiant</a>
 				<span class="eyebrow-sep">/</span>
-				<a href="/learn" class="eyebrow-link">Deep dive</a>
+				<a href="/learn" class="eyebrow-link">심층 분석</a>
 				<span class="eyebrow-sep">/</span>
 				<span>{shader.title}</span>
 			</div>
@@ -117,7 +117,7 @@
 			{/if}
 		</div>
 		<div class="hero-scroll-hint">
-			<span>Scroll</span>
+			<span>스크롤</span>
 			<svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 				<rect x="0.75" y="0.75" width="10.5" height="16.5" rx="5.25" stroke="currentColor" stroke-width="1.2"/>
 				<circle class="scroll-dot" cx="6" cy="5.5" r="1.4" fill="currentColor"/>
@@ -127,10 +127,10 @@
 </header>
 
 <div class="page">
-	<aside class="toc" aria-label="Table of contents">
+	<aside class="toc" aria-label="목차">
 		<div class="toc-inner">
-			<a href="/gallery" class="back">&larr; Gallery</a>
-			<div class="toc-label">Contents</div>
+			<a href="/gallery" class="back">&larr; 갤러리</a>
+			<div class="toc-label">목차</div>
 			<nav>
 				{#each toc as item}
 					<a
@@ -144,8 +144,8 @@
 				{/each}
 			</nav>
 			<div class="toc-footer">
-				<a class="footer-link" href="/shader/{shader.id}">Open playground →</a>
-				<a class="footer-link" href="/{shader.file}" target="_blank">Fullscreen →</a>
+				<a class="footer-link" href="/shader/{shader.id}">플레이그라운드 열기 →</a>
+				<a class="footer-link" href="/{shader.file}" target="_blank">전체 화면 →</a>
 			</div>
 		</div>
 	</aside>
@@ -156,9 +156,9 @@
 		</div>
 
 		<footer class="article-footer">
-			<a class="cta" href="/shader/{shader.id}">Open the playground →</a>
-			<a class="cta secondary" href="/{shader.file}" target="_blank">View source</a>
-			<a class="cta secondary" href="/gallery">More shaders</a>
+			<a class="cta" href="/shader/{shader.id}">플레이그라운드 열기 →</a>
+			<a class="cta secondary" href="/{shader.file}" target="_blank">소스 보기</a>
+			<a class="cta secondary" href="/gallery">셰이더 더 보기</a>
 		</footer>
 	</article>
 </div>

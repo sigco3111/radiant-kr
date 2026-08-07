@@ -147,15 +147,15 @@
 			></iframe>
 		{/if}
 		{#if !loaded}
-			<div class="loading">{mounted ? 'Loading sandbox…' : ''}</div>
+			<div class="loading">{mounted ? '샌드박스 불러오는 중…' : ''}</div>
 		{/if}
 	</div>
 
 	{#if params.length || toggle}
 		<div class="controls">
 			<div class="controls-header">
-				<span class="controls-label">Try it</span>
-				<button class="reset" onclick={reset} title="Reset to defaults">Reset</button>
+				<span class="controls-label">실험하기</span>
+				<button class="reset" onclick={reset} title="기본값으로 초기화">초기화</button>
 			</div>
 			{#if toggle}
 				<div class="toggle-row">

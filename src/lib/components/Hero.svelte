@@ -138,17 +138,17 @@
 			use:hideLabel
 			use:sendHeroParams
 			src="/event-horizon.html"
-			title="Event Horizon"
+			title="사건의 지평선"
 			style:filter={scheme.filter}
 		></iframe>
 	{/if}
 	<div class="overlay"></div>
 	<div class="content">
 		<h1>Radiant</h1>
-		<p class="tagline">Production-ready shaders & effects for the web. No dependencies. Just drop in.</p>
-		<p class="changelog-link"><a href="/#changelog">v1.1 — Mouse & touch interactivity, 7 new shaders</a></p>
+		<p class="tagline">웹을 위한 프로덕션 준비 셰이더와 효과. 의존성 없음. 바로 사용하세요.</p>
+		<p class="changelog-link"><a href="/#changelog">v1.1 — 마우스 및 터치 인터랙션, 신규 셰이더 7개</a></p>
 		<div class="ctas">
-			<a href="/gallery" class="btn btn-solid">Browse Collection</a>
+			<a href="/gallery" class="btn btn-solid">컬렉션 둘러보기</a>
 			<a href="https://github.com/pbakaus/radiant" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
 		</div>
 	</div>
@@ -168,18 +168,18 @@
 		</div>
 		<div class="divider"></div>
 		<label class="control">
-			<span>Chromatic</span>
+			<span>색수차</span>
 			<input type="range" min="0" max="1" step="0.02" value={chromatic} oninput={onChromatic} />
 		</label>
 		<label class="control">
-			<span>Intensity</span>
+			<span>강도</span>
 			<input type="range" min="0.3" max="2" step="0.05" value={intensity} oninput={onIntensity} />
 		</label>
 		<label class="control">
-			<span>Speed</span>
+			<span>속도</span>
 			<input type="range" min="0.05" max="1" step="0.05" value={speed} oninput={onSpeed} />
 		</label>
-		<span class="hint">Drag to rotate</span>
+		<span class="hint">드래그하여 회전</span>
 	</div>
 </section>
 

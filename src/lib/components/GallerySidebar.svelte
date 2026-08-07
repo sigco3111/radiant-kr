@@ -10,9 +10,9 @@
 
 <aside class="sidebar">
 	<div class="section">
-		<h3>Saved</h3>
+		<h3>저장됨</h3>
 		<a href="/gallery/saved" class:active={currentPath === '/gallery/saved'}>
-			<span class="label">My Collection</span>
+			<span class="label">내 컬렉션</span>
 			<span class="count">{savedCount}</span>
 		</a>
 	</div>

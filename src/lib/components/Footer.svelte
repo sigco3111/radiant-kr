@@ -2,7 +2,7 @@
 	<div class="footer-top">
 		<div class="wordmark">Radiant</div>
 		<nav class="footer-links">
-			<a href="/gallery">Gallery</a>
+			<a href="/gallery">갤러리</a>
 			<a href="https://github.com/pbakaus/radiant" target="_blank" rel="noopener noreferrer">GitHub</a>
 		</nav>
 		<div class="social">
@@ -25,7 +25,7 @@
 			&copy; 2026 Paul Bakaus
 		</a>
 		<a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer" class="license">
-			MIT License
+			MIT 라이선스
 		</a>
 	</div>
 </footer>

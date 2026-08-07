@@ -142,7 +142,7 @@
 			<!-- Hover hint: fades when active -->
 			{#if !getLiveMode()}
 				<div class="hover-hint" class:hide={hovered}>
-					<span>Hover to preview</span>
+					<span>호버하여 미리보기</span>
 				</div>
 			{/if}
 
@@ -159,20 +159,20 @@
 		</div>
 		<div class="card-info">
 			<div class="card-number">
-				{number}{#if shader.inspiration} <span class="card-muse">— inspired by {shader.inspiration}</span>{/if}
+				{number}{#if shader.inspiration} <span class="card-muse">— {shader.inspiration}에게 영감을 받음</span>{/if}
 			</div>
 			<div class="card-title">
 				{shader.title}
-				{#if shader.hasArticle}<span class="card-deep-dive-badge" title="Deep dive available">●</span>{/if}
+				{#if shader.hasArticle}<span class="card-deep-dive-badge" title="심층 분석 제공">●</span>{/if}
 			</div>
 			<div class="card-desc">{shader.desc}</div>
-			<span class="card-action">Explore &rarr;</span>
+			<span class="card-action">탐색 &rarr;</span>
 		</div>
 	</a>
 
 	{#if shader.hasArticle}
 		<a class="deep-dive-link" href="/learn/{shader.id}" onclick={(e) => e.stopPropagation()}>
-			Deep dive &rarr;
+			심층 분석 &rarr;
 		</a>
 	{/if}
 
@@ -181,9 +181,9 @@
 		class="save-btn"
 		class:saved={saved}
 		onclick={onSave}
-		aria-label={saved ? 'Remove from saved' : 'Save shader'}
+		aria-label={saved ? '저장 목록에서 제거' : '셰이더 저장'}
 		aria-pressed={saved}
-		title={saved ? 'Remove from saved' : 'Save'}
+		title={saved ? '저장 목록에서 제거' : '저장'}
 	>
 		<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill={saved ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 			<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>

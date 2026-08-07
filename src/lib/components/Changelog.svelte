@@ -1,6 +1,6 @@
 <section class="changelog" id="changelog">
 	<header>
-		<h2>What's New</h2>
+		<h2>새로운 기능</h2>
 	</header>
 	<div class="entries">
 		<div class="entry">
@@ -9,13 +9,13 @@
 				<span class="date">March 19, 2026</span>
 			</div>
 			<ul>
-				<li>Mouse & touch interactivity for all shaders — move, click, or drag to interact</li>
-				<li>New shaders: Feedback Loop, Dither Gradient, Analog Drift, Shattered Plains, Painted Strata, Synth Ribbon, Hologram Glitch</li>
-				<li>Moonlit Ripple rewritten with 3D perspective, Fresnel water, and adjustable wave intensity</li>
-				<li>Eclipse Glow polished — asymmetric corona, softer diamond ring, cleaner particles</li>
-				<li>Gallery live mode toggle — opt-in to preview all visible shaders at once</li>
-				<li>Per-shader default color schemes</li>
-				<li>Performance improvements across many shaders</li>
+				<li>모든 셰이더에 마우스 및 터치 인터랙션 추가 — 이동, 클릭, 드래그로 상호작용</li>
+				<li>신규 셰이더: 피드백 루프, 디더 그라데이션, 아날로그 드리프트, 셰터드 플레이즈, 페인티드 스트라타, 신스 리본, 홀로그램 글리치</li>
+	<li>문라이트 립플을 3D 원근, 프레넬 물 효과, 조절 가능한 파동 강도로 재작성</li>
+				<li>이클립스 글로우 다듬기 — 비대칭 코로나, 부드러운 다이아몬드 링, 깔끔한 파티클</li>
+				<li>갤러리 라이브 모드 토글 — 보이는 모든 셰이더를 한 번에 미리보기</li>
+				<li>셰이더별 기본 컬러 스킴</li>
+				<li>여러 셰이더 성능 개선</li>
 			</ul>
 		</div>
 		<div class="entry">
@@ -24,10 +24,10 @@
 				<span class="date">March 18, 2026</span>
 			</div>
 			<ul>
-				<li>Initial release with 50+ production-ready shaders and effects</li>
-				<li>Gallery with filtering by tag, technique, and inspiration</li>
-				<li>Interactive homepage with color scheme selector</li>
-				<li>MIT licensed, zero dependencies</li>
+				<li>프로덕션 준비 셰이더 및 효과 50종 이상과 첫 출시</li>
+				<li>태그, 기법, 영감별 필터링 갤러리</li>
+				<li>컬러 스킴 선택 가능한 인터랙티브 홈</li>
+				<li>MIT 라이선스, 의존성 없음</li>
 			</ul>
 		</div>
 	</div>

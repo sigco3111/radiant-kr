@@ -10,10 +10,10 @@
 	} = $props();
 
 	const labels = {
-		note: 'Note',
-		tip: 'Tip',
-		definition: 'Definition',
-		warning: 'Watch out'
+		note: '참고',
+		tip: '팁',
+		definition: '정의',
+		warning: '주의'
 	};
 </script>
 

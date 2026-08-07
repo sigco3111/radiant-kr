@@ -10,14 +10,14 @@
 		class="cover"
 		style:background-image="url(/previews/{shader.id}.webp)"
 		role="img"
-		aria-label="{shader.title} shader preview"
+		aria-label="{shader.title} 셰이더 미리보기"
 	></div>
 	<div class="body">
-		<div class="eyebrow">Deep dive · {shader.title}</div>
+		<div class="eyebrow">심층 분석 · {shader.title}</div>
 		<h2 class="title">{meta.title}</h2>
 		<p class="subtitle">{meta.subtitle}</p>
 		<div class="meta">
-			<span class="byline">By {meta.author}</span>
+			<span class="byline">{meta.author} 작성</span>
 			<span class="sep">·</span>
 			<span>{meta.readingTime}</span>
 		</div>

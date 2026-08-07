@@ -13,7 +13,7 @@
 </div>
 
 {#if shaders.length === 0}
-	<div class="empty">No shaders match the selected filters.</div>
+	<div class="empty">선택한 필터와 일치하는 셰이더가 없습니다.</div>
 {/if}
 
 <style>

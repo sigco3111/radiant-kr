@@ -45,13 +45,13 @@
 
 				let hint = '';
 				if (hasClick && hasMouseMove) {
-					hint = 'Move & click to interact';
+					hint = '이동 및 클릭하여 상호작용';
 				} else if (hasMouseDown && hasMouseMove) {
-					hint = 'Drag to interact';
+					hint = '드래그하여 상호작용';
 				} else if (hasClick) {
-					hint = 'Click to interact';
+					hint = '클릭하여 상호작용';
 				} else if (hasMouseMove) {
-					hint = 'Move cursor to interact';
+					hint = '커서를 움직여 상호작용';
 				}
 
 				// Remove any previous hint
@@ -105,18 +105,18 @@
 			<iframe use:hideLabel use:sendHeroParams src="/{shader.file}" title={shader.title} style:filter></iframe>
 			<div class="hero-custom-overlay" aria-hidden="true">
 				<div class="mock-nav">
-					<span class="mock-logo">acme</span>
+					<span class="mock-logo">아크메</span>
 					<span class="mock-links">
-						<span>Features</span>
-						<span>Pricing</span>
-						<span>About</span>
+						<span>기능</span>
+						<span>가격</span>
+						<span>소개</span>
 					</span>
 				</div>
 				<div class="hero-body">
 					<div class="mock-content">
-						<h2>Your next big idea starts here</h2>
-						<p>A beautiful landing page with a generative shader that makes your product stand out.</p>
-						<div class="mock-btn">Get Started</div>
+						<h2>여기서 다음 위대한 아이디어가 시작됩니다</h2>
+						<p>제품을 돋보이게 하는 생성형 셰이더를 갖춘 아름다운 랜딩 페이지.</p>
+						<div class="mock-btn">시작하기</div>
 					</div>
 				</div>
 			</div>
@@ -124,18 +124,18 @@
 	{:else if layout === 'hero'}
 		<div class="mock-layout hero-layout" aria-hidden="true">
 			<div class="mock-nav">
-				<span class="mock-logo">acme</span>
+				<span class="mock-logo">아크메</span>
 				<span class="mock-links">
-					<span>Features</span>
-					<span>Pricing</span>
-					<span>About</span>
+					<span>기능</span>
+					<span>가격</span>
+					<span>소개</span>
 				</span>
 			</div>
 			<div class="hero-body">
 				<div class="mock-content">
-					<h2>Your next big idea starts here</h2>
-					<p>A beautiful landing page with a generative shader that makes your product stand out.</p>
-					<div class="mock-btn">Get Started</div>
+					<h2>여기서 다음 위대한 아이디어가 시작됩니다</h2>
+					<p>제품을 돋보이게 하는 생성형 셰이더를 갖춘 아름다운 랜딩 페이지.</p>
+					<div class="mock-btn">시작하기</div>
 				</div>
 				<div class="hero-shader">
 					<iframe use:hideLabel src="/{shader.file}?p=1.8" title={shader.title} style:filter></iframe>
@@ -147,9 +147,9 @@
 			<iframe use:hideLabel src="/{shader.file}" title={shader.title} style:filter></iframe>
 			<div class="mock-overlay">
 				<div class="mock-overlay-content">
-					<h2>Welcome</h2>
-					<p>Content overlaid on a full-viewport shader background with a darkening layer.</p>
-					<div class="mock-btn">Call to Action</div>
+					<h2>환영합니다</h2>
+					<p>다크닝 레이어와 함께 전체 뷰포트 셰이더 배경 위에 콘텐츠가 오버레이됩니다.</p>
+					<div class="mock-btn">액션 유도</div>
 				</div>
 			</div>
 		</div>
@@ -157,9 +157,9 @@
 		<div class="mock-layout accent-layout" aria-hidden="true">
 			<iframe use:hideLabel src="/{shader.file}" title={shader.title} style:filter></iframe>
 			<div class="mock-content">
-				<h2>Creative Studio</h2>
-				<p>The shader fades in from the right as a dramatic accent, creating depth alongside your content.</p>
-				<div class="mock-btn">Learn More</div>
+				<h2>크리에이티브 스튜디오</h2>
+				<p>셰이더가 오른쪽에서 극적인 액센트로 페이드인되어 콘텐츠와 함께 깊이감을 만듭니다.</p>
+				<div class="mock-btn">자세히 보기</div>
 			</div>
 		</div>
 	{:else}

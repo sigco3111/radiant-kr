@@ -20,17 +20,17 @@
 
 <aside class="panel">
 	<div class="panel-header">
-		<span class="panel-title">Source</span>
+		<span class="panel-title">소스</span>
 		<div class="panel-actions">
 			<button class="panel-btn" onclick={copySource}>
-				{copied ? 'Copied!' : 'Copy'}
+				{copied ? '복사 완료!' : '복사'}
 			</button>
-			<button class="panel-btn close-btn" onclick={onclose} aria-label="Close source viewer">&times;</button>
+			<button class="panel-btn close-btn" onclick={onclose} aria-label="소스 뷰어 닫기">&times;</button>
 		</div>
 	</div>
 	<div class="panel-body">
 		{#if loading}
-			<div class="loading">Loading source...</div>
+			<div class="loading">소스 불러오는 중...</div>
 		{:else}
 			<pre><code>{source}</code></pre>
 		{/if}

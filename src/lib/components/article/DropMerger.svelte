@@ -111,10 +111,10 @@
 </script>
 
 <figure class="merger">
-	<canvas bind:this={canvas} aria-label="Drop merger area-conservation visualization"></canvas>
+	<canvas bind:this={canvas} aria-label="방울 합체 면적 보존 시각화"></canvas>
 	<div class="controls">
 		<label class="row">
-			<span class="label">r₁ (the bigger drop)</span>
+			<span class="label">r₁ (큰 방울)</span>
 			<input
 				type="range"
 				min="20"
@@ -126,7 +126,7 @@
 			<span class="value">{r1.toFixed(0)}</span>
 		</label>
 		<label class="row">
-			<span class="label">r₂ (the smaller drop)</span>
+			<span class="label">r₂ (작은 방울)</span>
 			<input
 				type="range"
 				min="6"

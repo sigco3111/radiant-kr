@@ -114,7 +114,7 @@
 		</div>
 	</div>
 	<label class="row">
-		<span class="label">Effective temperature</span>
+		<span class="label">유효 온도</span>
 		<input
 			type="range"
 			min="0"

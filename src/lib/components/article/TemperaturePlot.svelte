@@ -191,7 +191,7 @@
 	<canvas bind:this={canvas}></canvas>
 	<div class="controls">
 		<label class="row">
-			<span class="label">ISCO radius <span class="hint">(in RS)</span></span>
+			<span class="label">ISCO 반지름 <span class="hint">(단위: RS)</span></span>
 			<input
 				type="range"
 				min="2"
@@ -203,7 +203,7 @@
 			<span class="value">{isco.toFixed(2)}</span>
 		</label>
 		<label class="row">
-			<span class="label">Outer edge</span>
+			<span class="label">외곽 경계</span>
 			<input
 				type="range"
 				min="8"

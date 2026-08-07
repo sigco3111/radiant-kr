@@ -90,10 +90,10 @@
 </script>
 
 <figure class="lissajous">
-	<canvas bind:this={canvas} aria-label="Interactive Lissajous figure"></canvas>
+	<canvas bind:this={canvas} aria-label="인터랙티브 리사주 도형"></canvas>
 	<div class="controls">
 		<label class="row">
-			<span class="label">a (x frequency)</span>
+			<span class="label">a (x 주파수)</span>
 			<input
 				type="range"
 				min="1"
@@ -105,7 +105,7 @@
 			<span class="value">{a.toFixed(0)}</span>
 		</label>
 		<label class="row">
-			<span class="label">b (y frequency)</span>
+			<span class="label">b (y 주파수)</span>
 			<input
 				type="range"
 				min="1"
@@ -117,7 +117,7 @@
 			<span class="value">{b.toFixed(0)}</span>
 		</label>
 		<label class="row">
-			<span class="label">δ (phase, radians)</span>
+			<span class="label">δ (위상, 라디안)</span>
 			<input
 				type="range"
 				min="0"
@@ -130,7 +130,7 @@
 		</label>
 		<div class="formula">
 			x = sin({a.toFixed(0)}·t + {delta.toFixed(2)})  ·  y = sin({b.toFixed(0)}·t){#if ratio()}
-				  ·  ratio <strong>{ratio()}</strong>{/if}
+				  ·  비율 <strong>{ratio()}</strong>{/if}
 		</div>
 	</div>
 	{#if caption}<figcaption>{caption}</figcaption>{/if}

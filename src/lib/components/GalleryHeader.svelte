@@ -22,9 +22,9 @@
 				<h1>{title}</h1>
 				<p>{description}</p>
 			</div>
-			<button class="live-toggle" class:active={live} onclick={toggleLive} title={live ? 'Disable live previews' : 'Enable live previews for all visible shaders'} aria-label={live ? 'Disable live previews' : 'Enable live previews'} aria-pressed={live}>
+			<button class="live-toggle" class:active={live} onclick={toggleLive} title={live ? '라이브 미리보기 끄기' : '보이는 모든 셰이더 라이브 미리보기 켜기'} aria-label={live ? '라이브 미리보기 끄기' : '라이브 미리보기 켜기'} aria-pressed={live}>
 				<span class="live-dot"></span>
-				<span class="live-label">Live</span>
+				<span class="live-label">라이브</span>
 			</button>
 		</div>
 		{#if intro}

@@ -6,9 +6,9 @@
 <nav>
 	<a href="/" class="logo">Radiant</a>
 	<div class="links">
-		<a href="/gallery">Gallery</a>
-		<a href="/learn">Deep Dives</a>
-		<a href="/#how-to-use">How to Use</a>
+		<a href="/gallery">갤러리</a>
+		<a href="/learn">심층 분석</a>
+		<a href="/#how-to-use">사용법</a>
 		<a href="https://github.com/pbakaus/radiant" target="_blank" rel="noopener noreferrer">GitHub</a>
 		{#if savedCount > 0}
 			<a href="/gallery/saved" class="saved-link">
