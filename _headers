@@ -1,0 +1,22 @@
+# SvelteKit app — hashed filenames, cache forever
+/_app/immutable/*
+  Cache-Control: public, immutable, max-age=31536000
+/_app/*
+  X-Robots-Tag: noindex
+  Cache-Control: no-cache
+
+# Preview sprites — regenerated on build, safe to cache long-term
+/previews/*
+  Cache-Control: public, max-age=2592000
+
+# Shader HTML files — standalone, rarely change
+/*.html
+  Cache-Control: public, max-age=86400
+
+# Static images
+/og-image.png
+  Cache-Control: public, max-age=2592000
+/og-image.jpg
+  Cache-Control: public, max-age=2592000
+/favicon.svg
+  Cache-Control: public, max-age=2592000
