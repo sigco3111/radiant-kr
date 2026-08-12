@@ -2,7 +2,7 @@
 
 **한국적 색감과 모티프가 추가된 Radiant 셰이더 갤러리.**
 
-[![Live](https://img.shields.io/badge/Vercel-Live-success?logo=vercel)](https://radiant-kr.vercel.app)
+[![Live](https://img.shields.io/badge/Vercel-Live-success?logo=vercel)](https://sigco3111.github.io/radiant-kr)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![GitHub](https://img.shields.io/badge/sigco3111-radiant--kr-181717?logo=github)](https://github.com/sigco3111/radiant-kr)
 
@@ -14,8 +14,8 @@
 
 | 페이지 | URL |
 |---|---|
-| 갤러리 홈 | https://radiant-kr.vercel.app |
-| 전체 셰이더 목록 | https://radiant-kr.vercel.app/gallery/all.html |
+| 갤러리 홈 | https://sigco3111.github.io/radiant-kr |
+| 전체 셰이더 목록 | https://sigco3111.github.io/radiant-kr/gallery/all.html |
 
 > ℹ️ SvelteKit `adapter-static` prerender 특성상 URL 끝에 `.html`을 명시해야 접근 가능합니다 (예: `/gallery/all.html`). `.html`을 생략하면 404를 반환합니다.
 
@@ -87,7 +87,7 @@ npm run build
 
 이 저장소는 Vercel 정적 사이트로 배포되어 있습니다.
 
-**라이브 URL**: https://radiant-kr.vercel.app
+**라이브 URL**: https://sigco3111.github.io/radiant-kr
 
 배포는 `vercel deploy --prod` 한 줄로 가능하며, `vercel.json`은 이미 원본에 포함되어 있어 별도 설정 불필요 (`outputDirectory: "build"`).
 
