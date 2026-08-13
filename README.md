@@ -2,7 +2,7 @@
 
 **한국적 색감과 모티프가 추가된 Radiant 셰이더 갤러리.**
 
-[![Live](https://img.shields.io/badge/Vercel-Live-success?logo=vercel)](https://sigco3111.github.io/radiant-kr)
+[![Live](https://img.shields.io/badge/GitHub%20Pages-Live-222222?style=for-the-badge&logo=githubpages&logoColor=white)](https://sigco3111.github.io/radiant-kr)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![GitHub](https://img.shields.io/badge/sigco3111-radiant--kr-181717?logo=github)](https://github.com/sigco3111/radiant-kr)
 
@@ -46,7 +46,7 @@ npm run dev
 
 # 프로덕션 빌드
 npm run build
-# → build/ 폴더에 정적 산출물 (Vercel 배포용)
+# → build/ 폴더에 정적 산출물 (GitHub Pages 배포용)
 ```
 
 ---
@@ -83,18 +83,27 @@ npm run build
 
 ---
 
-## 🌐 Vercel 배포
+## 🌐 GitHub Pages 배포
 
-이 저장소는 Vercel 정적 사이트로 배포되어 있습니다.
+이 저장소는 GitHub Pages 정적 사이트로 배포되어 있습니다.
 
 **라이브 URL**: https://sigco3111.github.io/radiant-kr
 
-배포는 `vercel deploy --prod` 한 줄로 가능하며, `vercel.json`은 이미 원본에 포함되어 있어 별도 설정 불필요 (`outputDirectory: "build"`).
+SvelteKit `adapter-static`이 `build/` 폴더에 SPA 모드 산출물을 생성하며, gh-pages 브랜치에서 root로 서빙됩니다.
 
-GitHub 푸시 시 자동 재배포는 미설정 상태 — 수동 배포가 필요할 때 다음 명령을 사용하세요:
+📦 **호스팅 메모 (Vercel 사용 이력)**: 이전에는 Vercel로 배포했으나 2026-08에 Pages로 전환했습니다. `vercel.json`은 원본 보존 (Pages는 SPA rewrites 무해). `vercel deploy` CLI로 재전이 가능하나 현재는 Pages를 권장합니다.
+
+GitHub 푸시 시 자동 재배포는 미설정 상태 — 수동 gh-pages 푸시가 필요할 때 다음 워크플로를 사용하세요:
 
 ```bash
-CI='' vercel deploy --prod --yes
+npm run build
+git checkout gh-pages
+rm -rf index.html _app/ _next/ etc...
+cp -R build/* .
+git commit -am "deploy: github pages"
+git push origin gh-pages
+# (참고) Vercel 재배포 명령 (보존):
+# CI='' vercel deploy --prod --yes
 ```
 
 ---
@@ -122,7 +131,7 @@ src/
 1. `static/<name>.html` 셰이더 HTML 작성
 2. `src/lib/shaders.ts` 카탈로그에 엔트리 추가
 3. `node scripts/generate-previews.mjs --only=<name>`로 preview sprite 생성
-4. `npm run build` → Vercel 배포
+4. `npm run build` → GitHub Pages 배포 (`build/` → gh-pages 브랜치)
 
 ---
 
