@@ -1,0 +1,1 @@
+import{r as e}from"../chunks/pfMRWl6z.js";const r=!0,o=()=>{throw e(307,"/gallery/all")},l=Object.freeze(Object.defineProperty({__proto__:null,load:o,prerender:r},Symbol.toStringTag,{value:"Module"}));export{l as universal};
