@@ -83,15 +83,18 @@ npm run build
 
 ---
 
-## 🌐 GitHub Pages 배포
+## 🌐 라이브 데모
 
-이 저장소는 GitHub Pages 정적 사이트로 배포되어 있습니다.
+이 저장소는 **두 가지 정적 호스팅**으로 동시에 배포되어 있습니다:
 
-**라이브 URL**: https://sigco3111.github.io/radiant-kr
+| 호스팅 | URL | 비고 |
+|---|---|---|
+| **Vercel** (★ 권장) | https://radiant-kr.vercel.app | SPA rewrites로 모든 라우트 200 보장 |
+| **GitHub Pages** | https://sigco3111.github.io/radiant-kr | 어제 박은 `<base href>` + index.html 변환으로 동작 |
 
-SvelteKit `adapter-static`이 `build/` 폴더에 SPA 모드 산출물을 생성하며, gh-pages 브랜치에서 root로 서빙됩니다.
+SvelteKit `adapter-static`이 `build/` 폴더에 SPA 모드 산출물을 생성하며, Vercel은 `vercel.json`의 rewrites로, Pages는 gh-pages의 명시적 폴더 구조로 서빙됩니다.
 
-📦 **호스팅 메모 (Vercel 사용 이력)**: 이전에는 Vercel로 배포했으나 2026-08에 Pages로 전환했습니다. `vercel.json`은 원본 보존 (Pages는 SPA rewrites 무해). `vercel deploy` CLI로 재전이 가능하나 현재는 Pages를 권장합니다.
+📦 **호스팅 메모 (Vercel 사용 이력)**: 어제까지 Pages만 사용했으나 nav 클릭 시 일부 라우트 404 발견 → Vercel 우선, Pages는 폴백으로 유지. `vercel.json`은 SPA rewrites 포함. `vercel deploy` CLI로 재전이 가능.
 
 GitHub 푸시 시 자동 재배포는 미설정 상태 — 수동 gh-pages 푸시가 필요할 때 다음 워크플로를 사용하세요:
 
@@ -131,7 +134,7 @@ src/
 1. `static/<name>.html` 셰이더 HTML 작성
 2. `src/lib/shaders.ts` 카탈로그에 엔트리 추가
 3. `node scripts/generate-previews.mjs --only=<name>`로 preview sprite 생성
-4. `npm run build` → GitHub Pages 배포 (`build/` → gh-pages 브랜치)
+4. `npm run build` → Vercel 배포 (`vercel deploy --prod`) 또는 GitHub Pages 배포 (`build/` → gh-pages 브랜치)
 
 ---
 
